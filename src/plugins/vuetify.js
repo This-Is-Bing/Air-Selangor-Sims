@@ -24,9 +24,12 @@ export default createVuetify({
           secondary: "#4EADD6", 
           tertiary: "#2E728E", 
           quatenary: "#98D0E6", 
-          quinary: "#D0E2E9", 
+          quinary: "#D0E2E9",
+          active: "#4EADD6", 
           inactive: "#A3AED0",
-          block:"#00538C"
+          block:"#00538C",
+          nav:"#FEFEFE",
+          main: "#EFF8FC"
         }
       },
       dark: {
@@ -35,7 +38,12 @@ export default createVuetify({
           secondary: "#4EADD6", 
           tertiary: "#2E728E", 
           quatenary: "#98D0E6", 
-          quinary: "#D0E2E9", 
+          quinary: "#D0E2E9",
+          active: "#4EADD6", 
+          inactive: "#A3AED0",
+          block:"#00538C",
+          nav: "#D0E2E9",
+          main: "#EFF8FC"
         }
       },
     },
