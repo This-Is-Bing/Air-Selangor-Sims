@@ -4,6 +4,7 @@
         <div class="font-weight-bold text-h5">Profile</div>
       </v-row>
     </v-container>
+    This is profile view
   </template>
   
   <script>
