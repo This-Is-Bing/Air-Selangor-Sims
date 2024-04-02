@@ -34,19 +34,36 @@
         </v-list>
 
         <v-list class="cursor-pointer" >
-          <router-link class="text-decoration-none font-weight-bold text-inactive text-subtitle-1" to="/inventory">
+          <router-link class="text-decoration-none font-weight-bold text-inactive text-subtitle-1" to="/inventory/overview">
             <v-list-item class="ml-6">
               <v-list-item-icon class="mr-8">
                 <v-icon color="inactive">fa-solid fa-suitcase</v-icon>
               </v-list-item-icon>
               <v-list-item-content >Inventory</v-list-item-content>
             </v-list-item>
-            <v-list-item class="text-inactive text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer">Overview</v-list-item>
-            <v-list-item class="text-inactive text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer">Sales</v-list-item>
-            <v-list-item class="text-inactive text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer">Certification</v-list-item>
-            <v-list-item class="text-inactive text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer">Stock Transfer</v-list-item>
-            <v-list-item class="text-inactive text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer">Store Management</v-list-item>
           </router-link>
+
+          <router-link class="text-decoration-none " to="/inventory/overview">
+            <v-list-item class="text-inactive text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer">Overview</v-list-item>
+          </router-link>
+
+          <router-link class="text-decoration-none " to="/inventory/sales">
+            <v-list-item class="text-inactive text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer">Sales</v-list-item>
+          </router-link>
+
+          <router-link class="text-decoration-none " to="/inventory/certification">
+            <v-list-item class="text-inactive text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer">Certification</v-list-item>
+          </router-link>
+
+          <router-link class="text-decoration-none " to="/inventory/stock">
+            <v-list-item class="text-inactive text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer">Stock Transfer</v-list-item>
+          </router-link>
+
+          <router-link class="text-decoration-none " to="/inventory/store">
+            <v-list-item class="text-inactive text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer">Store Managements</v-list-item>
+          </router-link>
+
+          
         </v-list>
 
         <v-list class="cursor-pointer" >
