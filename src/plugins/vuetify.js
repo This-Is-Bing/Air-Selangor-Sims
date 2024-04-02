@@ -35,7 +35,7 @@ export default createVuetify({
       dark: {
         colors:{
           primary: "#FEFEFE", 
-          secondary: "#4EADD6", 
+          secondary: "#00538C", 
           tertiary: "#2E728E", 
           quatenary: "#98D0E6", 
           quinary: "#D0E2E9",
@@ -43,7 +43,7 @@ export default createVuetify({
           inactive: "#A3AED0",
           block:"#00538C",
           nav: "#D0E2E9",
-          main: "#EFF8FC"
+          main: "#98D0E6"
         }
       },
     },

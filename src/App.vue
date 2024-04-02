@@ -71,21 +71,21 @@
           </v-list-item>
         </v-list>
 
-        <v-footer class="mt-16 pt-16 d-flex justify-center text-caption text-inactive" >
+        <v-footer class="mt-16 pt-16 d-flex justify-center text-caption text-inactive bg-nav" >
+          <v-btn class="mr-2 ml-n8" size="x-large" rounded="xl" variant="plain" @click="toggleTheme">
+              <v-icon color="secondary">fa-solid fa-cloud-sun</v-icon>
+          </v-btn>
           © 2024 | TheHackSmith <br>
           Air Selangor Hackathon
         </v-footer>
       </v-navigation-drawer>
 
-    <v-container fluid class="bg-block ">
+    <v-container fluid class="bg-secondary elevation-2">
         <v-row class="py-7 pl-5">
             <div class="font-weight-bold text-h5">Dashboard</div>
         </v-row>
     </v-container>
 
-    <v-btn class="ma-8" color="primary" @click="toggleTheme">Theme: {{theme.global.name.value}}</v-btn>
-
- 
 
     </v-main>
   </v-app>
