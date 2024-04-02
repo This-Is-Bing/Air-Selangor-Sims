@@ -39,7 +39,7 @@ export default createVuetify({
           tertiary: "#2E728E", 
           quatenary: "#98D0E6", 
           quinary: "#D0E2E9",
-          active: "#4EADD6", 
+          active: "#00538C", 
           inactive: "#A3AED0",
           block:"#00538C",
           nav: "#D0E2E9",

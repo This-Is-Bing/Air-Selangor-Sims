@@ -1,18 +1,14 @@
 <template>
-  <HelloWorld />
+  <v-container fluid class="bg-secondary elevation-2">
+    <v-row class="py-7 pl-5">
+      <div class="font-weight-bold text-h5">Dashboard</div>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
-
-// Components
-import HelloWorld from '../components/HelloWorld.vue';
-
-export default defineComponent({
+export default {
   name: 'HomeView',
-
-  components: {
-    HelloWorld,
-  },
-});
+  // Other component options go here
+}
 </script>
