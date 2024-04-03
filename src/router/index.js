@@ -12,47 +12,47 @@ import RefundView from '../views/RefundView.vue';
 const routes = [
   {
     path: '/',
-    name: 'Dashboard',
+    name: 'dashboard',
     component: DashboardView  
   },
   {
     path: '/profile',
-    name: 'Profile',
+    name: 'profile',
     component: ProfileView  
   },
   {
     path: '/inventory/overview',
-    name: 'Overview',
+    name: 'overview',
     component: OverviewView  
   },
   {
     path: '/inventory/sales',
-    name: 'Sales',
+    name: 'sales',
     component: SalesView  
   },
   {
     path: '/inventory/certification',
-    name: 'Certification',
+    name: 'certification',
     component: CertificationView  
   },
   {
     path: '/inventory/stock',
-    name: 'Stock',
+    name: 'stock',
     component: StockView  
   },
   {
     path: '/inventory/store',
-    name: 'Store',
+    name: 'store',
     component: StoreView  
   },
   {
     path: '/partner',
-    name: 'Partner',
+    name: 'partner',
     component: PartnerView  
   },
   {
     path: '/refund',
-    name: 'Refund',
+    name: 'refund',
     component: RefundView  
   },
 ]
