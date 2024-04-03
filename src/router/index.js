@@ -8,8 +8,14 @@ import StockView from '../views/StockView.vue';
 import StoreView from '../views/StoreView.vue';
 import PartnerView from '../views/PartnerView.vue';
 import RefundView from '../views/RefundView.vue';
+import NotFoundView from '../views/NotFoundView.vue'
 
 const routes = [
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not_found',
+    component: NotFoundView  
+  },
   {
     path: '/',
     name: 'dashboard',
