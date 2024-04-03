@@ -32,7 +32,8 @@ export default createVuetify({
           inactive: "#A3AED0",
           block:"#00538C",
           nav:"#FEFEFE",
-          main: "#EFF8FC"
+          main: "#EFF8FC",
+          title: "#383E49"
         }
       },
       dark: {
@@ -46,7 +47,9 @@ export default createVuetify({
           inactive: "#A3AED0",
           block:"#00538C",
           nav: "#D0E2E9",
-          main: "#98D0E6"
+          main: "#98D0E6",
+          title: "#383E49"
+
         }
       },
     },

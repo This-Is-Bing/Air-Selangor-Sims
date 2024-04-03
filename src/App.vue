@@ -22,7 +22,7 @@
         <!-- Menu -->
         <v-list class="cursor-pointer" >
           <router-link class="text-decoration-none font-weight-bold text-inactive text-subtitle-1" to="/">
-            <v-list-item class="ml-6"  :class="{'active':navigationItems['dashboard'].active, 'text-secondary':navigationItems['dashboard'].active}">
+            <v-list-item class="ml-6" :class="{'active':navigationItems['dashboard'].active, 'text-secondary':navigationItems['dashboard'].active}">
               <v-list-item-icon class="mr-8">
                 <v-icon :color="navigationItems['dashboard'].active ? 'active' : 'inactive'" >fa-solid fa-house</v-icon>
               </v-list-item-icon>
