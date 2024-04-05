@@ -17,17 +17,16 @@
     </v-container>
 
     <!-- Stores -->
-    <StoreCard></StoreCard>
-    <StoreCard></StoreCard>
-    <StoreCard></StoreCard>
-    <StoreCard></StoreCard>
-    <StoreCard></StoreCard>
+    <StoreCard :imageUrl="require('@/assets/stores_images/kuala_selangor.png')" name="Kuala Selangor Store" address="Jalan Bendahara 1/2B, Taman Bendahara" district="45000 Kuala Selangor, Selangor" phone="603-61262500"/>
+    <StoreCard :imageUrl="require('@/assets/stores_images/gombak.png')" name="Gombak Store" address="Persiaran Pegawai, Baru Selayang, " district="68100 Selayang, Selangor" phone="603-61262500"/>
+    <StoreCard :imageUrl="require('@/assets/stores_images/kuala_langat.png')" name="Kuala Langat Store" address="Pengurusan Air Selangor Sdn Bhd,Region, Telok Datok" district="42700 42700Banting, Selangor" phone="603-31841300"/>
 
   </v-card>
 </template>
   
   <script>
   import StoreCard from '@/components/StoreCard.vue';
+
   export default {
     name: 'StoreView',
     components:{StoreCard}

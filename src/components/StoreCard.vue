@@ -4,15 +4,15 @@
       <v-row class="pt-0 border border-secondary border-opacity pa-0 ma-0 rounded">
           <v-col class="pa-0 ma-0 rounded" cols="12" sm="6" md="4">
             <v-card class="elevation-0 d-flex rounded" width="100%">
-              <v-img class="rounded" aspect-ratio="16/9" cover src="../assets/store.png"></v-img>
+              <v-img class="rounded" aspect-ratio="16/9" cover :src="imageUrl" ></v-img>
             </v-card>
           </v-col>
 
           <v-col class="justify-center d-flex flex-column pl-6" cols="12" sm="6" md="4">
-            <p class="text-h6 font-weight-bold pb-5">Kuala Selangor Store</p>
-            <p class="text-subtitle-1 font-weight-light pb-0">Jalan Bendahara 1/2B, Taman Bendahara </p>
-            <p class="text-subtitle-1 font-weight-light pb-0">45000 Kuala Selangor, Selangor</p>
-            <p class="text-subtitle-1 font-weight-light pb-0">603-61262500</p>
+            <p class="text-h6 font-weight-bold pb-5">{{ name }}</p>
+            <p class="text-subtitle-1 font-weight-light pb-0">{{  address  }}</p>
+            <p class="text-subtitle-1 font-weight-light pb-0">{{  district }}</p>
+            <p class="text-subtitle-1 font-weight-light pb-0">{{ phone }}</p>
           </v-col>
 
           <v-col class="justify-start align-end d-flex flex-column pl-6" cols="12" sm="6" md="4">
