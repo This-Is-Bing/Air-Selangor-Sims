@@ -68,11 +68,11 @@ import { getAllProducts } from '@/tools/api.js';
     data: ()=>({
       itemsPerPage: 10,
       headers: [
-        { title: 'Product', key: 'product', align: 'center'},
-        { title: 'Category', key: 'category', align: 'center' },
-        { title: 'Type', key: 'type', align: 'center' },
-        { title: 'Size', key: 'size', align: 'center' },
-        { title: 'Last Update', key: 'updated_at', align: 'center' },
+        { title: 'Product', key: 'product', sortable: false, align: 'center' },
+        { title: 'Category', key: 'category', sortable: false, align: 'center' },
+        { title: 'Type', key: 'type', sortable: false, align: 'center' },
+        { title: 'Size', key: 'size', sortable: false, align: 'center' },
+        { title: 'Last Update', key: 'updated_at', sortable: false, align: 'center' },
       ],
       search: '',
       serverItems: [],
