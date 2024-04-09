@@ -146,7 +146,6 @@ onMounted(() => {
     // Activate the navigation item that matches the route name, if it exists
     if (navigationItems[routeName]) {
       navigationItems[routeName].active = true;
-      console.log(navigationItems[routeName]);
     }
 
     // Activate Inventory if sub menu choosen
@@ -157,7 +156,6 @@ onMounted(() => {
         navigationItems["store"].active
         ){
           navigationItems["inventory"].active = true;
-          console.log('yes');
         }
   });
 });

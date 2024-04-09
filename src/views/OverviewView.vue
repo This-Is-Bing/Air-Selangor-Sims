@@ -17,14 +17,22 @@
         <v-btn color="primary text-none text-subtitle-1" prepend-icon="fa-regular fa-arrow-down-wide-short">Filters</v-btn>
       </div>
     </v-container>
-
+    <v-btn color="success" @click="getAllProducts">text</v-btn>
+    <!-- Server Side Table  -->
+    <v-data-table-server>
+    </v-data-table-server>
   </v-card>
 
 </template>
   
 <script>
+import { getAllProducts } from '@/tools/api.js';
+
   export default {
     name: 'OverviewView',
+    methods:{
+      getAllProducts
+    }
     
 }
 </script>
