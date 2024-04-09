@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main class="bg-main">
-      <v-navigation-drawer width="300" class="bg-nav h-screen">
+      <v-navigation-drawer width="300" class="bg-nav h-screen" >
       
         <!-- Logo -->
         <v-list class="cursor-pointer">
@@ -101,8 +101,9 @@
           </router-link>
         </v-list>
 
+
         <!-- Footer & Change Theme -->
-        <v-footer class="mt-16 pt-16 d-flex justify-center text-caption text-inactive bg-nav" >
+        <v-footer class="pt-16 d-flex justify-center text-caption text-inactive bg-nav">
           <v-btn class="mr-2 ml-n8 cursor-pointer" size="x-large" rounded="xl" variant="plain" @click="toggleTheme">
             <v-icon color="secondary">fa-solid fa-cloud-sun</v-icon>
           </v-btn>
@@ -111,7 +112,6 @@
             Air Selangor Hackathon
           </p>
         </v-footer>
-
       </v-navigation-drawer>
 
       <!-- Router View -->
