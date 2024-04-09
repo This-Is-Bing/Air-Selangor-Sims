@@ -17,9 +17,19 @@
         <v-btn color="primary text-none text-subtitle-1" prepend-icon="fa-regular fa-arrow-down-wide-short">Filters</v-btn>
       </div>
     </v-container>
-    <v-btn color="success" @click="getAllProducts">text</v-btn>
+
     <!-- Server Side Table  -->
-    <v-data-table-server>
+    <v-data-table-server
+      v-model:items-per-page="itemsPerPage"
+      :items-per-page-options="[5, 10, 15, 20]"
+      :headers="headers"
+      :items="serverItems"
+      :items-length="totalItems"
+      :loading="loading"
+      :search="search"
+      item-value="Product"
+      @update:options="loadItems"
+    >
     </v-data-table-server>
   </v-card>
 
@@ -31,8 +41,44 @@ import { getAllProducts } from '@/tools/api.js';
   export default {
     name: 'OverviewView',
     methods:{
-      getAllProducts
+      async loadItems({page, itemsPerPage}){
+        this.loading = true;
+
+        await getAllProducts()
+        .then((response) => {
+          if (response) {
+            const start = (page - 1) * itemsPerPage
+            const end = start + itemsPerPage
+            const sliced = response.products.slice(start,end)
+            this.serverItems = sliced;
+            this.totalItems = response.products.length;
+            console.log(response.products);
+          } else {
+            console.error('Received undefined or null');
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching products:', error);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     }
+    },
+    data: ()=>({
+      itemsPerPage: 10,
+      headers: [
+        { title: 'Product', key: 'product', align: 'center'},
+        { title: 'Category', key: 'category', align: 'center' },
+        { title: 'Type', key: 'type', align: 'center' },
+        { title: 'Size', key: 'size', align: 'center' },
+        { title: 'Last Update', key: 'updated_at', align: 'center' },
+      ],
+      search: '',
+      serverItems: [],
+      loading: true,
+      totalItems: 0,
+    })
     
 }
 </script>
