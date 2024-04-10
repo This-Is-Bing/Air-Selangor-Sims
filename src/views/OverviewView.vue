@@ -70,10 +70,12 @@ import addProductModal from '@/components/addProductModal.vue';
     data: ()=>({
       itemsPerPage: 10,
       headers: [
-        { title: 'Product', key: 'product', sortable: false, align: 'center' },
+        { title: 'Product', key: 'name', sortable: false, align: 'center' },
         { title: 'Category', key: 'category', sortable: false, align: 'center' },
         { title: 'Type', key: 'type', sortable: false, align: 'center' },
         { title: 'Size', key: 'size', sortable: false, align: 'center' },
+        { title: 'Supplier', key: 'supplier', sortable: false, align: 'center' },
+        { title: 'Threshold', key: 'threshold', sortable: false, align: 'center' },
         { title: 'Last Update', key: 'updated_at', sortable: false, align: 'center' },
       ],
       search: '',

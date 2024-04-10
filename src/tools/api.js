@@ -11,6 +11,15 @@ const getAllProducts = async()=>{
     }
 }
 
+const createProduct = async(product)=>{
+    try{
+        const response = await axios.post(apiList.createProduct,product)
+        return response
+    }catch (error){
+        console.error("Error Creating product:", error.message);
+    }
+}
+
 
 // Suppliers
 const getAllSuppliers = async()=>{
@@ -24,4 +33,4 @@ const getAllSuppliers = async()=>{
 
 
 
-export { getAllProducts, getAllSuppliers }
+export { getAllProducts, createProduct, getAllSuppliers }

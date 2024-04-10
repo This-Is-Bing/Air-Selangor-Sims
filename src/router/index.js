@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import DashboardView from '../views/DashboardView.vue';
 import ProfileView from '../views/ProfileView.vue';
 import OverviewView from '../views/OverviewView.vue';
+import ProductCustomizationView from '../views/ProductCustomizationView.vue';
 import SalesView from '../views/SalesView.vue';
 import CertificationView from '../views/CertificationView.vue';
 import StockView from '../views/StockView.vue';
@@ -30,6 +31,11 @@ const routes = [
     path: '/inventory/overview',
     name: 'overview',
     component: OverviewView  
+  },
+  {
+    path: '/inventory/customization',
+    name: 'customization',
+    component: ProductCustomizationView  
   },
   {
     path: '/inventory/sales',

@@ -12,8 +12,8 @@
 
         <template v-slot:default="{ isActive }">
             <v-card  title="New Product">
-
                 <v-text-field
+                    v-model="productName"
                     class="px-6 pt-3"
                     label="Product Name"
                     density="comfortable"
@@ -22,6 +22,7 @@
                 </v-text-field>
 
                 <v-autocomplete
+                    v-model="productCategory"
                     class="px-6 pt-2"
                     label="Category"
                     density="comfortable"
@@ -31,6 +32,7 @@
                 </v-autocomplete>
 
                 <v-autocomplete
+                    v-model="productType"
                     class="px-6 pt-2"
                     label="Type"
                     density="comfortable"
@@ -39,17 +41,19 @@
                 >
                 </v-autocomplete>
 
-                <v-autocomplete
+                <v-text-field
+                    v-model="productSize"
                     class="px-6 pt-2"
                     label="Size"
+                    type="number"
                     suffix="mm"
                     density="comfortable"
-                    :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
                     variant="outlined"
                 >
-                </v-autocomplete>
+                </v-text-field>
 
                 <v-autocomplete
+                    v-model="productSupplier"
                     class="px-6 pt-2"
                     label="Supplier"
                     density="comfortable"
@@ -64,40 +68,51 @@
                     density="comfortable"
                     variant="outlined"
                     type="number"
-                    model-value="0"
+                    v-model="productThreshold"
                 >
                 </v-text-field>
 
-            <v-card-actions class="pb-4">
-                <v-spacer></v-spacer>
+                <v-card-actions class="pb-4">
 
-                <v-btn
-                text="Discard"
-                variant="flat"
-                color=" text-none text-subtitle-1" 
-                class="elevation-1"
-                @click="isActive.value = false"
-                ></v-btn>
-                <v-btn
-                text="Add Product"
-                color="secondary text-none text-subtitle-1" 
-                variant="flat"
-                class="mx-5 elevation-1"
-                @click="isActive.value = false"
-                ></v-btn>
-            </v-card-actions>
+                    <v-spacer></v-spacer>
+
+                    <v-btn
+                        text="Discard"
+                        variant="flat"
+                        color=" text-none text-subtitle-1" 
+                        class="elevation-1"
+                        @click="isActive.value = false"
+                    >
+                    </v-btn>
+
+                    <v-btn
+                        text="Add Product"
+                        color="secondary text-none text-subtitle-1" 
+                        variant="flat"
+                        class="mx-5 elevation-1"
+                        @click="submitForm"
+                    >
+                    </v-btn>
+                    
+                </v-card-actions>
             </v-card>
         </template>
     </v-dialog>
 </template>
 
 <script>
-import { getAllSuppliers } from '@/tools/api.js'
+import { createProduct, getAllSuppliers } from '@/tools/api.js'
 export default {
     name: "addProductModal",
     data(){
         return{
-            suppliers:[]
+            suppliers:[],
+            productName: null,
+            productCategory: null,
+            productSize: 0,
+            productSupplier: null,
+            productThreshold: 0,
+            productType: null
         }
     },
     created(){
@@ -111,6 +126,25 @@ export default {
             }).catch((error) => {
                 console.error('Error fetching suppliers:', error);
             });
+        },
+        async submitForm(){
+            const newProduct = {
+                "name": this.productName,
+                "category": this.productCategory,
+                "type": this.productType,
+                "size": this.productSize,
+                "supplier": this.productSupplier,
+                "threshold": this.productThreshold
+            }
+
+            await createProduct(newProduct)
+            .then((response) => {
+                console.log(response);
+            }).catch((error) => {
+                console.log(error.message);
+            });
+
+            this.$router.go('');
         }
     }
 }

@@ -47,6 +47,10 @@
             <v-list-item class=" text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer" :class="{'text-secondary':navigationItems['overview'].active}">Overview</v-list-item>
           </router-link>
 
+          <router-link class="text-decoration-none text-inactive" to="/inventory/customization">
+            <v-list-item class=" text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer" :class="{'text-secondary':navigationItems['customization'].active}">Product Customization</v-list-item>
+          </router-link>
+
           <router-link class="text-decoration-none text-inactive" to="/inventory/sales">
             <v-list-item class=" text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer" :class="{'text-secondary':navigationItems['sales'].active}">Sales</v-list-item>
           </router-link>
@@ -150,6 +154,7 @@ onMounted(() => {
 
     // Activate Inventory if sub menu choosen
     if (navigationItems["sales"].active ||
+        navigationItems["customization"].active ||
         navigationItems["certification"].active ||
         navigationItems["stock"].active||
         navigationItems["overview"].active||
@@ -163,6 +168,7 @@ onMounted(() => {
 const navigationItems = reactive({
   dashboard: { active: true },
   overview: { active: false },
+  customization: { active: false },
   inventory: { active: false },
   sales: { active: false },
   certification: { active: false },
