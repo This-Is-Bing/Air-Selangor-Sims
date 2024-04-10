@@ -108,8 +108,6 @@ export default {
             await getAllSuppliers()
             .then((response) => {
                 this.suppliers = response.supplier.map(supplier => supplier.name);
-                console.log(this.suppliers);
-
             }).catch((error) => {
                 console.error('Error fetching suppliers:', error);
             });
