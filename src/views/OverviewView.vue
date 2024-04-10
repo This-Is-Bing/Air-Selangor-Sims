@@ -1,4 +1,5 @@
 <template>
+  
   <!-- Header -->
   <v-container fluid class="bg-secondary elevation-2">
     <v-row class="py-7 pl-5">
@@ -10,16 +11,17 @@
   <v-card class="elevation-0 ma-3 bg-primary" >
 
     <!-- Title & Action Buttons -->
-    <v-container grid-list-xs class="d-flex justify-space-between px-10" fluid>
+    <v-container grid-list-xs class="d-flex justify-space-between " fluid>
       <p class="text-h6 font-weight-bold">Products</p>
       <div>
-        <v-btn color="secondary text-none text-subtitle-1" class="mx-5">Add Product</v-btn>
-        <v-btn color="primary text-none text-subtitle-1" prepend-icon="fa-regular fa-arrow-down-wide-short">Filters</v-btn>
+        <add-product-modal/>
+        <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-regular fa-arrow-down-wide-short">Filters</v-btn>
       </div>
     </v-container>
 
     <!-- Server Side Table  -->
     <v-data-table-server
+      class="bg-primary border-tertiary"
       v-model:items-per-page="itemsPerPage"
       :items-per-page-options="[5, 10, 15, 20]"
       :headers="headers"
@@ -32,14 +34,15 @@
     >
     </v-data-table-server>
   </v-card>
-
 </template>
   
 <script>
 import { getAllProducts } from '@/tools/api.js';
+import addProductModal from '@/components/addProductModal.vue';
 
   export default {
     name: 'OverviewView',
+    components:{ addProductModal },
     methods:{
       async loadItems({page, itemsPerPage}){
         this.loading = true;
@@ -52,7 +55,6 @@ import { getAllProducts } from '@/tools/api.js';
             const sliced = response.products.slice(start,end)
             this.serverItems = sliced;
             this.totalItems = response.products.length;
-            console.log(response.products);
           } else {
             console.error('Received undefined or null');
           }
