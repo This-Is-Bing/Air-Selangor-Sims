@@ -16,7 +16,7 @@ const createProduct = async(product)=>{
         const response = await axios.post(apiList.createProduct,product)
         return response
     }catch (error){
-        console.error("Error Creating product:", error.message);
+        console.error("Error Creating Product:", error.message);
     }
 }
 
@@ -31,6 +31,59 @@ const getAllSuppliers = async()=>{
     }
 }
 
+const createSupplier = async(supplier)=>{
+    try{
+        const response = await axios.post(apiList.createSupplier,supplier)
+        return response
+    }catch (error){
+        console.error("Error Creating Supplier:", error.message);
+    }
+}
 
 
-export { getAllProducts, createProduct, getAllSuppliers }
+// Product Type
+const getAllTypes = async()=>{
+    try {
+        const response = await axios.get(apiList.getAllTypes);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+}
+
+const createType = async(type)=>{
+    try{
+        const response = await axios.post(apiList.createType,type)
+        return response
+    }catch (error){
+        console.error("Error Creating Product Type:", error.message);
+    }
+}
+
+
+// Product Category
+const getAllCategories = async()=>{
+    try {
+        const response = await axios.get(apiList.getAllCategories);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+}
+
+const createCategory = async(category)=>{
+    try{
+        const response = await axios.post(apiList.createCategory,category)
+        return response
+    }catch (error){
+        console.error("Error Creating Category:", error.message);
+    }
+}
+
+
+export { 
+        getAllProducts, createProduct, 
+        getAllSuppliers, createSupplier,
+        getAllTypes, createType,
+        getAllCategories,createCategory  
+        }

@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main class="bg-main">
-      <v-navigation-drawer width="300" class="bg-nav h-screen" >
+      <v-navigation-drawer width="300" class="bg-nav h-screen">
       
         <v-container grid-list-xl fluid class="pa-0 d-flex flex-column h-screen">
           

@@ -26,7 +26,7 @@
                     class="px-6 pt-2"
                     label="Category"
                     density="comfortable"
-                    :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+                    :items="categories"
                     variant="outlined"
                 >
                 </v-autocomplete>
@@ -36,7 +36,7 @@
                     class="px-6 pt-2"
                     label="Type"
                     density="comfortable"
-                    :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+                    :items="types"
                     variant="outlined"
                 >
                 </v-autocomplete>
@@ -101,12 +101,14 @@
 </template>
 
 <script>
-import { createProduct, getAllSuppliers } from '@/tools/api.js'
+import { createProduct, getAllCategories, getAllSuppliers, getAllTypes } from '@/tools/api.js'
 export default {
     name: "addProductModal",
     data(){
         return{
             suppliers:[],
+            types:[],
+            categories:[],
             productName: null,
             productCategory: null,
             productSize: 0,
@@ -117,6 +119,8 @@ export default {
     },
     created(){
         this.loadSupplier()
+        this.loadType()
+        this.loadCategory()
     },
     methods:{
         async loadSupplier(){
@@ -127,6 +131,22 @@ export default {
                 console.error('Error fetching suppliers:', error);
             });
         },
+        async loadType(){
+        await getAllTypes()
+        .then((response) => {
+            this.types = response.type.map(res => res.type);
+        }).catch((error) => {
+            console.error('Error fetching product type:', error);
+        });
+      },
+      async loadCategory(){
+        await getAllCategories()
+        .then((response) => {
+            this.categories = response.category.map(res => res.category);
+        }).catch((error) => {
+            console.error('Error fetching product category:', error);
+        });
+      },
         async submitForm(){
             const newProduct = {
                 "name": this.productName,
