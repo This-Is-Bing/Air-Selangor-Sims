@@ -106,6 +106,7 @@ import { getAllCategories, getAllSuppliers, getAllTypes } from '@/tools/api';
         await getAllSuppliers()
         .then((response) => {
             this.suppliers = response.supplier.map(supplier => supplier.name);
+            if(this.suppliers.length == 0){this.supplierError = "No data available"} 
         }).catch((error) => {
             this.supplierError = error.message
             console.error('Error fetching suppliers:', error);
@@ -115,6 +116,7 @@ import { getAllCategories, getAllSuppliers, getAllTypes } from '@/tools/api';
         await getAllTypes()
         .then((response) => {
             this.types = response.type.map(res => res.type);
+            if(this.types.length == 0){this.typeError = "No data available"} 
         }).catch((error) => {
             this.typeError = error.message
             console.error('Error fetching product type:', error);
@@ -124,6 +126,7 @@ import { getAllCategories, getAllSuppliers, getAllTypes } from '@/tools/api';
         await getAllCategories()
         .then((response) => {
             this.categories = response.category.map(res => res.category);
+            if(this.categories.length == 0){this.categoryError = "No data available"} 
         }).catch((error) => {
             this.categoryError = error.message
             console.error('Error fetching product category:', error);
