@@ -3,6 +3,7 @@ import DashboardView from '../views/DashboardView.vue';
 import ProfileView from '../views/ProfileView.vue';
 import OverviewView from '../views/OverviewView.vue';
 import ProductCustomizationView from '../views/ProductCustomizationView.vue';
+import ProductDetailsView from '../views/ProductDetailsView.vue';
 import SalesView from '../views/SalesView.vue';
 import CertificationView from '../views/CertificationView.vue';
 import StockView from '../views/StockView.vue';
@@ -66,6 +67,12 @@ const routes = [
     path: '/refund',
     name: 'refund',
     component: RefundView  
+  },
+  {
+    path: '/inventory/product_details',
+    name: 'productDetails',
+    component: ProductDetailsView,
+    props: (route) => ({ id: route.query.id })
   },
 ]
 

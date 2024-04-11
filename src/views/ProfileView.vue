@@ -38,11 +38,6 @@
 
     </v-window>
 
-    <v-tabs-items v-model="activeTab">
-
-
-
-      </v-tabs-items>
     
   </v-container>
 </template>

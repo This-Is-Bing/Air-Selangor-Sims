@@ -160,6 +160,7 @@ onMounted(() => {
     // Activate Inventory if sub menu choosen
     if (navigationItems["sales"].active ||
         navigationItems["customization"].active ||
+        navigationItems["productDetails"].active ||
         navigationItems["certification"].active ||
         navigationItems["stock"].active||
         navigationItems["overview"].active||
@@ -174,6 +175,7 @@ const navigationItems = reactive({
   dashboard: { active: true },
   overview: { active: false },
   customization: { active: false },
+  productDetails: { active: false },
   inventory: { active: false },
   sales: { active: false },
   certification: { active: false },

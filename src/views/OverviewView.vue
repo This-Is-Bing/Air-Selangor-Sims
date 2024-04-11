@@ -35,14 +35,14 @@
       >
       <template v-slot:[`item.actions`]="{item}">
         <!-- <v-btn size="x-small" color="secondary" class="text-none text-caption mr-2">View</v-btn> -->
-        <v-icon icon="fa-solid fa-search" color="secondary mr-2 cursor-pointer" @click="console.log(item._id);"></v-icon>
+        <v-icon icon="fa-solid fa-search" color="secondary mr-2 cursor-pointer" @click="this.$router.push({ name: 'productDetails', query: { id: item._id } })"></v-icon>
 
         <!-- <v-btn size="x-small" color="error" class="text-none text-caption">Edit</v-btn> -->
         <v-icon icon="fa-solid fa-trash" color="quinary cursor-pointer"></v-icon>
 
       </template>
       </v-data-table-server>
-      
+
       <v-overlay
       :model-value="showOverlay"
       class="align-center justify-center"

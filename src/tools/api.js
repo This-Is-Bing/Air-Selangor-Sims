@@ -11,6 +11,16 @@ const getAllProducts = async()=>{
     }
 }
 
+const getAProduct = async( id )=>{
+    const url = apiList.getAProduct + id
+    try {
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+}
+
 const createProduct = async(product)=>{
     try{
         const response = await axios.post(apiList.createProduct,product)
@@ -82,7 +92,7 @@ const createCategory = async(category)=>{
 
 
 export { 
-        getAllProducts, createProduct, 
+        getAllProducts, getAProduct, createProduct, 
         getAllSuppliers, createSupplier,
         getAllTypes, createType,
         getAllCategories,createCategory  
