@@ -20,29 +20,39 @@
     </v-container>
 
     <!-- Server Side Table  -->
-    <v-data-table-server
-      :key="dataTable" 
-      class="bg-primary border-tertiary"
-      v-model:items-per-page="itemsPerPage"
-      :items-per-page-options="[5, 10, 15, 20]"
-      :headers="headers"
-      :items="serverItems"
-      :items-length="totalItems"
-      :loading="loading"
-      :search="search"
-      item-value="Product"
-      @update:options="loadItems"
-    >
-    <template v-slot:[`item.actions`]="{item}">
-      <!-- <v-btn size="x-small" color="secondary" class="text-none text-caption mr-2">View</v-btn> -->
-      <v-icon icon="fa-solid fa-search" color="secondary mr-2 cursor-pointer" @click="console.log(item._id);"></v-icon>
+      <v-data-table-server
+        :key="dataTable" 
+        class="bg-primary border-tertiary"
+        v-model:items-per-page="itemsPerPage"
+        :items-per-page-options="[5, 10, 15, 20]"
+        :headers="headers"
+        :items="serverItems"
+        :items-length="totalItems"
+        :loading="loading"
+        :search="search"
+        item-value="Product"
+        @update:options="loadItems"
+      >
+      <template v-slot:[`item.actions`]="{item}">
+        <!-- <v-btn size="x-small" color="secondary" class="text-none text-caption mr-2">View</v-btn> -->
+        <v-icon icon="fa-solid fa-search" color="secondary mr-2 cursor-pointer" @click="console.log(item._id);"></v-icon>
 
-      <!-- <v-btn size="x-small" color="error" class="text-none text-caption">Edit</v-btn> -->
-      <v-icon icon="fa-solid fa-trash" color="quinary cursor-pointer"></v-icon>
+        <!-- <v-btn size="x-small" color="error" class="text-none text-caption">Edit</v-btn> -->
+        <v-icon icon="fa-solid fa-trash" color="quinary cursor-pointer"></v-icon>
 
-    </template>
-    </v-data-table-server>
-
+      </template>
+      </v-data-table-server>
+      <v-overlay
+      :model-value="showOverlay"
+      class="align-center justify-center"
+      >
+        <v-progress-circular
+            color="primary"
+            size="64"
+            indeterminate
+        ></v-progress-circular>
+      </v-overlay>
+    
     <!-- Notification -->
     <v-snackbar v-model="snackbar" color="primary" >
       <v-icon icon="fa-solid fa-circle-check" color="success" class="mr-3" ></v-icon> {{ text }} 
@@ -65,8 +75,9 @@ import addProductModal from '@/components/addProductModal.vue';
         immediate: true,
         handler(value) {
           if (value === 'true') {
-            this.snackbar = true;  // Show the snackbar
             this.remountTable();
+            this.snackbar = true;// Show the snackbar
+
           }
         }
       }
@@ -74,6 +85,7 @@ import addProductModal from '@/components/addProductModal.vue';
     methods:{
       async loadItems({page, itemsPerPage}){
         this.loading = true;
+        this.showOverlay = true  
 
         await getAllProducts()
         .then((response) => {
@@ -92,6 +104,7 @@ import addProductModal from '@/components/addProductModal.vue';
         })
         .finally(() => {
           this.loading = false;
+          this.showOverlay = false 
         });
       },
       remountTable() {
@@ -116,7 +129,8 @@ import addProductModal from '@/components/addProductModal.vue';
       totalItems: 0,
       snackbar: false, //snackbar
       text: `New Product Added`, //snackbar
-      dataTable: 0 //to remount data table
+      dataTable: 0, //to remount data table,
+      showOverlay: false
     })
     
 }

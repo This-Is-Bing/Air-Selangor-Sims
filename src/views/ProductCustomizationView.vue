@@ -17,7 +17,7 @@
         <add-supplier-modal/>
       </v-container>
       <v-container grid-list-xs class="ma-0 pa-0">
-        <p v-if="!this.suppliers.length" class="pl-5 text-subtitle-1 font-weight-regular ">{{ supplierError }}</p>
+        <p v-if="!this.suppliers.length" class="pl-5 text-subtitle-1 font-weight-regular text-quinary">{{ supplierError }}</p>
         <v-chip 
           close 
           class="cursor-pointer ma-2"
@@ -39,7 +39,7 @@
         <add-type-modal/>
       </v-container>
       <v-container grid-list-xs class="ma-0 pa-0">
-        <p v-if="!this.types.length" class="pl-5 text-subtitle-1 font-weight-regular ">{{ typeError }}</p>
+        <p v-if="!this.types.length" class="pl-5 text-subtitle-1 font-weight-regulars text-quinary ">{{ typeError }}</p>
         <v-chip 
           close 
           class="cursor-pointer ma-2"
@@ -61,7 +61,7 @@
         <add-category-modal/>
       </v-container>
       <v-container grid-list-xs class="ma-0 pa-0">
-        <p v-if="!this.categories.length" class="pl-5 text-subtitle-1 font-weight-regular ">{{ categoryError }}</p>
+        <p v-if="!this.categories.length" class="pl-5 text-subtitle-1 font-weight-regular text-quinary" >{{ categoryError }}</p>
         <v-chip 
           close 
           class="cursor-pointer ma-2"
