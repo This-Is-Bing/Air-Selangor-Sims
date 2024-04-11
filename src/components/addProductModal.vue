@@ -90,7 +90,7 @@
                         color="secondary text-none text-subtitle-1" 
                         variant="flat"
                         class="mx-5 elevation-1"
-                        @click="submitForm"
+                        @click="submitForm() ; isActive.value = false; "
                     >
                     </v-btn>
                     
@@ -98,6 +98,8 @@
             </v-card>
         </template>
     </v-dialog>
+
+
 </template>
 
 <script>
@@ -114,7 +116,7 @@ export default {
             productSize: 0,
             productSupplier: null,
             productThreshold: 0,
-            productType: null
+            productType: null,
         }
     },
     created(){
@@ -159,12 +161,21 @@ export default {
 
             await createProduct(newProduct)
             .then((response) => {
+                this.productName= null,
+                this.productCategory= null,
+                this.productSize= 0,
+                this.productSupplier= null,
+                this.productThreshold= 0,
+                this.productType= null,
                 console.log(response);
+                this.$router.push({ name: 'overview', query: { productCreated: 'true' } })
+                .then(() => {
+                    this.$router.replace({ name: 'overview', query: {} });
+                });
             }).catch((error) => {
                 console.log(error.message);
             });
 
-            this.$router.go('');
         }
     }
 }

@@ -21,6 +21,7 @@
 
     <!-- Server Side Table  -->
     <v-data-table-server
+      :key="dataTable" 
       class="bg-primary border-tertiary"
       v-model:items-per-page="itemsPerPage"
       :items-per-page-options="[5, 10, 15, 20]"
@@ -32,7 +33,23 @@
       item-value="Product"
       @update:options="loadItems"
     >
+    <template v-slot:[`item.actions`]="{item}">
+      <!-- <v-btn size="x-small" color="secondary" class="text-none text-caption mr-2">View</v-btn> -->
+      <v-icon icon="fa-solid fa-search" color="secondary mr-2 cursor-pointer" @click="console.log(item._id);"></v-icon>
+
+      <!-- <v-btn size="x-small" color="error" class="text-none text-caption">Edit</v-btn> -->
+      <v-icon icon="fa-solid fa-trash" color="quinary cursor-pointer"></v-icon>
+
+    </template>
     </v-data-table-server>
+
+    <!-- Notification -->
+    <v-snackbar v-model="snackbar" color="primary" >
+      <v-icon icon="fa-solid fa-circle-check" color="success" class="mr-3" ></v-icon> {{ text }} 
+      <template v-slot:actions>
+        <v-btn color="secondary" variant="text" @click="snackbar = false" append-icon="fa-regular fa-xmark"></v-btn>
+      </template>
+    </v-snackbar>
   </v-card>
 </template>
   
@@ -43,6 +60,17 @@ import addProductModal from '@/components/addProductModal.vue';
   export default {
     name: 'OverviewView',
     components:{ addProductModal },
+    watch: {
+      '$route.query.productCreated': {
+        immediate: true,
+        handler(value) {
+          if (value === 'true') {
+            this.snackbar = true;  // Show the snackbar
+            this.remountTable();
+          }
+        }
+      }
+    },
     methods:{
       async loadItems({page, itemsPerPage}){
         this.loading = true;
@@ -65,7 +93,10 @@ import addProductModal from '@/components/addProductModal.vue';
         .finally(() => {
           this.loading = false;
         });
-    }
+      },
+      remountTable() {
+        this.dataTable++;
+      },
     },
     data: ()=>({
       itemsPerPage: 10,
@@ -77,11 +108,15 @@ import addProductModal from '@/components/addProductModal.vue';
         { title: 'Supplier', key: 'supplier', sortable: false, align: 'center' },
         { title: 'Threshold', key: 'threshold', sortable: false, align: 'center' },
         { title: 'Last Update', key: 'updated_at', sortable: false, align: 'center' },
+        { title: 'Actions', value: 'actions', sortable: false, align: 'center' },
       ],
       search: '',
       serverItems: [],
       loading: true,
       totalItems: 0,
+      snackbar: false, //snackbar
+      text: `New Product Added`, //snackbar
+      dataTable: 0 //to remount data table
     })
     
 }
