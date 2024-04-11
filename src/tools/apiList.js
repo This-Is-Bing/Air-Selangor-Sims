@@ -1,5 +1,8 @@
 // List of all APIs
 const apiList = {
+    // Imagekit'
+    authenticationEndpoint : "https://sims-server-api.vercel.app/imagekit/auth",
+
     // Products
     getAllProducts : "https://sims-server-api.vercel.app/product/all",
     createProduct : "https://sims-server-api.vercel.app/product/create",

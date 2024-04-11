@@ -12,6 +12,22 @@
 
         <template v-slot:default="{ isActive }">
             <v-card  title="New Product">
+
+                <v-container grid-list-xs class="px-8 pb-0 pt-6" >
+                    <VCol cols="12" sm="12" class="a7ign-center pa-0 ma-0">
+                        <v-file-input 
+                        v-model = "imageFile"
+                        accept="image/*" 
+                        prepend-icon="fa-regular fa-images"  
+                        label="Browse or Drag Image Here" 
+                        placeholder="Pick an image" 
+                        variant="outlined"
+                        @change="logFile"
+                        ></v-file-input>
+                    </VCol>
+                </v-container>
+                
+
                 <v-text-field
                     v-model="productName"
                     class="px-6 pt-3"
@@ -99,11 +115,22 @@
         </template>
     </v-dialog>
 
+    <v-overlay
+      :model-value="showOverlay"
+      class="align-center justify-center"
+      >
+        <v-progress-circular
+            color="primary"
+            size="64"
+            indeterminate
+        ></v-progress-circular>
+      </v-overlay>
 
 </template>
 
 <script>
 import { createProduct, getAllCategories, getAllSuppliers, getAllTypes } from '@/tools/api.js'
+import { uploadFile } from '@/tools/imagekit'
 export default {
     name: "addProductModal",
     data(){
@@ -117,6 +144,9 @@ export default {
             productSupplier: null,
             productThreshold: 0,
             productType: null,
+            imageFile: null,
+            imageUrl: null,
+            showOverlay: false
         }
     },
     created(){
@@ -150,31 +180,44 @@ export default {
         });
       },
         async submitForm(){
-            const newProduct = {
+            this.showOverlay = true
+
+            const file = this.imageFile[0]
+
+            try {
+            const result = await uploadFile(file);
+                this.imageUrl = result.url
+
+                const newProduct = {
                 "name": this.productName,
+                "imageURL": this.imageUrl,
                 "category": this.productCategory,
                 "type": this.productType,
                 "size": this.productSize,
                 "supplier": this.productSupplier,
                 "threshold": this.productThreshold
             }
-
-            await createProduct(newProduct)
-            .then((response) => {
-                this.productName= null,
-                this.productCategory= null,
-                this.productSize= 0,
-                this.productSupplier= null,
-                this.productThreshold= 0,
-                this.productType= null,
-                console.log(response);
-                this.$router.push({ name: 'overview', query: { productCreated: 'true' } })
-                .then(() => {
-                    this.$router.replace({ name: 'overview', query: {} });
+                await createProduct(newProduct)
+                .then((response) => {
+                    this.productName= null,
+                    this.productCategory= null,
+                    this.productSize= 0,
+                    this.productSupplier= null,
+                    this.productThreshold= 0,
+                    this.productType= null,
+                    console.log(response);
+                    this.$router.push({ name: 'overview', query: { productCreated: 'true' } })
+                    .then(() => {
+                        this.$router.replace({ name: 'overview', query: {} });
+                    });
+                }).catch((error) => {
+                    console.log(error.message);
                 });
-            }).catch((error) => {
-                console.log(error.message);
-            });
+            } catch (error) {
+                console.error("File upload failed:", error);
+            } finally{
+                this.showOverlay = false
+            }
 
         }
     }

@@ -11,6 +11,7 @@
     "@mui/icons-material": "^5.15.14",
     "axios": "^1.6.8",
     "core-js": "^3.8.3",
+    "imagekit-javascript": "^3.0.0",
     "roboto-fontface": "*",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
