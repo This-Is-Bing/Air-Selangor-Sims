@@ -66,13 +66,13 @@
                     <!-- supplier name -->
                     <v-row >
                     <v-col cols="6">Supplier Name:</v-col>
-                    <v-col cols="6">{{product.supplier}}</v-col>
+                    <v-col cols="6" v-if="product && product.supplier_id">{{product.supplier_id.name}}</v-col>
                     </v-row>
 
                     <!-- category -->
                     <v-row>
                     <v-col cols="6">Contact Number:</v-col>
-                    <v-col cols="6">60128892387</v-col>
+                    <v-col cols="6" v-if="product && product.supplier_id">{{product.supplier_id.contact}}</v-col>
                     </v-row>
 
                 </v-col>
@@ -94,6 +94,10 @@
     props: {
       product: Array,
     },
+    data(){
+        return{
+        }
+    }
   }
   </script>
   
