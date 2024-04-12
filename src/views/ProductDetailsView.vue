@@ -24,8 +24,8 @@
     <v-container grid-list-xs class="d-flex justify-space-between" fluid>
       <p class="text-h6 font-weight-bold">{{product.name}}</p>
       <div>
-        <add-product-modal/>
-        <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-regular fa-arrow-down-wide-short">Filters</v-btn>
+        <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-regular fa-pencil" class="mr-2">Edit</v-btn>
+        <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-regular fa-download">Download</v-btn>
       </div>
     </v-container>
 
@@ -35,10 +35,10 @@
       light
       slider-color="secondary"
       >
-      <v-tab key="overview" class="text-none px-10"> Overview </v-tab>
-      <v-tab key="purchases" class="text-none px-10"> Purchases </v-tab>
-      <v-tab key="adjustments" class="text-none px-10"> Adjustments </v-tab>
-      <v-tab key="history" class="text-none px-10"> History </v-tab>
+      <v-tab key="overview" class="text-none px-10 text-subtitle-1"> Overview </v-tab>
+      <v-tab key="purchases" class="text-none px-10 text-subtitle-1"> Purchases </v-tab>
+      <v-tab key="adjustments" class="text-none px-10 text-subtitle-1"> Adjustments </v-tab>
+      <v-tab key="history" class="text-none px-10 text-subtitle-1"> History </v-tab>
     </v-tabs>
 
     <v-divider color="black"></v-divider>
@@ -48,9 +48,7 @@
         <!-- Account Summary Tab -->
         <v-window-item key="overview">
           <v-card flat>
-            <v-card-text>
-                <detail-overview :product="product"/>
-            </v-card-text>
+            <detail-overview :product="product"/>
           </v-card>
         </v-window-item>
         
@@ -88,12 +86,11 @@
   
   <script>
 import { getAProduct } from '@/tools/api';
-import addProductModal from '@/components/addProductModal.vue';
 import DetailOverview from '@/components/product_details/overview.vue';
 
 
   export default {
-  components: { addProductModal, DetailOverview },
+  components: { DetailOverview },
     name: 'ProductDetailsView',
     props: {
         id: {
