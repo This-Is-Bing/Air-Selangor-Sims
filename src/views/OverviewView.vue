@@ -119,7 +119,6 @@ import addProductModal from '@/components/addProductModal.vue';
         { title: 'Category', key: 'category', sortable: false, align: 'center' },
         { title: 'Type', key: 'type', sortable: false, align: 'center' },
         { title: 'Size', key: 'size', sortable: false, align: 'center' },
-        { title: 'Supplier', key: 'supplier', sortable: false, align: 'center' },
         { title: 'Threshold', key: 'threshold', sortable: false, align: 'center' },
         { title: 'Last Update', key: 'updated_at', sortable: false, align: 'center' },
         { title: 'Actions', value: 'actions', sortable: false, align: 'center' },

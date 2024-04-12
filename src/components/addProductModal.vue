@@ -73,7 +73,7 @@
                     class="px-6 pt-2"
                     label="Supplier"
                     density="comfortable"
-                    :items="suppliers"
+                    :items="supplierName"
                     variant="outlined"
                 >
                 </v-autocomplete>
@@ -136,17 +136,24 @@ export default {
     data(){
         return{
             suppliers:[],
+            supplierName:[],
             types:[],
             categories:[],
             productName: null,
             productCategory: null,
             productSize: 0,
             productSupplier: null,
+            productSupplierId: null,
             productThreshold: 0,
             productType: null,
             imageFile: null,
             imageUrl: null,
             showOverlay: false
+        }
+    },
+    watch:{
+        productSupplier(newVal){
+            this.findSupplierByName(newVal)
         }
     },
     created(){
@@ -155,13 +162,18 @@ export default {
         this.loadCategory()
     },
     methods:{
-        async loadSupplier(){
-            await getAllSuppliers()
-            .then((response) => {
-                this.suppliers = response.supplier.map(supplier => supplier.name);
-            }).catch((error) => {
-                console.error('Error fetching suppliers:', error);
-            });
+
+    async loadSupplier(){
+        try {
+            const response = await getAllSuppliers();
+            this.suppliers = response.supplier.map(supplier => ({
+                id: supplier._id ,
+                name: supplier.name, 
+                }));
+                } catch (error) {
+                    console.error('Error fetching suppliers:', error);
+            }
+            this.supplierName = this.suppliers.map(supplier =>supplier.name)
         },
         async loadType(){
         await getAllTypes()
@@ -170,8 +182,19 @@ export default {
         }).catch((error) => {
             console.error('Error fetching product type:', error);
         });
-      },
-      async loadCategory(){
+    },
+
+    findSupplierByName(name) {
+    const supplier = this.suppliers.find(supplier => supplier.name === name);
+    if (supplier) {
+        this.productSupplierId = supplier.id;
+    } else {
+        console.error('Supplier not found for the name:', name);
+        this.productSupplierId = null; // Handle the case where no supplier is found
+    }
+    },
+
+    async loadCategory(){
         await getAllCategories()
         .then((response) => {
             this.categories = response.category.map(res => res.category);
@@ -194,7 +217,7 @@ export default {
                 "category": this.productCategory,
                 "type": this.productType,
                 "size": this.productSize,
-                "supplier": this.productSupplier,
+                "supplier_id": this.productSupplierId,
                 "threshold": this.productThreshold
             }
                 await createProduct(newProduct)
@@ -203,6 +226,7 @@ export default {
                     this.productCategory= null,
                     this.productSize= 0,
                     this.productSupplier= null,
+                    this.productSupplierId= null,
                     this.productThreshold= 0,
                     this.productType= null,
                     console.log(response);
