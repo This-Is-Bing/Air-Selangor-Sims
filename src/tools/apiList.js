@@ -3,6 +3,15 @@ const apiList = {
     // Imagekit'
     authenticationEndpoint : "https://sims-server-api.vercel.app/imagekit/auth",
 
+    // Meters
+    getAllMeters : "https://sims-server-api.vercel.app/meter/all",
+    getAMeter : "https://sims-server-api.vercel.app/meter/",
+    createMeter: "https://sims-server-api.vercel.app/meter/create",
+
+    // Certificate
+    getAllCertificates : "https://sims-server-api.vercel.app/meter/certificate/all",
+    createCertificate: "https://sims-server-api.vercel.app/meter/certificate/create",
+
     // Products
     getAllProducts : "https://sims-server-api.vercel.app/product/all",
     getAProduct : "https://sims-server-api.vercel.app/product/",
