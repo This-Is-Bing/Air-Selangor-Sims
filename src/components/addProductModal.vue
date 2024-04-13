@@ -229,6 +229,7 @@ export default {
                     this.productSupplierId= null,
                     this.productThreshold= 0,
                     this.productType= null,
+                    this.imageFile = null,
                     console.log(response);
                     this.$router.push({ name: 'overview', query: { productCreated: 'true' } })
                     .then(() => {
