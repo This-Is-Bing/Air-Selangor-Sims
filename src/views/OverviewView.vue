@@ -33,6 +33,12 @@
         item-value="Product"
         @update:options="loadItems"
       >
+
+      <template v-slot:[`item.updated_at`]="{item}">
+        <p v-if="item.updated_at"> {{ convertDateTime(item.updated_at) }}</p>
+        <p v-else>N/A</p>
+      </template>
+
       <template v-slot:[`item.actions`]="{item}">
         <!-- <v-btn size="x-small" color="secondary" class="text-none text-caption mr-2">View</v-btn> -->
         <v-icon icon="fa-solid fa-search" color="secondary mr-2 cursor-pointer" @click="this.$router.push({ name: 'productDetails', query: { id: item._id } })"></v-icon>
@@ -42,7 +48,7 @@
 
       </template>
       </v-data-table-server>
-
+      
       <v-overlay
       :model-value="showOverlay"
       class="align-center justify-center"
@@ -67,6 +73,7 @@
 <script>
 import { getAllProducts } from '@/tools/api.js';
 import addProductModal from '@/components/addProductModal.vue';
+import {convertDateTime} from '@/tools/convertDateTime';
 
   export default {
     name: 'OverviewView',
@@ -76,6 +83,7 @@ import addProductModal from '@/components/addProductModal.vue';
         immediate: true,
         handler(value) {
           if (value === 'true') {
+            console.log('reload');
             this.remountTable();
             this.snackbar = true;// Show the snackbar
 
@@ -84,6 +92,7 @@ import addProductModal from '@/components/addProductModal.vue';
       }
     },
     methods:{
+      convertDateTime,
       async loadItems({page, itemsPerPage}){
         this.loading = true;
         this.showOverlay = true  

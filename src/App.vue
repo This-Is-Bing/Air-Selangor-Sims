@@ -53,8 +53,8 @@
             <v-list-item class=" text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer" :class="{'text-secondary':navigationItems['customization'].active}">Product Customization</v-list-item>
           </router-link>
 
-          <router-link class="text-decoration-none text-inactive" to="/inventory/sales">
-            <v-list-item class=" text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer" :class="{'text-secondary':navigationItems['sales'].active}">Sales</v-list-item>
+          <router-link class="text-decoration-none text-inactive" to="/inventory/installation">
+            <v-list-item class=" text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer" :class="{'text-secondary':navigationItems['installation'].active}">Installation</v-list-item>
           </router-link>
 
           <router-link class="text-decoration-none text-inactive " to="/inventory/certification">
@@ -158,7 +158,7 @@ onMounted(() => {
     }
 
     // Activate Inventory if sub menu choosen
-    if (navigationItems["sales"].active ||
+    if (navigationItems["installation"].active ||
         navigationItems["customization"].active ||
         navigationItems["productDetails"].active ||
         navigationItems["certification"].active ||
@@ -177,7 +177,7 @@ const navigationItems = reactive({
   customization: { active: false },
   productDetails: { active: false },
   inventory: { active: false },
-  sales: { active: false },
+  installation: { active: false },
   certification: { active: false },
   stock: { active: false },
   store: { active: false },

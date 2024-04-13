@@ -14,7 +14,10 @@
     <v-container grid-list-xs class="d-flex justify-space-between " fluid>
       <p class="text-h6 font-weight-bold">All Meters</p>
       <div>
-        <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-regular fa-pen">Edit</v-btn>
+        <add-meter-modal/>
+        <v-btn color="primary text-none text-subtitle-1 mr-5"  prepend-icon="fa-regular fa-download">Download Template</v-btn>
+        <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-regular fa-upload">Import</v-btn>
+        <!-- <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-regular fa-arrow-down-wide-short">Filters</v-btn> -->
       </div>
     </v-container>
 
@@ -33,27 +36,23 @@
         @update:options="loadItems"
       >
 
-      <template v-slot:[`item.certification_id`]="{item}">
-        <p v-if="item.certification_id">{{ item.certification_id }}</p>
+      <template v-slot:[`item.installation_date`]="{item}">
+        <p v-if="item.installation_date">{{ convertDate(item.installation_date) }}</p>
         <p v-else>N/A</p>
       </template>
 
-      <template v-slot:[`item.meter_id.certificate_id.test_date`]="{item}">
-        <p v-if=" item.meter_id.certificate_id">{{ item.meter_id.certificate_id }}</p>
-        <p v-else >N/A</p>
+      <template v-slot:[`item.warranty`]="{item}">
+        <p v-if="item.warranty">{{ convertDate(item.warranty) }}</p>
+        <p v-else>N/A</p>
       </template>
 
-      <template v-slot:[`item.test_status`]="{item}">
-        <v-chip close color="error" v-if="item.test_status == false" prepend-icon="fa-solid fa-clock" >Failed</v-chip>
-        <v-chip close color="success" v-if="item.test_status == true" prepend-icon="fa-solid fa-circle-check" >Passed</v-chip>
+      <template v-slot:[`item.updated_at`]="{item}">
+        <p v-if="item.updated_at">{{ convertDateTime(item.updated_at) }}</p>
+        <p v-else>N/A</p>
       </template>
+
 
       <template v-slot:[`item.actions`]="{}">
-        <!-- <v-btn size="x-small" color="secondary" class="text-none text-caption mr-2">View</v-btn> -->
-        <!-- <v-icon icon="fa-solid fa-search" color="secondary mr-2 cursor-pointer" @click="this.$router.push({ name: 'productDetails', query: { id: item._id } })"></v-icon> -->
-
-        <!-- <v-btn size="x-small" color="error" class="text-none text-caption">Edit</v-btn> -->
-        <!-- <v-icon icon="fa-solid fa-trash" color="quinary cursor-pointer"></v-icon> -->
 
       </template>
       </v-data-table-server>
@@ -80,12 +79,15 @@
 </template>
   
 <script>
+import AddMeterModal from '@/components/addMeterModal.vue';
 import { getAllMeters } from '@/tools/api.js';
+import { convertDate, convertDateTime } from '@/tools/convertDateTime';
 
   export default {
     name: 'MeterView',
+    components:{ AddMeterModal },
     watch: {
-      '$route.query.productCreated': {
+      '$route.query.meterCreated': {
         immediate: true,
         handler(value) {
           if (value === 'true') {
@@ -97,6 +99,8 @@ import { getAllMeters } from '@/tools/api.js';
       }
     },
     methods:{
+      convertDateTime,
+      convertDate,
       async loadItems({page, itemsPerPage}){
         this.loading = true;
         this.showOverlay = true  

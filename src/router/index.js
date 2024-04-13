@@ -4,7 +4,7 @@ import ProfileView from '../views/ProfileView.vue';
 import OverviewView from '../views/OverviewView.vue';
 import ProductCustomizationView from '../views/ProductCustomizationView.vue';
 import ProductDetailsView from '../views/ProductDetailsView.vue';
-import SalesView from '../views/SalesView.vue';
+import InstallationView from '../views/InstallationView.vue';
 import CertificationView from '../views/CertificationView.vue';
 import StockView from '../views/StockView.vue';
 import StoreView from '../views/StoreView.vue';
@@ -39,9 +39,9 @@ const routes = [
     component: ProductCustomizationView  
   },
   {
-    path: '/inventory/sales',
-    name: 'sales',
-    component: SalesView  
+    path: '/inventory/installation',
+    name: 'installation',
+    component: InstallationView  
   },
   {
     path: '/inventory/certification',
