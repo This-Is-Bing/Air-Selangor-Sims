@@ -8,7 +8,7 @@ import SalesView from '../views/SalesView.vue';
 import CertificationView from '../views/CertificationView.vue';
 import StockView from '../views/StockView.vue';
 import StoreView from '../views/StoreView.vue';
-import PartnerView from '../views/PartnerView.vue';
+import MeterView from '../views/MeterView.vue';
 import RefundView from '../views/RefundView.vue';
 import NotFoundView from '../views/NotFoundView.vue'
 
@@ -59,9 +59,9 @@ const routes = [
     component: StoreView  
   },
   {
-    path: '/partner',
-    name: 'partner',
-    component: PartnerView  
+    path: '/meter',
+    name: 'meter',
+    component: MeterView  
   },
   {
     path: '/refund',

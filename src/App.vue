@@ -71,14 +71,14 @@
 
         </v-list>
 
-        <!-- Partner -->
+        <!-- meter -->
         <v-list class="cursor-pointer" >
-          <router-link class="text-decoration-none font-weight-bold text-inactive text-subtitle-1" to="/partner">
-            <v-list-item class="ml-6"  :class="{'active':navigationItems['partner'].active, 'text-secondary':navigationItems['partner'].active}">
+          <router-link class="text-decoration-none font-weight-bold text-inactive text-subtitle-1" to="/meter">
+            <v-list-item class="ml-6"  :class="{'active':navigationItems['meter'].active, 'text-secondary':navigationItems['meter'].active}">
               <v-list-item-icon class="mr-8">
-                <v-icon :color="navigationItems['partner'].active ? 'active' : 'inactive'" >fa-solid fa-warehouse</v-icon>
+                <v-icon :color="navigationItems['meter'].active ? 'active' : 'inactive'" >fa-solid fa-droplet</v-icon>
               </v-list-item-icon>
-              <v-list-item-content >Partner</v-list-item-content>
+              <v-list-item-content >Meter</v-list-item-content>
             </v-list-item>
           </router-link>
         </v-list>
@@ -181,7 +181,7 @@ const navigationItems = reactive({
   certification: { active: false },
   stock: { active: false },
   store: { active: false },
-  partner: { active: false },
+  meter: { active: false },
   refund:{ active: false },
   profile: { active: false },
 });
@@ -192,4 +192,5 @@ const navigationItems = reactive({
 .active{
   border-right: solid 3px #4EADD6;
 }
+
 </style>

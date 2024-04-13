@@ -52,7 +52,6 @@
                                 :src="product.imageURL"
                                 :width="200"
                                 aspect-ratio="1/1"
-                                class="bg-grey-lighten-2"
                                 cover
                             ></v-img>
                         </v-col>
