@@ -32,17 +32,28 @@
         item-value="Product"
         @update:options="loadItems"
       >
+
+      <template v-slot:[`item.certification_id`]="{item}">
+        <p v-if="item.certification_id">{{ item.certification_id }}</p>
+        <p v-else>N/A</p>
+      </template>
+
+      <template v-slot:[`item.meter_id.certificate_id.test_date`]="{item}">
+        <p v-if=" item.meter_id.certificate_id">{{ item.meter_id.certificate_id }}</p>
+        <p v-else >N/A</p>
+      </template>
+
       <template v-slot:[`item.test_status`]="{item}">
         <v-chip close color="error" v-if="item.test_status == false" prepend-icon="fa-solid fa-clock" >Failed</v-chip>
         <v-chip close color="success" v-if="item.test_status == true" prepend-icon="fa-solid fa-circle-check" >Passed</v-chip>
       </template>
 
-      <template v-slot:[`item.actions`]="{item}">
+      <template v-slot:[`item.actions`]="{}">
         <!-- <v-btn size="x-small" color="secondary" class="text-none text-caption mr-2">View</v-btn> -->
-        <v-icon icon="fa-solid fa-search" color="secondary mr-2 cursor-pointer" @click="this.$router.push({ name: 'productDetails', query: { id: item._id } })"></v-icon>
+        <!-- <v-icon icon="fa-solid fa-search" color="secondary mr-2 cursor-pointer" @click="this.$router.push({ name: 'productDetails', query: { id: item._id } })"></v-icon> -->
 
         <!-- <v-btn size="x-small" color="error" class="text-none text-caption">Edit</v-btn> -->
-        <v-icon icon="fa-solid fa-trash" color="quinary cursor-pointer"></v-icon>
+        <!-- <v-icon icon="fa-solid fa-trash" color="quinary cursor-pointer"></v-icon> -->
 
       </template>
       </v-data-table-server>
