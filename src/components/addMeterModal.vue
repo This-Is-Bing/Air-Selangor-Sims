@@ -61,6 +61,9 @@
                     v-model="mileage"
                 >
                 </v-text-field>
+
+                
+
                 <v-container>
                     <p class="text-grey text-subtitle-1 pl-5 pb-4">Installation Date</p>
                     <v-row justify="center">
@@ -132,7 +135,8 @@ export default {
             region: null,
             warranty: null,
             installation_date: null,
-            showOverlay: false
+            showOverlay: false,
+            menu:false
         }
     },
     watch:{

@@ -15,11 +15,11 @@
         </v-list>
 
          <!-- Order Button -->
-         <v-list class="mt-0 mb-5 ">
+         <!-- <v-list class="mt-0 mb-5 ">
           <v-list-item class="d-flex justify-center">
             <v-btn class="text-none font-weight-bold text-h6 px-10" prepend-icon="fa-solid fa-plus" color="secondary" size="x-large" >Create Order</v-btn>
           </v-list-item>
-        </v-list>
+        </v-list> -->
 
         <!-- Menu -->
         <v-list class="cursor-pointer" >
@@ -29,6 +29,18 @@
                 <v-icon :color="navigationItems['dashboard'].active ? 'active' : 'inactive'" >fa-solid fa-house</v-icon>
               </v-list-item-icon>
               <v-list-item-content >Dashboard</v-list-item-content>
+            </v-list-item>
+          </router-link>
+        </v-list>
+
+        <!-- water meter -->
+        <v-list class="cursor-pointer" >
+          <router-link class="text-decoration-none font-weight-bold text-inactive text-subtitle-1" to="/meter">
+            <v-list-item class="ml-6"  :class="{'active':navigationItems['meter'].active, 'text-secondary':navigationItems['meter'].active}">
+              <v-list-item-icon class="mr-8">
+                <v-icon :color="navigationItems['meter'].active ? 'active' : 'inactive'" >fa-solid fa-droplet</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content >Water Meter</v-list-item-content>
             </v-list-item>
           </router-link>
         </v-list>
@@ -57,10 +69,6 @@
             <v-list-item class=" text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer" :class="{'text-secondary':navigationItems['installation'].active}">Installation</v-list-item>
           </router-link>
 
-          <router-link class="text-decoration-none text-inactive " to="/inventory/certification">
-            <v-list-item class="text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer" :class="{'text-secondary':navigationItems['certification'].active}">Certification</v-list-item>
-          </router-link>
-
           <router-link class="text-decoration-none text-inactive" to="/inventory/stock">
             <v-list-item class="text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer" :class="{'text-secondary':navigationItems['stock'].active}">Stock Transfer</v-list-item>
           </router-link>
@@ -71,17 +79,18 @@
 
         </v-list>
 
-        <!-- meter -->
+        <!-- water meter -->
         <v-list class="cursor-pointer" >
-          <router-link class="text-decoration-none font-weight-bold text-inactive text-subtitle-1" to="/meter">
-            <v-list-item class="ml-6"  :class="{'active':navigationItems['meter'].active, 'text-secondary':navigationItems['meter'].active}">
+          <router-link class="text-decoration-none font-weight-bold text-inactive text-subtitle-1" to="/inventory/certification">
+            <v-list-item class="ml-6"  :class="{'active':navigationItems['certification'].active, 'text-secondary':navigationItems['certification'].active}">
               <v-list-item-icon class="mr-8">
-                <v-icon :color="navigationItems['meter'].active ? 'active' : 'inactive'" >fa-solid fa-droplet</v-icon>
+                <v-icon :color="navigationItems['certification'].active ? 'active' : 'inactive'" >fa-solid fa-flask</v-icon>
               </v-list-item-icon>
-              <v-list-item-content >Meter</v-list-item-content>
+              <v-list-item-content >Lab Test</v-list-item-content>
             </v-list-item>
           </router-link>
         </v-list>
+
 
         <!-- Refund & Return -->
         <v-list class="cursor-pointer" >
@@ -161,7 +170,6 @@ onMounted(() => {
     if (navigationItems["installation"].active ||
         navigationItems["customization"].active ||
         navigationItems["productDetails"].active ||
-        navigationItems["certification"].active ||
         navigationItems["stock"].active||
         navigationItems["overview"].active||
         navigationItems["store"].active

@@ -25,9 +25,13 @@ const apiList = {
     getAllTypes : "https://sims-server-api.vercel.app/product_data/type/all",
     createType : "https://sims-server-api.vercel.app/product_data/type/create",
 
-    // category
+    // Category
     getAllCategories : "https://sims-server-api.vercel.app/product_data/category/all",
     createCategory: "https://sims-server-api.vercel.app/product_data/category/create",
+
+    // Stores
+    getAllStores : "https://sims-server-api.vercel.app/store/all",
+    createStore: "https://sims-server-api.vercel.app/store/create",
 }
 
 export default apiList

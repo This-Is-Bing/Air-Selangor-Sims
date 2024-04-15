@@ -208,8 +208,9 @@ export default {
             const file = this.imageFile[0]
 
             try {
-            const result = await uploadFile(file);
+            const result = await uploadFile(file, '/Products');
                 this.imageUrl = result.url
+
 
                 const newProduct = {
                 "name": this.productName,

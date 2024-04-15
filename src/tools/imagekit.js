@@ -33,7 +33,7 @@ const fetchImageKitToken = async () => {
     }
 };
 
-const uploadFile = async (file) => {
+const uploadFile = async (file, folder) => {
   const imageKitToken = await fetchImageKitToken();
 
   // Convert file to Base64 using FileReader
@@ -51,7 +51,7 @@ const uploadFile = async (file) => {
     imagekit.upload({
       file: base64Content, // Use the Base64 content
       fileName: file.name, 
-      folder: '/Products',
+      folder: folder,
       token: imageKitToken.token,
       expire: imageKitToken.expire,
       signature: imageKitToken.signature,  

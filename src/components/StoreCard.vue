@@ -1,6 +1,6 @@
 <template>
   <!-- Stores -->
-  <v-container class="pt-0 px-10 pb-10" fluid>
+  <v-container class="pt-0 px-10 pb-10"  fluid>
     <v-row class="pt-0 border border-secondary border-opacity pa-0 ma-0 rounded">
       <v-col class="pa-0 ma-0 rounded" cols="12" sm="6" md="4">
         <v-card class="elevation-0 d-flex rounded" width="100%">
@@ -11,8 +11,8 @@
       <v-col class="justify-center d-flex flex-column pl-6" cols="12" sm="6" md="4">
         <p class="text-h6 font-weight-bold pb-5">{{ name }}</p>
         <p class="text-subtitle-1 font-weight-light pb-0">{{  address  }}</p>
-        <p class="text-subtitle-1 font-weight-light pb-0">{{  district }}</p>
-        <p class="text-subtitle-1 font-weight-light pb-0">{{ phone }}</p>
+        <p class="text-subtitle-1 font-weight-light pb-0"> {{ postcode }} {{  district }}, {{ city }}</p>
+        <p class="text-subtitle-1 font-weight-light pb-0">{{ contact }}</p>
       </v-col>
 
       <v-col class="justify-start align-end d-flex flex-column pl-6" cols="12" sm="6" md="4">
@@ -34,7 +34,7 @@ export default {
     postcode: Number,
     district: String,
     city: String,
-    phone: String,
+    contact: String,
   },
 }
 </script>

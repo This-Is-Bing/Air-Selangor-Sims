@@ -15,9 +15,9 @@
       <p class="text-h6 font-weight-bold">All Meters</p>
       <div>
         <add-meter-modal/>
-        <v-btn color="primary text-none text-subtitle-1 mr-5"  prepend-icon="fa-regular fa-download">Download Template</v-btn>
-        <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-regular fa-upload">Import</v-btn>
-        <!-- <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-regular fa-arrow-down-wide-short">Filters</v-btn> -->
+        <v-btn color="primary text-none text-subtitle-1 mr-5"  prepend-icon="fa-regular fa-download">Template</v-btn>
+        <v-btn color="primary text-none text-subtitle-1 mr-5"  prepend-icon="fa-regular fa-upload">Import</v-btn>
+        <v-btn color="primary text-none text-subtitle-1 "  prepend-icon="fa-regular fa-arrow-down-wide-short">Filters</v-btn>
       </div>
     </v-container>
 

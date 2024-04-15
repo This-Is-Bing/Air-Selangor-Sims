@@ -139,6 +139,25 @@ const createCategory = async(category)=>{
     }
 }
 
+// Stores
+const getAllStores = async()=>{
+    try {
+        const response = await axios.get(apiList.getAllStores);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+}
+
+const createStore= async(store)=>{
+    try{
+        const response = await axios.post(apiList.createStore,store)
+        return response
+    }catch (error){
+        console.error("Error Creating Store:", error.message);
+    }
+}
+
 
 export { 
         getAllCertificate,createCertificate,
@@ -146,5 +165,6 @@ export {
         getAllProducts, getAProduct, createProduct, 
         getAllSuppliers, createSupplier,
         getAllTypes, createType,
-        getAllCategories,createCategory  
+        getAllCategories,createCategory ,
+        getAllStores, createStore
         }
