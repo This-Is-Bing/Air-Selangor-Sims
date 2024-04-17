@@ -40,10 +40,9 @@
       </template>
 
       <template v-slot:[`item.actions`]="{item}">
-        <!-- <v-btn size="x-small" color="secondary" class="text-none text-caption mr-2">View</v-btn> -->
+        <v-icon icon="fa-solid fa-ellipsis"  color="secondary cursor-pointer"></v-icon>
         <v-icon icon="fa-solid fa-search" color="secondary mr-2 cursor-pointer" @click="this.$router.push({ name: 'productDetails', query: { id: item._id } })"></v-icon>
 
-        <!-- <v-btn size="x-small" color="error" class="text-none text-caption">Edit</v-btn> -->
         <v-icon icon="fa-solid fa-trash" color="quinary cursor-pointer"></v-icon>
 
       </template>
@@ -73,7 +72,7 @@
 <script>
 import { getAllProducts } from '@/tools/api.js';
 import addProductModal from '@/components/addProductModal.vue';
-import {convertDateTime} from '@/tools/convertDateTime';
+import { convertDateTime } from '@/tools/convertDateTime';
 
   export default {
     name: 'OverviewView',
