@@ -2,11 +2,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 import DashboardView from '../views/DashboardView.vue';
 import ProfileView from '../views/ProfileView.vue';
 import OverviewView from '../views/OverviewView.vue';
-import SalesView from '../views/SalesView.vue';
+import ProductCustomizationView from '../views/ProductCustomizationView.vue';
+import ProductDetailsView from '../views/ProductDetailsView.vue';
+import InstallationView from '../views/InstallationView.vue';
 import CertificationView from '../views/CertificationView.vue';
 import StockView from '../views/StockView.vue';
 import StoreView from '../views/StoreView.vue';
-import PartnerView from '../views/PartnerView.vue';
+import MeterView from '../views/MeterView.vue';
 import RefundView from '../views/RefundView.vue';
 import NotFoundView from '../views/NotFoundView.vue'
 
@@ -32,9 +34,14 @@ const routes = [
     component: OverviewView  
   },
   {
-    path: '/inventory/sales',
-    name: 'sales',
-    component: SalesView  
+    path: '/inventory/customization',
+    name: 'customization',
+    component: ProductCustomizationView  
+  },
+  {
+    path: '/inventory/installation',
+    name: 'installation',
+    component: InstallationView  
   },
   {
     path: '/inventory/certification',
@@ -52,14 +59,20 @@ const routes = [
     component: StoreView  
   },
   {
-    path: '/partner',
-    name: 'partner',
-    component: PartnerView  
+    path: '/meter',
+    name: 'meter',
+    component: MeterView  
   },
   {
     path: '/refund',
     name: 'refund',
     component: RefundView  
+  },
+  {
+    path: '/inventory/product_details',
+    name: 'productDetails',
+    component: ProductDetailsView,
+    props: (route) => ({ id: route.query.id })
   },
 ]
 

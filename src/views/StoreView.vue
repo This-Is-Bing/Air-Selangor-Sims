@@ -11,25 +11,78 @@
   <v-card class="elevation-0 ma-3 bg-primary" >
 
     <!-- Title & Add Store Button -->
-    <v-container grid-list-xs class="d-flex justify-space-between pb-8 pl-6">
+    <v-container grid-list-xs class="d-flex justify-space-between " fluid>
       <p class="text-h6 font-weight-bold">Manage Store</p>
-      <v-btn color="secondary text-none text-subtitle-1">Add Store</v-btn>
+      <add-store-modal></add-store-modal>
     </v-container>
 
     <!-- Stores -->
-    <StoreCard :imageUrl="require('@/assets/stores_images/kuala_selangor.png')" name="Kuala Selangor Store" address="Jalan Bendahara 1/2B, Taman Bendahara" district="45000 Kuala Selangor, Selangor" phone="603-61262500"/>
-    <StoreCard :imageUrl="require('@/assets/stores_images/gombak.png')" name="Gombak Store" address="Persiaran Pegawai, Baru Selayang, " district="68100 Selayang, Selangor" phone="603-61262500"/>
-    <StoreCard :imageUrl="require('@/assets/stores_images/kuala_langat.png')" name="Kuala Langat Store" address="Pengurusan Air Selangor Sdn Bhd,Region, Telok Datok" district="42700 42700Banting, Selangor" phone="603-31841300"/>
+    <store-card
+    v-for=" store in stores"
+      :key="store._id"
+      :imageUrl="store.imageUrl"
+      :name="store.name"
+      :address="store.address"
+      :postcode="store.postcode"
+      :district="store.district"
+      :city="store.city"
+      :contact="store.contact"
+    />
 
   </v-card>
+      <!-- Notification -->
+  <v-snackbar v-model="snackbar" color="primary" >
+    <v-icon icon="fa-solid fa-circle-check" color="success" class="mr-3" ></v-icon> New Store Added 
+    <template v-slot:actions>
+      <v-btn color="secondary" variant="text" @click="snackbar = false" append-icon="fa-regular fa-xmark"></v-btn>
+    </template>
+  </v-snackbar>
 </template>
   
   <script>
   import StoreCard from '@/components/StoreCard.vue';
+  import AddStoreModal from '@/components/addStoreModal.vue';
+  import { getAllStores } from '@/tools/api'
 
   export default {
     name: 'StoreView',
-    components:{StoreCard}
+    components:{StoreCard, AddStoreModal},
+    watch: {
+      '$route.query.storeCreated': {
+        immediate: true,
+        handler(value) {
+          if (value === 'true') {
+            this.loadStore();
+            this.snackbar = true;// Show the snackbar
+
+          }
+        }
+      }
+    },
+    created(){
+      this.loadStore()
+    },
+    methods:{
+
+      // Load Stores
+      async loadStore(){
+        try {
+            const response = await getAllStores();
+            this.stores = response.stores
+            console.log(this.stores);
+            } catch (error) {
+              console.error('Error fetching Stores:', error);
+            }
+      },
+    },
+    data(){
+      return{
+        snackbar: false, //snackbar
+        dataTable: 0, //to remount data table,
+        showOverlay: false,
+        stores:[]
+      }
+    }
   }
   </script>
   

@@ -3,7 +3,7 @@
   <!-- Header -->
   <v-container fluid class="bg-secondary elevation-2">
     <v-row class="py-7 pl-5">
-      <div class="font-weight-bold text-h5">Inventory Overview</div>
+      <div class="font-weight-bold text-h5">Meter Inventory</div>
     </v-row>
   </v-container>
       
@@ -12,10 +12,12 @@
 
     <!-- Title & Action Buttons -->
     <v-container grid-list-xs class="d-flex justify-space-between " fluid>
-      <p class="text-h6 font-weight-bold">Products</p>
+      <p class="text-h6 font-weight-bold">All Meters</p>
       <div>
-        <add-product-modal/>
-        <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-regular fa-arrow-down-wide-short">Filters</v-btn>
+        <add-meter-modal/>
+        <v-btn color="primary text-none text-subtitle-1 mr-5"  prepend-icon="fa-regular fa-download">Template</v-btn>
+        <v-btn color="primary text-none text-subtitle-1 mr-5"  prepend-icon="fa-regular fa-upload">Import</v-btn>
+        <v-btn color="primary text-none text-subtitle-1 "  prepend-icon="fa-regular fa-arrow-down-wide-short">Filters</v-btn>
       </div>
     </v-container>
 
@@ -34,20 +36,27 @@
         @update:options="loadItems"
       >
 
-      <template v-slot:[`item.updated_at`]="{item}">
-        <p v-if="item.updated_at"> {{ convertDateTime(item.updated_at) }}</p>
+      <template v-slot:[`item.installation_date`]="{item}">
+        <p v-if="item.installation_date">{{ convertDate(item.installation_date) }}</p>
         <p v-else>N/A</p>
       </template>
 
-      <template v-slot:[`item.actions`]="{item}">
-        <v-icon icon="fa-solid fa-ellipsis"  color="secondary cursor-pointer"></v-icon>
-        <v-icon icon="fa-solid fa-search" color="secondary mr-2 cursor-pointer" @click="this.$router.push({ name: 'productDetails', query: { id: item._id } })"></v-icon>
+      <template v-slot:[`item.warranty`]="{item}">
+        <p v-if="item.warranty">{{ convertDate(item.warranty) }}</p>
+        <p v-else>N/A</p>
+      </template>
 
-        <v-icon icon="fa-solid fa-trash" color="quinary cursor-pointer"></v-icon>
+      <template v-slot:[`item.updated_at`]="{item}">
+        <p v-if="item.updated_at">{{ convertDateTime(item.updated_at) }}</p>
+        <p v-else>N/A</p>
+      </template>
+
+
+      <template v-slot:[`item.actions`]="{}">
 
       </template>
       </v-data-table-server>
-      
+
       <v-overlay
       :model-value="showOverlay"
       class="align-center justify-center"
@@ -70,19 +79,18 @@
 </template>
   
 <script>
-import { getAllProducts } from '@/tools/api.js';
-import addProductModal from '@/components/addProductModal.vue';
-import { convertDateTime } from '@/tools/convertDateTime';
+import AddMeterModal from '@/components/addMeterModal.vue';
+import { getAllMeters } from '@/tools/api.js';
+import { convertDate, convertDateTime } from '@/tools/convertDateTime';
 
   export default {
-    name: 'OverviewView',
-    components:{ addProductModal },
+    name: 'MeterView',
+    components:{ AddMeterModal },
     watch: {
-      '$route.query.productCreated': {
+      '$route.query.meterCreated': {
         immediate: true,
         handler(value) {
           if (value === 'true') {
-            console.log('reload');
             this.remountTable();
             this.snackbar = true;// Show the snackbar
 
@@ -92,18 +100,19 @@ import { convertDateTime } from '@/tools/convertDateTime';
     },
     methods:{
       convertDateTime,
+      convertDate,
       async loadItems({page, itemsPerPage}){
         this.loading = true;
         this.showOverlay = true  
 
-        await getAllProducts()
+        await getAllMeters()
         .then((response) => {
           if (response) {
             const start = (page - 1) * itemsPerPage
             const end = start + itemsPerPage
-            const sliced = response.products.slice(start,end)
+            const sliced = response.meters.slice(start,end)
             this.serverItems = sliced;
-            this.totalItems = response.products.length;
+            this.totalItems = response.meters.length;
           } else {
             console.error('Received undefined or null');
           }
@@ -123,11 +132,13 @@ import { convertDateTime } from '@/tools/convertDateTime';
     data: ()=>({
       itemsPerPage: 10,
       headers: [
-        { title: 'Product', key: 'name', sortable: false, align: 'center' },
-        { title: 'Category', key: 'category', sortable: false, align: 'center' },
-        { title: 'Type', key: 'type', sortable: false, align: 'center' },
-        { title: 'Size', key: 'size', sortable: false, align: 'center' },
-        { title: 'Threshold', key: 'threshold', sortable: false, align: 'center' },
+        { title: 'Serial Number', key: 'serial_number', sortable: false, align: 'center' },
+        { title: 'Product', key: 'product_id.name', sortable: false, align: 'center' },
+        { title: 'Region', key: 'region', sortable: false, align: 'center' },
+        { title: 'Installation Date', key: 'installation_date', sortable: false, align: 'center' },
+        { title: 'Age', key: 'age', sortable: false, align: 'center' },
+        { title: 'Mileage', key: 'mileage', sortable: false, align: 'center' },
+        { title: 'Warranty', key: 'warranty', sortable: false, align: 'center' },
         { title: 'Last Update', key: 'updated_at', sortable: false, align: 'center' },
         { title: 'Actions', value: 'actions', sortable: false, align: 'center' },
       ],
