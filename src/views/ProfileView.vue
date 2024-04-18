@@ -11,11 +11,11 @@
 			v-model="tab"
 			background-color="white"
 			light
-			slider-color="blue"
+			slider-color="secondary"
 			align-tabs="center"
 		>
-			<v-tab key="account-summary"> Account Summary </v-tab>
-			<v-tab key="manage-users"> Manage Users </v-tab>
+			<v-tab class="text-none" key="account-summary"> Account Summary </v-tab>
+			<v-tab class="text-none" key="manage-users"> Manage Users </v-tab>
 		</v-tabs>
 
 		<!-- Tab Items -->
@@ -31,11 +31,11 @@
 							'position-relative': true,
 							'text-none': true,
 							'text-subtitle-1': true,
-							'ml-5':true,
+							'ml-5': true,
 						}"
 						:color="buttonColor"
 						@click="toggleEditMode"
-						>{{buttonText}}</v-btn
+						>{{ buttonText }}</v-btn
 					>
 					<v-row>
 						<v-col cols="2">
@@ -46,15 +46,16 @@
 								width="350"
 							>
 								<v-row class="d-flex flex-column justify-center align-center">
-									<svg
-										width="200"
-										height="200"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<!-- Circle -->
-										<circle cx="100" cy="100" r="80" fill="lightblue" />
-									</svg>
-									<text style="color: blue; font-weight: bold; font-size: 20px"
+									<v-card height="200" width="200" elevation="0">
+										<!-- cannot display the image when using /assets/-->
+										<v-img
+											src="https://static-00.iconduck.com/assets.00/profile-circle-icon-2048x2048-cqe5466q.png"
+											width="200"
+											height="200"
+											aspect-ratio="1/1"
+										></v-img>
+									</v-card>
+									<text style="font-weight: bold; font-size: 20px"
 										>@sarahlee</text
 									>
 									<text>Admin</text>
@@ -131,8 +132,8 @@
 									<td>{{ item.name }}</td>
 									<td>{{ item.email }}</td>
 									<td>{{ item.role }}</td>
-									<td><button style="color: blue">Edit</button></td>
-									<td><button style="color: red">Delete</button></td>
+									<td><v-btn color="secondary">Edit</v-btn></td>
+									<td><v-btn color="error">Delete</v-btn></td>
 								</tr>
 							</tbody>
 						</v-table>
@@ -144,75 +145,80 @@
 </template>
   
 <script>
-export default {
-	name: "ProfileView",
-	data: () => ({
-		tab: null,
-		items: ["account-summary", "manage-users"],
-		// Determines whether the form is in edit mode
-		editMode: false,
-		// Represents the form fields and their values
-		formFields: {
-			Name: "Sarah Lee",
-			Email: "sarahlee@gmail.com",
-			Department: "Meter Water Unit",
-			Password: "********",
+	import profile_picture from "@/assets/profile_picture.png"
+	export default {
+		name: "ProfileView",
+		
+		data: () => ({
+			tab: null,
+			items: ["account-summary", "manage-users"],
+			// Determines whether the form is in edit mode
+			editMode: false,
+			// Represents the form fields and their values
+			formFields: {
+				Name: "Sarah Lee",
+				Email: "sarahlee@gmail.com",
+				Department: "Meter Water Unit",
+				Password: "********",
+			},
+			editformFields: {
+				Name: "Sarah Lee",
+				Email: "sarahlee@gmail.com",
+				Department: "Meter Water Unit",
+				Password: "********",
+				"Confirm Password": "********",
+			},
+			user_info: [
+				{
+					username: "sarahlee",
+					name: "Sarah Lee",
+					email: "sarahlee@gmail.com",
+					role: "Admin",
+				},
+				{
+					username: "weimin",
+					name: "Wei Min Tan",
+					email: "weimin123@gmail.com",
+					role: "User",
+				},
+				{
+					username: "huiling0203",
+					name: "Chan Hui Ling",
+					email: "chanhuiling@gmail.com",
+					role: "User",
+				},
+				{
+					username: "irfan77",
+					name: "Muhammad Irfan bin Razak",
+					email: "irfan@gmail.com",
+					role: "User",
+				},
+				{
+					username: "anitakrishnan",
+					name: "Anita Krishnan",
+					email: "anitakrishnan@gmail.com",
+					role: "User",
+				},
+			],
+		}),
+		return :{
+			profile_picture
 		},
-		editformFields: {
-			Name: "Sarah Lee",
-			Email: "sarahlee@gmail.com",
-			Department: "Meter Water Unit",
-			Password: "********",
-			"Confirm Password": "********",
+		methods: {
+			// Toggle between edit and display mode
+			toggleEditMode() {
+				this.editMode = !this.editMode;
+			},
 		},
-		user_info: [
-			{
-				username: "sarahlee",
-				name: "Sarah Lee",
-				email: "sarahlee@gmail.com",
-				role: "Admin",
+		computed: {
+			buttonColor() {
+				return this.editMode ? "green" : "secondary";
 			},
-			{
-				username: "weimin",
-				name: "Wei Min Tan",
-				email: "weimin123@gmail.com",
-				role: "User",
+			buttonText() {
+				return this.editMode ? "Save Information" : "Edit Information";
 			},
-			{
-				username: "huiling0203",
-				name: "Chan Hui Ling",
-				email: "chanhuiling@gmail.com",
-				role: "User",
-			},
-			{
-				username: "irfan77",
-				name: "Muhammad Irfan bin Razak",
-				email: "irfan@gmail.com",
-				role: "User",
-			},
-			{
-				username: "anitakrishnan",
-				name: "Anita Krishnan",
-				email: "anitakrishnan@gmail.com",
-				role: "User",
-			},
-		],
-	}),
-	methods: {
-		// Toggle between edit and display mode
-		toggleEditMode() {
-			this.editMode = !this.editMode;
 		},
-	},
-	computed:{
-		buttonColor(){
-			return this.editMode? 'green':'secondary'
-		},
-		buttonText(){
-			return this.editMode? 'Save Information':'Edit Information'
-		}
-	},
-};
+	};
 </script>
   
 

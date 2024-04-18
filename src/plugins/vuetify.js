@@ -33,7 +33,8 @@ export default createVuetify({
           block:"#00538C",
           nav:"#FEFEFE",
           main: "#EFF8FC",
-          title: "#383E49"
+          title: "#383E49",
+          error: '#fc1c03',
         }
       },
       dark: {
@@ -48,7 +49,8 @@ export default createVuetify({
           block:"#00538C",
           nav: "#D0E2E9",
           main: "#98D0E6",
-          title: "#383E49"
+          title: "#383E49",
+          error: '#fc1c03',
 
         }
       },
