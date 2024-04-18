@@ -40,12 +40,11 @@
       </template>
 
       <template v-slot:[`item.actions`]="{item}">
-        <v-icon icon="fa-solid fa-ellipsis"  color="secondary cursor-pointer"></v-icon>
+        <!-- <v-icon icon="fa-solid fa-ellipsis"  color="secondary cursor-pointer"></v-icon> -->
         <v-icon icon="fa-solid fa-search" color="secondary mr-2 cursor-pointer" @click="this.$router.push({ name: 'productDetails', query: { id: item._id } })"></v-icon>
-
         <v-icon icon="fa-solid fa-trash" color="quinary cursor-pointer"></v-icon>
-
       </template>
+      
       </v-data-table-server>
       
       <v-overlay

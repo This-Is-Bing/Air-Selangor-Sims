@@ -11,6 +11,7 @@ import StoreView from '../views/StoreView.vue';
 import MeterView from '../views/MeterView.vue';
 import RefundView from '../views/RefundView.vue';
 import NotFoundView from '../views/NotFoundView.vue'
+import MeterDetailsView from '../views/MeterDetailsView.vue'
 
 const routes = [
   {
@@ -62,6 +63,12 @@ const routes = [
     path: '/meter',
     name: 'meter',
     component: MeterView  
+  },
+  {
+    path: '/meter/meter_details',
+    name: 'meterDetails',
+    component: MeterDetailsView,
+    props: (route) => ({ id: route.query.id }) 
   },
   {
     path: '/refund',

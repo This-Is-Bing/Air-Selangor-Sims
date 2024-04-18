@@ -54,8 +54,8 @@
 										<!-- Circle -->
 										<circle cx="100" cy="100" r="80" fill="lightblue" />
 									</svg>
-									<text style="color: blue; font-weight: bold; font-size: 20px"
-										>@sarahlee</text
+									<text class="text-blue font-weight-bold text-subtitle-1"
+										>@{{username}}</text
 									>
 									<text>Admin</text>
 								</v-row>
@@ -131,8 +131,8 @@
 									<td>{{ item.name }}</td>
 									<td>{{ item.email }}</td>
 									<td>{{ item.role }}</td>
-									<td><button style="color: blue">Edit</button></td>
-									<td><button style="color: red">Delete</button></td>
+									<td><button class="text-secondary">Edit</button></td>
+									<td><button class="text-error">Delete</button></td>
 								</tr>
 							</tbody>
 						</v-table>
@@ -144,17 +144,20 @@
 </template>
   
 <script>
+import userInfo from '@/tools/userInfo';
+
 export default {
 	name: "ProfileView",
 	data: () => ({
+		username : userInfo.name,
 		tab: null,
 		items: ["account-summary", "manage-users"],
 		// Determines whether the form is in edit mode
 		editMode: false,
 		// Represents the form fields and their values
 		formFields: {
-			Name: "Sarah Lee",
-			Email: "sarahlee@gmail.com",
+			Name: userInfo.name,
+			Email: "airselangoradmin@gmail.com",
 			Department: "Meter Water Unit",
 			Password: "********",
 		},

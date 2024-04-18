@@ -15,7 +15,7 @@
 
                 <v-autocomplete
                     v-model="productName"
-                    class="px-6 pt-2"
+                    class="px-6 pt-3"
                     label="Products"
                     density="comfortable"
                     :items="productNameList"
@@ -25,24 +25,24 @@
 
                 <v-text-field
                     v-model="serialNumber"
-                    class="px-6 pt-3"
+                    class="px-6 pt-2"
                     label="Serial Number"
                     density="comfortable"
                     variant="outlined"
                 >
                 </v-text-field>
 
-                <v-text-field
+                <!-- <v-text-field
                     v-model="region"
                     class="px-6 pt-3"
                     label="Region"
                     density="comfortable"
                     variant="outlined"
                 >
-                </v-text-field>
+                </v-text-field> -->
 
 
-                <v-text-field
+                <!-- <v-text-field
                     class="px-6 pt-2"
                     label="Age"
                     density="comfortable"
@@ -60,24 +60,24 @@
                     type="number"
                     v-model="mileage"
                 >
-                </v-text-field>
+                </v-text-field> -->
 
                 
 
-                <v-container>
+                <!-- <v-container>
                     <p class="text-grey text-subtitle-1 pl-5 pb-4">Installation Date</p>
                     <v-row justify="center">
                         <v-date-picker color="secondary" hide-header v-model:model-value="installation_date" ></v-date-picker>
                     </v-row>
-                </v-container>
+                </v-container> -->
     
-                <v-container class="mt-n5">
+                <!-- <v-container class="mt-n5">
                     <p class="text-grey text-subtitle-1 pl-5 pb-4">Warranty</p>
 
                     <v-row justify="center">
                         <v-date-picker color="secondary" hide-header v-model:model-value="warranty"></v-date-picker>
                     </v-row>
-                </v-container>
+                </v-container> -->
 
                 <v-card-actions class="pb-4">
                     <v-spacer></v-spacer>

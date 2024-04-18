@@ -13,7 +13,7 @@
 
     <v-container fluid class="bg-secondary elevation-2 ">
       <v-row class="py-7 pl-5">
-        <div class="font-weight-bold text-h5">Product Details</div>
+        <div class="font-weight-bold text-h5">Water Meter Details</div>
       </v-row>
     </v-container>
 
@@ -22,7 +22,7 @@
 
     <!-- button -->
     <v-container grid-list-xs class="d-flex justify-space-between" fluid>
-      <p class="text-h6 font-weight-bold">{{product.name}}</p>
+      <p class="text-h6 font-weight-bold">Meter - {{meter.serial_number}}</p>
       <div>
         <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-regular fa-pencil" class="mr-2">Edit</v-btn>
         <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-regular fa-download">Download</v-btn>
@@ -36,9 +36,7 @@
       slider-color="secondary"
       >
       <v-tab key="overview" class="text-none px-10 text-subtitle-1"> Overview </v-tab>
-      <v-tab key="purchases" class="text-none px-10 text-subtitle-1"> Purchases </v-tab>
       <v-tab key="adjustments" class="text-none px-10 text-subtitle-1"> Adjustments </v-tab>
-      <v-tab key="history" class="text-none px-10 text-subtitle-1"> History </v-tab>
     </v-tabs>
 
     <v-divider color="black"></v-divider>
@@ -48,18 +46,10 @@
         <!-- Account Summary Tab -->
         <v-window-item key="overview">
           <v-card flat>
-            <detail-overview :product="product"/>
+            <meter-details :meter="meter"/>
           </v-card>
         </v-window-item>
-        
-        <v-window-item key="purchases">
-          <v-card flat>
-            <v-card-text>
-              Content for purchases goes here.
-            </v-card-text>
-          </v-card>
-        </v-window-item>
-        
+          
         <v-window-item key="adjustments">
           <v-card flat>
             <v-card-text>
@@ -68,16 +58,6 @@
           </v-card>
         </v-window-item>
         
-        <v-window-item key="history">
-          <v-card flat>
-            <v-card-text>
-              Content for history goes here.
-            </v-card-text>
-          </v-card>
-        </v-window-item>
-
-        
-
     </v-window>
 
   </v-card>
@@ -85,13 +65,13 @@
   </template>
   
   <script>
-import { getAProduct } from '@/tools/api';
-import DetailOverview from '@/components/product_details/overview.vue';
+import MeterDetails from '@/components/meter_details/meterDetails.vue';
+import { getAMeter } from '@/tools/api.js';
 
 
   export default {
-  components: { DetailOverview },
-    name: 'ProductDetailsView',
+  components: { MeterDetails },
+    name: 'MeterDetailsView',
     props: {
         id: {
         type: String,
@@ -101,21 +81,20 @@ import DetailOverview from '@/components/product_details/overview.vue';
     data(){
         return{
             showOverlay:false,
-            product:[],
+            meter:[],
             activeTab: 'overview' 
         }
     },
     created(){
-        this.loadProduct()
+        this.loadMeter()
     },
     methods:{
-      async loadProduct(){
-        console.log(this.id);
-          this.showOverlay = true
-          const result = await getAProduct( this.id )
-          this.product = result.product
-          this.showOverlay = false
-      }
+        async loadMeter(){
+            this.showOverlay = true
+            const result = await getAMeter( this.id )
+            this.meter = result.meter
+            this.showOverlay = false
+        }
     }
 
   }
