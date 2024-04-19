@@ -5,13 +5,13 @@ import OverviewView from '../views/OverviewView.vue';
 import ProductCustomizationView from '../views/ProductCustomizationView.vue';
 import ProductDetailsView from '../views/ProductDetailsView.vue';
 import InstallationView from '../views/InstallationView.vue';
-import CertificationView from '../views/CertificationView.vue';
 import StockView from '../views/StockView.vue';
 import StoreView from '../views/StoreView.vue';
 import MeterView from '../views/MeterView.vue';
 import RefundView from '../views/RefundView.vue';
 import NotFoundView from '../views/NotFoundView.vue'
 import MeterDetailsView from '../views/MeterDetailsView.vue'
+import LabTestView from '../views/LabTestView.vue';
 
 const routes = [
   {
@@ -45,9 +45,9 @@ const routes = [
     component: InstallationView  
   },
   {
-    path: '/inventory/certification',
-    name: 'certification',
-    component: CertificationView  
+    path: '/inventory/labtest',
+    name: 'labtest',
+    component: LabTestView  
   },
   {
     path: '/inventory/stock',
