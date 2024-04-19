@@ -144,7 +144,8 @@
 </template>
   
 <script>
-import userInfo from '@/tools/userInfo';
+import userInfo from '@/userInfo';
+
 
 export default {
 	name: "ProfileView",
@@ -157,8 +158,8 @@ export default {
 		// Represents the form fields and their values
 		formFields: {
 			Name: userInfo.name,
-			Email: "airselangoradmin@gmail.com",
-			Department: "Meter Water Unit",
+			Email: userInfo.email,
+			Department: "Water Meter Unit",
 			Password: "********",
 		},
 		editformFields: {

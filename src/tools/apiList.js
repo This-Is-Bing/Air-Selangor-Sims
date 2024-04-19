@@ -8,9 +8,11 @@ const apiList = {
     getAMeter : "https://sims-server-api.vercel.app/meter/",
     createMeter: "https://sims-server-api.vercel.app/meter/create",
 
-    // Certificate
-    getAllCertificates : "https://sims-server-api.vercel.app/meter/certificate/all",
-    createCertificate: "https://sims-server-api.vercel.app/meter/certificate/create",
+    // Lab Test
+    getAllLabTests : "https://sims-server-api.vercel.app/labtest/all",
+    getALabTest: "https://sims-server-api.vercel.app/labtest/",
+    getALabTestByMeterID: "https://sims-server-api.vercel.app/labtest/meter_id/",
+    createLabTest: "https://sims-server-api.vercel.app/labtest/create",
 
     // Products
     getAllProducts : "https://sims-server-api.vercel.app/product/all",

@@ -1,19 +1,39 @@
 import axios from "axios";
 import apiList from "./apiList.js"
 
-// Certificate
-const getAllCertificate = async()=>{
+// Labtest
+const getAllLabTests = async()=>{
     try {
-        const response = await axios.get(apiList.getAllCertificates);
+        const response = await axios.get(apiList.getAllLabTests);
         return response.data;
     } catch (error) {
         console.error("Error fetching data:", error.message);
     }
 }
 
-const createCertificate = async(certificate)=>{
+const getALabTest = async( id )=>{
+    const url = apiList.getALabTest + id
+    try {
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+}
+
+const getALabTestByMeterID = async( id )=>{
+    const url = apiList.getALabTestByMeterID + id
+    try {
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+}
+
+const createLabTest = async(labtest)=>{
     try{
-        const response = await axios.post(apiList.createMeter,certificate)
+        const response = await axios.post(apiList.createLabTest,labtest)
         return response
     }catch (error){
         console.error("Error Creating data:", error.message);
@@ -160,7 +180,7 @@ const createStore= async(store)=>{
 
 
 export { 
-        getAllCertificate,createCertificate,
+        getAllLabTests, getALabTest, createLabTest, getALabTestByMeterID,
         getAllMeters,getAMeter,createMeter,
         getAllProducts, getAProduct, createProduct, 
         getAllSuppliers, createSupplier,

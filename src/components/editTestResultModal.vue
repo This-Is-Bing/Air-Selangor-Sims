@@ -1,9 +1,9 @@
 <template>
-    <v-dialog max-width="500" scrollable max-height="800">
+    <v-dialog max-width="500" scrollable max-height="600">
         <template v-slot:activator="{ props: activatorProps }">
             <v-btn
             v-bind="activatorProps"
-            text="Add Meter"
+            text="Edit Result"
             variant="flat"
             color="secondary text-none text-subtitle-1" 
             class="mx-5 elevation-1 text-h6 text-bold"
@@ -11,73 +11,42 @@
         </template>
         
         <template v-slot:default="{ isActive }">
-            <v-card  title="New Meter">
+            <v-card  title="Lab Test">
 
                 <v-autocomplete
-                    v-model="productName"
+                    v-model="testResult"
                     class="px-6 pt-3"
-                    label="Products"
+                    label="Test Result"
                     density="comfortable"
-                    :items="productNameList"
+                    :items="testResultOptions"
                     variant="outlined"
                 >
                 </v-autocomplete>
 
                 <v-text-field
-                    v-model="serialNumber"
+                    v-model="tester"
                     class="px-6 pt-2"
-                    label="Serial Number"
+                    label="Tester"
                     density="comfortable"
                     variant="outlined"
                 >
                 </v-text-field>
 
-                <!-- <v-text-field
-                    v-model="region"
-                    class="px-6 pt-3"
-                    label="Region"
-                    density="comfortable"
-                    variant="outlined"
-                >
-                </v-text-field> -->
-
-
-                <!-- <v-text-field
-                    class="px-6 pt-2"
-                    label="Age"
-                    density="comfortable"
-                    variant="outlined"
-                    type="number"
-                    v-model="age"
-                >
-                </v-text-field>
-
-                <v-text-field
-                    class="px-6 pt-2"
-                    label="Milage"
-                    density="comfortable"
-                    variant="outlined"
-                    type="number"
-                    v-model="mileage"
-                >
-                </v-text-field> -->
-
-                
-
-                <!-- <v-container>
-                    <p class="text-grey text-subtitle-1 pl-5 pb-4">Installation Date</p>
+                <v-container>
+                    <p class="text-grey text-subtitle-1 pl-5 pb-4">Test Date</p>
                     <v-row justify="center">
-                        <v-date-picker color="secondary" hide-header v-model:model-value="installation_date" ></v-date-picker>
+                        <v-date-picker color="secondary" hide-header v-model:model-value="testDate"></v-date-picker>
                     </v-row>
-                </v-container> -->
-    
-                <!-- <v-container class="mt-n5">
-                    <p class="text-grey text-subtitle-1 pl-5 pb-4">Warranty</p>
+                </v-container>
 
-                    <v-row justify="center">
-                        <v-date-picker color="secondary" hide-header v-model:model-value="warranty"></v-date-picker>
-                    </v-row>
-                </v-container> -->
+                <v-textarea
+                    v-model="comments"
+                    class="px-6 pt-2"
+                    label="Comments"
+                    density="comfortable"
+                    variant="outlined"
+                >
+                </v-textarea>
 
                 <v-card-actions class="pb-4">
                     <v-spacer></v-spacer>
@@ -92,7 +61,7 @@
                     </v-btn>
 
                     <v-btn
-                        text="Add Meter"
+                        text="Save"
                         color="secondary text-none text-subtitle-1" 
                         variant="flat"
                         class="mx-5 elevation-1"
@@ -123,9 +92,14 @@ import { createMeter, getAllProducts } from '@/tools/api.js'
 import { convertToISO } from '@/tools/convertDateTime'
 import userInfo from '@/userInfo'
 export default {
-    name: "aaddMeterModal",
+    name: "editTestResult",
     data(){
         return{
+            testResultOptions:["Passed", "Failed", "New"],
+            testResult: null,
+            tester: null,
+            testDate: new Date(),
+            comments: null,
             products:[],
             productNameList:[],
             productName: null,
@@ -207,7 +181,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

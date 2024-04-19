@@ -89,6 +89,17 @@
                                 </v-col>
                             </v-row>
 
+                            <!-- Store -->
+                            <v-row>
+                                <v-col cols="4">Location:</v-col>
+                                <v-col cols="8" v-if="meter && meter.store_id">{{ meter.store_id.name }}</v-col>
+                            </v-row>
+
+                            <v-row>
+                                <v-col cols="4">Contact:</v-col>
+                                <v-col cols="8" v-if="meter && meter.store_id">{{ meter.store_id.contact }}</v-col>
+                            </v-row>
+
                             <!-- Date Added -->
                             <v-row>
                                 <v-col cols="4">Date Added:</v-col>
@@ -105,31 +116,43 @@
                             <v-row>
                                 <v-col cols="4">Test Result:</v-col>
                                 <v-col cols="8" class="text-capitalize">
-                                    <v-chip v-if="meter.status == 'new'" close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
+                                    <!-- <v-chip v-if="labtest && labtest.test_status== 'new'" close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
                                         Pending
+                                    </v-chip> -->
+
+                                    <!-- <v-chip v-if="labtest.test_status&&labtest.test_status == 'Passed'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+                                        Passed
                                     </v-chip>
 
-                                    <v-chip v-if="meter.status == 'client'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
-                                        Client
-                                    </v-chip>
+                                    <v-chip v-if="labtest.test_status&&labtest.test_status == 'Failed'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+                                        Failed
+                                    </v-chip> -->
                                 </v-col>
                             </v-row>
 
                             <!-- Date Tested -->
                             <v-row>
                                 <v-col cols="4">Date Tested:</v-col>
-                                <v-col cols="8">N/A</v-col>
+                                <!-- <v-col cols="8" v-if="labtest.test_date" >{{ labtest.test_date }}</v-col> -->
                             </v-row>
 
                             <!-- Testing Personel -->
                             <v-row>
-                                <v-col cols="4">Testing Personel:</v-col>
-                                <v-col cols="8">{{ username }}</v-col>
+                                <v-col cols="4">Tester:</v-col>
+                                <!-- <v-col cols="8"  v-if="labtest.tester">{{ labtest.tester }}</v-col> -->
                             </v-row>
+                            {{ labtest }}
                         </v-col>
-
                         <v-col cols="4">
-                            <v-btn color="secondary" size="small" prepend-icon="fa-regular fa-up-right-from-square" class="text-none">Lab Test</v-btn>
+                            <v-btn 
+                                color="secondary" 
+                                size="small" 
+                                prepend-icon="fa-regular fa-up-right-from-square" 
+                                class="text-none"
+                                @click="this.$router.push({ name: 'LabTestDetails', query: { id: labtestID } })"
+                            >
+                                Lab Test
+                            </v-btn>
                         </v-col>
                     </v-row>
 
@@ -170,7 +193,7 @@
                         </v-col>
 
                         <v-col cols="4">
-                            <v-btn color="secondary" size="small" prepend-icon="fa-regular fa-up-right-from-square" class="text-none">Installation</v-btn>
+                            <v-btn color="secondary" size="small" prepend-icon="fa-regular fa-up-right-from-square" class="text-none" >Installation</v-btn>
                         </v-col>
                     </v-row>
 
@@ -207,21 +230,31 @@
             </v-row>
         </v-container>
     </v-container>
-  
 </template>
   
 <script>
+import { getALabTestByMeterID } from "@/tools/api";
 import { convertDateTime } from "@/tools/convertDateTime";
-import userInfo from "@/tools/userInfo";
+import userInfo from "@/userInfo";
 
   export default {
     name: "meterDetails",
     props: {
       meter: Array,
     },
+    watch: {
+        // Watch the 'meter._id' for changes
+        'meter._id'(newVal) {
+            if (newVal) {
+                this.loadLabtest();
+            }
+        },
+    },
     data(){
         return{
             username: userInfo.name,
+            labtest: null,
+            labtestID: null,
             items: [
                 {
                 id: 1,
@@ -268,8 +301,18 @@ import userInfo from "@/tools/userInfo";
         }
     },
     methods:{
-        convertDateTime
+        convertDateTime,
+        async loadLabtest(){
+        await getALabTestByMeterID(this.meter._id)
+        .then((response) => {
+            this.labtest = response.labtest[0]
+            this.labtestID = this.labtest._id
+        }).catch((error) => {
+            console.error('Error fetching labtest:', error);
+        });
+
     }
-  }
+}
+}
   </script>
   
