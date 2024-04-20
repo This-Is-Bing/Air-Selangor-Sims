@@ -177,44 +177,36 @@ export default {
 				email: "sarahlee@gmail.com",
 				role: "Admin",
 			},
-			editformFields: {
-				Name: "Sarah Lee",
-				Email: "sarahlee@gmail.com",
-				Department: "Meter Water Unit",
-				Password: "********",
-				"Confirm Password": "********",
+			{
+				username: "sarahlee",
+				name: "Sarah Lee",
+				email: "sarahlee@gmail.com",
+				role: "Admin",
 			},
-			user_info: [
-				{
-					username: "sarahlee",
-					name: "Sarah Lee",
-					email: "sarahlee@gmail.com",
-					role: "Admin",
-				},
-				{
-					username: "weimin",
-					name: "Wei Min Tan",
-					email: "weimin123@gmail.com",
-					role: "User",
-				},
-				{
-					username: "huiling0203",
-					name: "Chan Hui Ling",
-					email: "chanhuiling@gmail.com",
-					role: "User",
-				},
-				{
-					username: "irfan77",
-					name: "Muhammad Irfan bin Razak",
-					email: "irfan@gmail.com",
-					role: "User",
-				},
-				{
-					username: "anitakrishnan",
-					name: "Anita Krishnan",
-					email: "anitakrishnan@gmail.com",
-					role: "User",
-				},
+			{
+				username: "weimin",
+				name: "Wei Min Tan",
+				email: "weimin123@gmail.com",
+				role: "User",
+			},
+			{
+				username: "huiling0203",
+				name: "Chan Hui Ling",
+				email: "chanhuiling@gmail.com",
+				role: "User",
+			},
+			{
+				username: "irfan77",
+				name: "Muhammad Irfan bin Razak",
+				email: "irfan@gmail.com",
+				role: "User",
+			},
+			{
+				username: "anitakrishnan",
+				name: "Anita Krishnan",
+				email: "anitakrishnan@gmail.com",
+				role: "User",
+			},
 			],
 		}),
 		return :{
