@@ -1,5 +1,6 @@
 import moment from "moment-timezone";
 
+// convert ISO to Date Time
 const convertDateTime = (isoDateTime)=>{
     const date = new Date(isoDateTime);
     
@@ -14,6 +15,18 @@ const convertDateTime = (isoDateTime)=>{
     return `${day}/${month}/${year} ${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
 }
 
+// convert ISO to Time
+const convertTime = (isoDateTime)=>{
+    const date = new Date(isoDateTime);
+    
+    const hour = date.getUTCHours();
+    const minute = date.getUTCMinutes();
+    
+    // Format the date and time to desired format: "2/1/1970 07:13"
+    return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+}
+
+// convert iso to day month year
 const convertDate = (isoDateTime)=>{
     const date = new Date(isoDateTime);
     
@@ -26,6 +39,7 @@ const convertDate = (isoDateTime)=>{
     return `${day}/${month}/${year}`;
 }
 
+// convert to ISO
 const convertToISO = (dateTime) => {
 
     // Return in ISO 8601 format with the timezone offset
@@ -35,4 +49,4 @@ const convertToISO = (dateTime) => {
 }
 
 
-export  {convertDateTime,convertToISO, convertDate}
+export  {convertDateTime,convertToISO, convertDate, convertTime}

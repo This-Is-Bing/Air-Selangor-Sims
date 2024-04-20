@@ -116,32 +116,42 @@
                             <v-row>
                                 <v-col cols="4">Test Result:</v-col>
                                 <v-col cols="8" class="text-capitalize">
-                                    <!-- <v-chip v-if="labtest && labtest.test_status== 'new'" close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
-                                        Pending
-                                    </v-chip> -->
 
-                                    <!-- <v-chip v-if="labtest.test_status&&labtest.test_status == 'Passed'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+                                    <v-chip v-if="labtestStatus== 'new'" close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
+                                        Pending
+                                    </v-chip>
+
+                                    <v-chip v-if="labtestStatus == 'Passed'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
                                         Passed
                                     </v-chip>
 
-                                    <v-chip v-if="labtest.test_status&&labtest.test_status == 'Failed'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+                                    <v-chip v-if="labtestStatus == 'Failed'" close class="text-subtitle-2" color="error" prepend-icon="fa-regular fa-circle-check">
                                         Failed
-                                    </v-chip> -->
+                                    </v-chip> 
                                 </v-col>
                             </v-row>
 
                             <!-- Date Tested -->
                             <v-row>
                                 <v-col cols="4">Date Tested:</v-col>
-                                <!-- <v-col cols="8" v-if="labtest.test_date" >{{ labtest.test_date }}</v-col> -->
+                                <v-col cols="8" v-if="labtestDate" >{{labtestDate}}</v-col>
+                                <v-col cols="8" v-else >N/A</v-col>
                             </v-row>
 
                             <!-- Testing Personel -->
                             <v-row>
                                 <v-col cols="4">Tester:</v-col>
-                                <!-- <v-col cols="8"  v-if="labtest.tester">{{ labtest.tester }}</v-col> -->
+                                <v-col cols="8"  v-if="labtestTester">{{ labtestTester}}</v-col>
+                                <v-col cols="8" v-else >N/A</v-col>
                             </v-row>
-                            {{ labtest }}
+
+                            <!-- Comments -->
+                            <v-row>
+                                <v-col cols="4">Comments:</v-col>
+                                <v-col cols="8"  v-if="labtestComments">{{ labtestComments }}</v-col>
+                                <v-col cols="8" v-else >N/A</v-col>
+                            </v-row>
+
                         </v-col>
                         <v-col cols="4">
                             <v-btn 
@@ -202,29 +212,41 @@
                 <!-- Meter Vertical Timeline -->
                 <v-col cols="5"   >
                     <p class="text-subtitle-1 font-weight-bold pt-2 pb-5">Meter History</p>
-                    <v-timeline side="end" align="start" density="compact" style="max-width: 450px;" >
+                    <p v-if="history==null">No History Available</p>
+                    <v-timeline side="end" align="start" density="compact" style="min-width: 400px;max-width: 450px; max-height: 50px;">
                         <v-timeline-item
-                            v-for="item in items"
-                            :key="item.id"
-                            :dot-color="item.color"
+                            v-for="item in history"
+                            :key="item.meter_id"
+                            dot-color="history_yellow_border"
                             size="x-small"
                             density="compact"
                         >
                             <v-row>
                                 <v-col cols="2" class="d-flex flex-column align-center">
-                                    <p class="font-weight-bold text-caption">12 April</p>
-                                    <p class="text-grey text-subtitle-2 ">2024</p>
+                                    <p class="font-weight-bold text-caption">{{convertDate(item.updated_at)}}</p>
                                 </v-col>
                                 <v-col cols="10" class="d-flex">
-                                    <v-alert :color="item.color" icon="fa-regular fa-circle-info" :value="true" title="Hello" class="elevation-1 py-8" style="min-width: 200px; border-left: 5px blue solid; border-radius: 10px;" >
+                                    <v-alert color="history_yellow" :value="true" small class=" elevation-1 py-8 text-caption border-s-lg border-history_yellow_border border-opacity-100 " >
+                                        <v-row class="mb-1">
+                                            <v-col cols="1">
+                                                <v-icon icon="fa-regular fa-circle-info" color="history_yellow_border"></v-icon>
+                                            </v-col>
+                                            <v-col>
+                                                <p class="text-subtitle-2 text-history_yellow_border" >{{item.header}}</p> 
+                                            </v-col>  
+                                        </v-row>
+                                        <span class="font-weight-bold">{{convertTime(item.updated_at)}} Hours:</span> 
                                         {{item.content}}
+
                                     </v-alert>
                                 </v-col>
 
                             </v-row>
                         </v-timeline-item>
                     </v-timeline>
- 
+
+                    
+                  
                 </v-col>
                 
             </v-row>
@@ -233,8 +255,8 @@
 </template>
   
 <script>
-import { getALabTestByMeterID } from "@/tools/api";
-import { convertDateTime } from "@/tools/convertDateTime";
+import { getAHistoryByMeterID, getALabTestByMeterID } from "@/tools/api";
+import { convertDate, convertDateTime, convertTime } from "@/tools/convertDateTime";
 import userInfo from "@/userInfo";
 
   export default {
@@ -247,6 +269,7 @@ import userInfo from "@/userInfo";
         'meter._id'(newVal) {
             if (newVal) {
                 this.loadLabtest();
+                this.loadHistory()
             }
         },
     },
@@ -255,64 +278,37 @@ import userInfo from "@/userInfo";
             username: userInfo.name,
             labtest: null,
             labtestID: null,
-            items: [
-                {
-                id: 1,
-                color: 'secondary',
-                icon: 'mdi-information',
-                content:'asdasdadadsasdasdadadsasdasdadadsasdasdadadsasdasdadadsasdasdadads'
-                },
-                {
-                id: 2,
-                color: 'secondary',
-                icon: 'mdi-alert-circle',
-                content:'asdasdadadsasdasdadadsasdasdadadsasdasdadadsasdasdadadsasdasdadads'
-
-                },
-                {
-                id: 2,
-                color: 'error',
-                icon: 'mdi-alert-circle',
-                content:'asdasdadadsasdasdadadsasdasdadadsasdasdadadsasdasdadadsasdasdadads'
-
-                },
-                {
-                id: 2,
-                color: 'error',
-                icon: 'mdi-alert-circle',
-                content:'asdasdadadsasdasdadadsasdasdadadsasdasdadadsasdasdadadsasdasdadads'
-
-                },
-                {
-                id: 2,
-                color: 'error',
-                icon: 'mdi-alert-circle',
-                content:'asdasdadadsasdasdadadsasdasdadadsasdasdadadsasdasdadadsasdasdadads'
-
-                },
-                {
-                id: 2,
-                color: 'error',
-                icon: 'mdi-alert-circle',
-                content:'asdasdadadsasdasdadadsasdasdadadsasdasdadadsasdasdadadsasdasdadads'
-
-                },
-            ],
+            labtestComments: null,
+            labtestTester: null,
+            labtestDate: null,
+            labtestStatus: null,
+            history:null,
         }
     },
     methods:{
         convertDateTime,
+        convertDate,
+        convertTime,
         async loadLabtest(){
         await getALabTestByMeterID(this.meter._id)
         .then((response) => {
             this.labtest = response.labtest[0]
             this.labtestID = this.labtest._id
+            this.labtestComments = this.labtest.comments
+            this.labtestTester = this.labtest.tester
+            this.labtestDate = this.labtest.test_date
+            this.labtestStatus = this.labtest.test_status
         }).catch((error) => {
             console.error('Error fetching labtest:', error);
         });
-
-    }
+        },
+        async loadHistory(){
+            this.showOverlay = true
+            const result = await getAHistoryByMeterID( this.meter._id )
+            this.history = result.history
+            console.log(this.history);
+            this.showOverlay = false
+        },
 }
 }
   </script>
-  

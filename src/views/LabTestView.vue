@@ -34,9 +34,9 @@
       >
 
         <template v-slot:[`item.test_status`]="{item}">
-          <v-chip close color="warning" v-if="item.test_status == 'new'" prepend-icon="fa-regular fa-clock"> Pending</v-chip>
-          <v-chip close color="success" v-if="item.test_status == 'passed'" prepend-icon="fa-regular fa-circle-check">Passed</v-chip>
-          <v-chip close color="error" v-if="item.test_status == 'failed'" prepend-icon="fa-regular fa-circle-exclamation" class="px-4">Failed</v-chip>
+          <v-chip close color="warning" v-if="item.test_status == 'New'" prepend-icon="fa-regular fa-clock"> Pending</v-chip>
+          <v-chip close color="success" v-if="item.test_status == 'Passed'" prepend-icon="fa-regular fa-circle-check">Passed</v-chip>
+          <v-chip close color="error" v-if="item.test_status == 'Failed'" prepend-icon="fa-regular fa-circle-exclamation" class="px-4">Failed</v-chip>
         </template>
 
         <template v-slot:[`item.test_date`]="{item}">

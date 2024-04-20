@@ -59,7 +59,7 @@
                 <p>Test Status:</p>
             </v-col>
             <v-col cols="3">
-                <v-chip close color="warning" v-if="labtest.test_status == 'new'">New</v-chip>
+                <v-chip close color="warning" v-if="labtest.test_status == 'New'">New</v-chip>
                 <v-chip close color="success" v-if="labtest.test_status == 'Passed'">Passed</v-chip>
                 <v-chip close color="error" v-if="labtest.test_status == 'Failed'">Failed</v-chip>
             </v-col>
@@ -71,7 +71,7 @@
                 <p >Test Date:</p>
             </v-col>
             <v-col cols="">
-                <p v-if="labtest.test_date">{{ labtest.test_date }}</p>
+                <p v-if="labtest.test_date">{{ convertDate(labtest.test_date) }}</p>
             </v-col>
         </v-row>
 
@@ -96,7 +96,14 @@
         </v-row>
 
     </v-container>
-
+    
+    <!-- Notification -->
+    <v-snackbar v-model="snackbar" color="primary" >
+      <v-icon icon="fa-solid fa-circle-check" color="success" class="mr-3" ></v-icon> {{ text }} 
+      <template v-slot:actions>
+        <v-btn color="secondary" variant="text" @click="snackbar = false" append-icon="fa-regular fa-xmark"></v-btn>
+      </template>
+    </v-snackbar>
 
   </v-card>
     
@@ -104,7 +111,7 @@
   
   <script>
     import { getALabTest } from '@/tools/api.js';
-    import { convertDateTime } from '@/tools/convertDateTime';
+    import { convertDate, convertDateTime } from '@/tools/convertDateTime';
     import editTestResultModal from '@/components/editTestResultModal.vue';
 
 
@@ -122,22 +129,36 @@
         return{
             showOverlay:false,
             labtest:[],
+            history:[],
             labResult: null,
             testDate: null,
             tester: null,
+            snackbar: false,
+            text: "Lab Test Updated"
         }
     },
     created(){
         this.loadLabtest()
     },
+    watch: {
+      '$route.query.labtestUpdated': {
+        immediate: true,
+        handler(value) {
+          if (value === 'true') {
+            this.loadLabtest()
+            this.snackbar = true;// Show the snackbar
+          }
+        }
+      }
+    },
     methods:{
+        convertDate,convertDateTime,
         async loadLabtest(){
             this.showOverlay = true
             const result = await getALabTest( this.id )
             this.labtest = result.labtest
             this.showOverlay = false
         },
-        convertDateTime
     }
 
   }

@@ -88,91 +88,61 @@
 </template>
 
 <script>
-import { createMeter, getAllProducts } from '@/tools/api.js'
+import { updateALabTest } from '@/tools/api.js'
 import { convertToISO } from '@/tools/convertDateTime'
-import userInfo from '@/userInfo'
 export default {
     name: "editTestResult",
     data(){
         return{
             testResultOptions:["Passed", "Failed", "New"],
-            testResult: null,
+            testResult: "Passed",
             tester: null,
             testDate: new Date(),
             comments: null,
-            products:[],
-            productNameList:[],
-            productName: null,
-            productId: null,
-            serialNumber: null,
+            labtestId: null,
             showOverlay: false,
-            menu:false
         }
     },
     watch:{
-        productName(newVal){
-            this.findProductByName(newVal)
-        }
+
     },
     created(){
-        this.loadProduct()
+         this.labtestId = this.$route.query.id;
     },
     methods:{
     
         // Function to convert date time
         convertToISO,
 
-        // Loading product for option
-        async loadProduct(){
-            try {
-                const response = await getAllProducts();
-                this.products = response.products.map(product => ({
-                    id: product._id ,
-                    name: product.name, 
-                    }));
-                    } catch (error) {
-                        console.error('Error fetching suppliers:', error);
-                }
-                this.productNameList = this.products.map(product =>product.name)
-        },
-        
-        // Get product id by name
-        findProductByName(name) {
-            const product = this.products.find(product => product.name === name);
-            if (product) {
-                this.productId = product.id;
-            } else {
-                console.error('Supplier not found for the name:', name);
-                this.productId = null; // Handle the case where no supplier is found
-            }
-        },
-
         // submit form action
         async submitForm(){
             this.showOverlay = true
 
-            const newMeter = {
-                "serial_number": this.serialNumber,
-                "product_id": this.productId,
-                "store_id": userInfo.store_id,
-  
+            const updatedLabtest = {
+                "tester": this.tester,
+                "test_date": convertToISO(this.testDate),
+                "test_status": this.testResult,
+                "comments": this.comments
             }
 
             try {
-                await createMeter(newMeter)
+                await updateALabTest(this.labtestId, updatedLabtest)
                 .then(() => {
-                    this.serialNumber= null,
-                    this.productId= 0,
+                    this.tester= null,
+                    this.testDate= null,
+                    this.testResult= null,
+                    this.comments= null,
                     
-                    this.$router.push({ name: 'meter', query: { meterCreated: 'true' } })
+                    
+                    this.$router.push({ name: 'LabTestDetails', query: { labtestUpdated: 'true', id: this.labtestId } })
                     .then(() => {
-                        this.$router.replace({ name: 'meter', query: {} });
+                        this.$router.replace({ name: 'LabTestDetails', query: {} });
                     });
                 }).catch((error) => {
                     console.log(error.message);
                 });
             } catch (error) {
-                console.error("Failed to create meter;", error);
+                console.error("Failed to update labtest", error);
             } finally{
                 this.showOverlay = false
             }

@@ -21,6 +21,16 @@ const getALabTest = async( id )=>{
     }
 }
 
+const updateALabTest = async( id, labtest )=>{
+    const url = apiList.updateALabTest + id
+    try {
+        const response = await axios.put(url, labtest);
+        return response.data;
+    } catch (error) {
+        console.error("Error udpating data:", error.message);
+    }
+}
+
 const getALabTestByMeterID = async( id )=>{
     const url = apiList.getALabTestByMeterID + id
     try {
@@ -34,6 +44,46 @@ const getALabTestByMeterID = async( id )=>{
 const createLabTest = async(labtest)=>{
     try{
         const response = await axios.post(apiList.createLabTest,labtest)
+        return response
+    }catch (error){
+        console.error("Error Creating data:", error.message);
+    }
+}
+
+// History
+const getAllHistory = async()=>{
+    try {
+        const response = await axios.get(apiList.getAllHistory);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+}
+
+const getAHistory = async( id )=>{
+    const url = apiList.getAHistory + id
+    try {
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+}
+
+const getAHistoryByMeterID = async( id )=>{
+    const url = apiList.getAHistoryByMeterID + id
+    try {
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+        return "Error"
+    }
+}
+
+const createHistory = async(history)=>{
+    try{
+        const response = await axios.post(apiList.createHistory,history)
         return response
     }catch (error){
         console.error("Error Creating data:", error.message);
@@ -68,6 +118,8 @@ const createMeter = async(meter)=>{
         console.error("Error Creating data:", error.message);
     }
 }
+
+
 
 
 // Products
@@ -180,7 +232,8 @@ const createStore= async(store)=>{
 
 
 export { 
-        getAllLabTests, getALabTest, createLabTest, getALabTestByMeterID,
+        getAllLabTests, getALabTest, createLabTest, getALabTestByMeterID,updateALabTest,
+        getAHistory, getAllHistory,createHistory, getAHistoryByMeterID,
         getAllMeters,getAMeter,createMeter,
         getAllProducts, getAProduct, createProduct, 
         getAllSuppliers, createSupplier,

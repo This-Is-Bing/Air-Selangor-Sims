@@ -11,8 +11,15 @@ const apiList = {
     // Lab Test
     getAllLabTests : "https://sims-server-api.vercel.app/labtest/all",
     getALabTest: "https://sims-server-api.vercel.app/labtest/",
+    updateALabTest: "https://sims-server-api.vercel.app/labtest/update/",
     getALabTestByMeterID: "https://sims-server-api.vercel.app/labtest/meter_id/",
     createLabTest: "https://sims-server-api.vercel.app/labtest/create",
+
+    // History
+    getAllHistory : "https://sims-server-api.vercel.app/history/all",
+    getAHistory: "https://sims-server-api.vercel.app/history/",
+    getAHistoryByMeterID: "https://sims-server-api.vercel.app/history/meter_id/",
+    createHistory: "https://sims-server-api.vercel.app/history/create",
 
     // Products
     getAllProducts : "https://sims-server-api.vercel.app/product/all",

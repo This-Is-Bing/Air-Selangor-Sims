@@ -33,7 +33,9 @@ export default createVuetify({
           block:"#00538C",
           nav:"#FEFEFE",
           main: "#EFF8FC",
-          title: "#383E49"
+          title: "#383E49",
+          history_yellow: "#FFFDE9",
+          history_yellow_border:"#DDA617"
         }
       },
       dark: {
