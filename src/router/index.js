@@ -5,6 +5,7 @@ import OverviewView from '../views/OverviewView.vue';
 import ProductCustomizationView from '../views/ProductCustomizationView.vue';
 import ProductDetailsView from '../views/ProductDetailsView.vue';
 import InstallationView from '../views/InstallationView.vue';
+import InstallationDetailsView from '../views/InstallationDetailsView.vue';
 import StockView from '../views/StockView.vue';
 import StoreView from '../views/StoreView.vue';
 import MeterView from '../views/MeterView.vue';
@@ -44,6 +45,12 @@ const routes = [
     path: '/inventory/installation',
     name: 'installation',
     component: InstallationView  
+  },
+  {
+    path: '/inventory/installation/installation_details',
+    name: 'installationDetails',
+    component: InstallationDetailsView,
+    props: (route) => ({ id: route.query.id }) 
   },
   {
     path: '/inventory/labtest',
@@ -88,6 +95,7 @@ const routes = [
     component: ProductDetailsView,
     props: (route) => ({ id: route.query.id })
   },
+  
 ]
 
 const router = createRouter({

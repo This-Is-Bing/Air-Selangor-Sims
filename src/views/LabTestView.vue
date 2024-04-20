@@ -41,7 +41,7 @@
 
         <template v-slot:[`item.test_date`]="{item}">
           <p v-if="item.test_date == null">N/A</p>
-          <p v-else>{{ convertDateTime(item.test_date) }}</p>
+          <p v-else>{{ convertDate(item.test_date) }}</p>
         </template>
 
         <template v-slot:[`item.tester`]="{item}">
@@ -80,7 +80,7 @@
   
 <script>
 import { getAllLabTests } from '@/tools/api';
-import { convertDateTime } from '@/tools/convertDateTime';
+import { convertDate, convertDateTime } from '@/tools/convertDateTime';
 
 
   export default {
@@ -98,7 +98,7 @@ import { convertDateTime } from '@/tools/convertDateTime';
       }
     },
     methods:{
-      convertDateTime,
+      convertDateTime, convertDate,
       async loadItems({page, itemsPerPage}){
         this.loading = true;
         this.showOverlay = true  

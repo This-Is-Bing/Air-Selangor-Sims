@@ -47,15 +47,37 @@
         </v-chip>
       </template>
 
-      <!-- <template v-slot:[`item.installation_date`]="{item}">
-        <p v-if="item.installation_date">{{ convertDate(item.installation_date) }}</p>
+      <template v-slot:[`item.transaction_date`]="{item}">
+        <p v-if="item.transaction_date">{{ convertDate(item.transaction_date) }}</p>
         <p v-else>N/A</p>
       </template>
 
-      <template v-slot:[`item.warranty`]="{item}">
-        <p v-if="item.warranty">{{ convertDate(item.warranty) }}</p>
+      <template v-slot:[`item.client`]="{item}">
+        <p v-if="item.client">{{ item.client }}</p>
         <p v-else>N/A</p>
-      </template> -->
+      </template>
+
+      <template v-slot:[`item.meter_id.serial_number`]="{item}">
+        <p v-if="item.meter_id.serial_number">{{ item.meter_id.serial_number }}</p>
+        <p v-else>N/A</p>
+      </template>
+
+      <template v-slot:[`item.meter_id.product_id.name`]="{item}">
+        <p v-if="item.meter_id.product_id.name">{{ item.meter_id.product_id.name }}</p>
+        <p v-else>N/A</p>
+      </template>
+
+      <template v-slot:[`item.region`]="{item}">
+        <p v-if="item.region">{{ item.region }}</p>
+        <p v-else>N/A</p>
+      </template>
+
+      <template v-slot:[`item.installation_status`]="{item}">
+        <p v-if="item.installation_status">{{ item.installation_status }}</p>
+        <p v-else>N/A</p>
+      </template>
+
+
 
       <template v-slot:[`item.updated_at`]="{item}">
         <p v-if="item.updated_at">{{ convertDateTime(item.updated_at) }}</p>
@@ -64,7 +86,7 @@
 
 
       <template v-slot:[`item.actions`]="{item}">
-        <v-icon icon="fa-solid fa-search" color="secondary mr-2 cursor-pointer" @click="this.$router.push({ name: 'meterDetails', query: { id: item._id } })"></v-icon>
+        <v-icon icon="fa-solid fa-search" color="secondary mr-2 cursor-pointer" @click="this.$router.push({ name: 'installationDetails', query: { id: item._id } })"></v-icon>
         <v-icon icon="fa-solid fa-trash" color="quinary cursor-pointer"></v-icon>
       </template>
 
@@ -93,11 +115,11 @@
   
 <script>
 import AddMeterModal from '@/components/addMeterModal.vue';
-import { getAllMeters } from '@/tools/api.js';
+import { getAllInstallations } from '@/tools/api.js';
 import { convertDate, convertDateTime } from '@/tools/convertDateTime';
 
   export default {
-    name: 'IsntallationView',
+    name: 'InstallationView',
     components:{ AddMeterModal },
     watch: {
       '$route.query.meterCreated': {
@@ -118,14 +140,14 @@ import { convertDate, convertDateTime } from '@/tools/convertDateTime';
         this.loading = true;
         this.showOverlay = true  
 
-        await getAllMeters()
+        await getAllInstallations()
         .then((response) => {
           if (response) {
             const start = (page - 1) * itemsPerPage
             const end = start + itemsPerPage
-            const sliced = response.meters.slice(start,end)
+            const sliced = response.installations.slice(start,end)
             this.serverItems = sliced;
-            this.totalItems = response.meters.length;
+            this.totalItems = response.installations.length;
           } else {
             console.error('Received undefined or null');
           }
@@ -145,12 +167,13 @@ import { convertDate, convertDateTime } from '@/tools/convertDateTime';
     data: ()=>({
       itemsPerPage: 10,
       headers: [
-        { title: 'Installation ID', key: 'id', sortable: false, align: 'center' },
+        { title: 'Installation ID', key: '_id', sortable: false, align: 'center' },
         { title: 'Client', key: 'client', sortable: false, align: 'center' },
-        { title: 'Model', key: 'product_id.name', sortable: false, align: 'center' },
-        { title: 'Region', key: '', sortable: false, align: 'center' },
-        { title: 'Status', key: '', sortable: false, align: 'center' },
-        { title: 'Transaction Date', key: '', sortable: false, align: 'center' },
+        { title: 'Serial Number', key: 'meter_id.serial_number', sortable: false, align: 'center' },
+        { title: 'Model', key: 'meter_id.product_id.name', sortable: false, align: 'center' },
+        { title: 'Region', key: 'region', sortable: false, align: 'center' },
+        { title: 'Installation Status', key: 'installation_status', sortable: false, align: 'center' },
+        { title: 'Transaction Date', key: 'transaction_date', sortable: false, align: 'center' },
         { title: 'Actions', value: 'actions', sortable: false, align: 'center' },
       ],
       search: '',

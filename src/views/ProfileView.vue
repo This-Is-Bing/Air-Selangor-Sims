@@ -14,8 +14,8 @@
 			slider-color="secondary"
 			align-tabs="center"
 		>
-			<v-tab class="text-none" key="account-summary"> Account Summary </v-tab>
-			<v-tab class="text-none" key="manage-users"> Manage Users </v-tab>
+			<v-tab class="text-none text-h6" key="account-summary"> Account Summary </v-tab>
+			<v-tab class="text-none text-h6" key="manage-users"> Manage Users </v-tab>
 		</v-tabs>
 
 		<!-- Tab Items -->
@@ -24,66 +24,62 @@
 				<!-- Account Summary Tab -->
 				<v-window-item
 					key="account-summary"
-					style="margin-left: 170px; margin-right: 230px; margin-top: 55px"
 				>
-					<v-btn
-						:class="{
-							'position-relative': true,
-							'text-none': true,
-							'text-subtitle-1': true,
-							'ml-5': true,
-						}"
-						:color="buttonColor"
-						@click="toggleEditMode"
-						>{{ buttonText }}</v-btn
-					>
-					<v-row>
-						<v-col cols="2">
-							<v-card
-								class="mx-5 my-5 d-flex justify-center"
-								elevation="100"
-								height="480"
-								width="350"
+					<v-row >
+						<v-col cols="12">
+							<v-btn
+							:class="{
+								'text-none': true,
+								'text-subtitle-1': true,
+								'ml-5': true,
+							}"
+							:color="buttonColor"
+							@click="toggleEditMode"
 							>
-								<v-row class="d-flex flex-column justify-center align-center">
-									<v-card height="200" width="200" elevation="0">
-										<!-- cannot display the image when using /assets/-->
+							{{ buttonText }}
+							</v-btn>
+						</v-col>
+					</v-row>
+					
+					<v-row>
+						<v-col cols="4">
+							<v-card class="d-flex flex-column justify-center align-center py-13	elevation-1">
+								<v-row>
+									<v-col>
 										<v-img
 											src="https://static-00.iconduck.com/assets.00/profile-circle-icon-2048x2048-cqe5466q.png"
 											width="200"
 											height="200"
 											aspect-ratio="1/1"
+											class="align-self-center"
 										></v-img>
-									</v-card>
-									<text style="font-weight: bold; font-size: 20px"
-										>@{{username}}</text>
-									<text>Admin</text>
+									</v-col>
+								</v-row>
+
+								<v-row>
+									<v-col>
+										<text class="font-weight-bold text-h6">@{{username}}</text>
+									</v-col>
+								</v-row>
+								
+								<v-row class="mt-n3">
+									<v-col>
+										<text class="text-subtitle-1 ">Admin</text>
+									</v-col>
 								</v-row>
 							</v-card>
 						</v-col>
 
-						<v-col cols="2" style="margin-left: 240px">
-							<v-card
-								class="mx-5 my-5"
-								elevation="100"
-								height="480"
-								width="800"
-							>
+						<v-col cols="8" >
+							<v-card class="elevation-1">
 								<v-row class="d-flex flex-column">
-									<v-card-text
-										style="
-											margin-left: 25px;
-											margin-top: 25px;
-											font-weight: bold;
-											font-size: 25px;
-										"
-									>
+									<v-card-text class="font-weight-bold ml-8 mt-5 text-h5">
 										Personal Information
 									</v-card-text>
 									<div
 										v-for="(value, name) in formFields"
 										:key="name"
-										class="my-3 mt-5"
+										class="my-3 mt-4"
 										style="margin-left: 60px; margin-top: 100px"
 									>
 										<v-row v-if="!editMode" class="mb-5 d-flex flex-column">
@@ -100,8 +96,8 @@
 											v-model="editformFields[name]"
 											:label="name"
 											variant="outlined"
-											dense
-											style="width: 550px; height: 50px; margin: 5px"
+											size="compact"
+											style="width: 550px; height: 60px; margin: -2px; padding-bottom: 2px;"
 										></v-text-field>
 									</div>
 								</v-row>

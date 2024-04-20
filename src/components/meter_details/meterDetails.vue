@@ -80,11 +80,11 @@
                                 <v-col cols="4">Inventory Type:</v-col>
                                 <v-col cols="8" class="text-capitalize">
                                     <v-chip v-if="meter.status == 'new'" close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
-                                        New
+                                        In-Store
                                     </v-chip>
 
                                     <v-chip v-if="meter.status == 'client'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
-                                        Client
+                                        Installed
                                     </v-chip>
                                 </v-col>
                             </v-row>
@@ -134,14 +134,14 @@
                             <!-- Date Tested -->
                             <v-row>
                                 <v-col cols="4">Date Tested:</v-col>
-                                <v-col cols="8" v-if="labtestDate" >{{labtestDate}}</v-col>
+                                <v-col cols="8" v-if="labtestDate" >{{ labtestDate }}</v-col>
                                 <v-col cols="8" v-else >N/A</v-col>
                             </v-row>
 
                             <!-- Testing Personel -->
                             <v-row>
                                 <v-col cols="4">Tester:</v-col>
-                                <v-col cols="8"  v-if="labtestTester">{{ labtestTester}}</v-col>
+                                <v-col cols="8"  v-if="labtestTester">{{ labtestTester }}</v-col>
                                 <v-col cols="8" v-else >N/A</v-col>
                             </v-row>
 
@@ -203,7 +203,13 @@
                         </v-col>
 
                         <v-col cols="4">
-                            <v-btn color="secondary" size="small" prepend-icon="fa-regular fa-up-right-from-square" class="text-none" >Installation</v-btn>
+                            <v-btn 
+                            color="secondary" 
+                            size="small" 
+                            prepend-icon="fa-regular fa-up-right-from-square" 
+                            class="text-none" 
+                            @click="this.$router.push({ name: 'installationDetails', query: { id: 'INS-0001' } })"
+                            >Installation</v-btn>
                         </v-col>
                     </v-row>
 
