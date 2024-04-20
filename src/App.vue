@@ -14,6 +14,7 @@
           </router-link>
         </v-list>
 
+
          <!-- Order Button -->
          <!-- <v-list class="mt-0 mb-5 ">
           <v-list-item class="d-flex justify-center">
@@ -81,10 +82,10 @@
 
         <!-- water meter -->
         <v-list class="cursor-pointer" >
-          <router-link class="text-decoration-none font-weight-bold text-inactive text-subtitle-1" to="/inventory/certification">
-            <v-list-item class="ml-6"  :class="{'active':navigationItems['certification'].active, 'text-secondary':navigationItems['certification'].active}">
+          <router-link class="text-decoration-none font-weight-bold text-inactive text-subtitle-1" to="/inventory/labtest">
+            <v-list-item class="ml-6"  :class="{'active':navigationItems['labtest'].active, 'text-secondary':navigationItems['labtest'].active}">
               <v-list-item-icon class="mr-8">
-                <v-icon :color="navigationItems['certification'].active ? 'active' : 'inactive'" >fa-solid fa-flask</v-icon>
+                <v-icon :color="navigationItems['labtest'].active ? 'active' : 'inactive'" >fa-solid fa-flask</v-icon>
               </v-list-item-icon>
               <v-list-item-content >Lab Test</v-list-item-content>
             </v-list-item>
@@ -186,7 +187,7 @@ const navigationItems = reactive({
   productDetails: { active: false },
   inventory: { active: false },
   installation: { active: false },
-  certification: { active: false },
+  labtest: { active: false },
   stock: { active: false },
   store: { active: false },
   meter: { active: false },

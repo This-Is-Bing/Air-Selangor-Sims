@@ -163,6 +163,7 @@ export default {
     },
     methods:{
 
+    // Loading supplier for options
     async loadSupplier(){
         try {
             const response = await getAllSuppliers();
@@ -175,7 +176,9 @@ export default {
             }
             this.supplierName = this.suppliers.map(supplier =>supplier.name)
         },
-        async loadType(){
+
+    // Loading type for options
+    async loadType(){
         await getAllTypes()
         .then((response) => {
             this.types = response.type.map(res => res.type);
@@ -184,6 +187,17 @@ export default {
         });
     },
 
+    // Loading catergory for options
+    async loadCategory(){
+        await getAllCategories()
+        .then((response) => {
+            this.categories = response.category.map(res => res.category);
+        }).catch((error) => {
+            console.error('Error fetching product category:', error);
+        });
+    },
+
+    // Get supplier id from the name
     findSupplierByName(name) {
     const supplier = this.suppliers.find(supplier => supplier.name === name);
     if (supplier) {
@@ -194,48 +208,41 @@ export default {
     }
     },
 
-    async loadCategory(){
-        await getAllCategories()
-        .then((response) => {
-            this.categories = response.category.map(res => res.category);
-        }).catch((error) => {
-            console.error('Error fetching product category:', error);
-        });
-      },
-        async submitForm(){
-            this.showOverlay = true
 
-            const file = this.imageFile[0]
+    
+    async submitForm(){
+        this.showOverlay = true
 
-            try {
-            const result = await uploadFile(file, '/Products');
-                this.imageUrl = result.url
+        const file = this.imageFile[0]
 
+        try {
+        const result = await uploadFile(file, '/Products');
+            this.imageUrl = result.url
+            const newProduct = {
+            "name": this.productName,
+            "imageURL": this.imageUrl,
+            "category": this.productCategory,
+            "type": this.productType,
+            "size": this.productSize,
+            "supplier_id": this.productSupplierId,
+            "threshold": this.productThreshold
+        }
+            await createProduct(newProduct)
+            .then(() => {
 
-                const newProduct = {
-                "name": this.productName,
-                "imageURL": this.imageUrl,
-                "category": this.productCategory,
-                "type": this.productType,
-                "size": this.productSize,
-                "supplier_id": this.productSupplierId,
-                "threshold": this.productThreshold
-            }
-                await createProduct(newProduct)
-                .then((response) => {
-                    this.productName= null,
-                    this.productCategory= null,
-                    this.productSize= 0,
-                    this.productSupplier= null,
-                    this.productSupplierId= null,
-                    this.productThreshold= 0,
-                    this.productType= null,
-                    this.imageFile = null,
-                    console.log(response);
-                    this.$router.push({ name: 'overview', query: { productCreated: 'true' } })
-                    .then(() => {
-                        this.$router.replace({ name: 'overview', query: {} });
-                    });
+                this.productName= null,
+                this.productCategory= null,
+                this.productSize= 0,
+                this.productSupplier= null,
+                this.productSupplierId= null,
+                this.productThreshold= 0,
+                this.productType= null,
+                this.imageFile = null,
+                
+                this.$router.push({ name: 'overview', query: { productCreated: 'true' } })
+                .then(() => {
+                    this.$router.replace({ name: 'overview', query: {} });
+                });
                 }).catch((error) => {
                     console.log(error.message);
                 });

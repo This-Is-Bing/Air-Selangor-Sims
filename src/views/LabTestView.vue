@@ -3,7 +3,7 @@
   <!-- Header -->
   <v-container fluid class="bg-secondary elevation-2">
     <v-row class="py-7 pl-5">
-      <div class="font-weight-bold text-h5">Meter Certification</div>
+      <div class="font-weight-bold text-h5">Lab Test</div>
     </v-row>
   </v-container>
       
@@ -12,9 +12,9 @@
 
     <!-- Title & Action Buttons -->
     <v-container grid-list-xs class="d-flex justify-space-between " fluid>
-      <p class="text-h6 font-weight-bold">Lab Tests</p>
+      <p class="text-h6 font-weight-bold">All Lab Tests</p>
       <div>
-        <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-regular fa-pen">Edit</v-btn>
+        <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-regular fa-arrow-down-wide-short">Filters</v-btn>
       </div>
     </v-container>
 
@@ -33,29 +33,28 @@
         @update:options="loadItems"
       >
 
-      <template v-slot:[`item.certification_id`]="{item}">
-        <p v-if="item.certification_id">{{ item.certification_id }}</p>
-        <p v-else>N/A</p>
-      </template>
+        <template v-slot:[`item.test_status`]="{item}">
+          <v-chip close color="warning" v-if="item.test_status == 'New'" prepend-icon="fa-regular fa-clock"> Pending</v-chip>
+          <v-chip close color="success" v-if="item.test_status == 'Passed'" prepend-icon="fa-regular fa-circle-check">Passed</v-chip>
+          <v-chip close color="error" v-if="item.test_status == 'Failed'" prepend-icon="fa-regular fa-circle-exclamation" class="px-4">Failed</v-chip>
+        </template>
 
-      <template v-slot:[`item.meter_id.certificate_id.test_date`]="{item}">
-        <p v-if=" item.meter_id.certificate_id">{{ item.meter_id.certificate_id }}</p>
-        <p v-else >N/A</p>
-      </template>
+        <template v-slot:[`item.test_date`]="{item}">
+          <p v-if="item.test_date == null">N/A</p>
+          <p v-else>{{ convertDateTime(item.test_date) }}</p>
+        </template>
 
-      <template v-slot:[`item.test_status`]="{item}">
-        <v-chip close color="error" v-if="item.test_status == false" prepend-icon="fa-solid fa-clock" >Failed</v-chip>
-        <v-chip close color="success" v-if="item.test_status == true" prepend-icon="fa-solid fa-circle-check" >Passed</v-chip>
-      </template>
+        <template v-slot:[`item.tester`]="{item}">
+          <p v-if="item.tester == null">N/A</p>
+          <p v-else>{{ item.tester }}</p>
+        </template>
+        
 
-      <template v-slot:[`item.actions`]="{}">
-        <!-- <v-btn size="x-small" color="secondary" class="text-none text-caption mr-2">View</v-btn> -->
-        <!-- <v-icon icon="fa-solid fa-search" color="secondary mr-2 cursor-pointer" @click="this.$router.push({ name: 'productDetails', query: { id: item._id } })"></v-icon> -->
+        <template v-slot:[`item.actions`]="{item}">
+          <v-icon icon="fa-solid fa-search" color="secondary mr-2 cursor-pointer" @click="this.$router.push({ name: 'LabTestDetails', query: { id: item._id } })"></v-icon>
+          <v-icon icon="fa-solid fa-trash" color="quinary cursor-pointer"></v-icon>
+        </template>
 
-        <!-- <v-btn size="x-small" color="error" class="text-none text-caption">Edit</v-btn> -->
-        <!-- <v-icon icon="fa-solid fa-trash" color="quinary cursor-pointer"></v-icon> -->
-
-      </template>
       </v-data-table-server>
 
       <v-overlay
@@ -80,10 +79,12 @@
 </template>
   
 <script>
-import { getAllCertificate } from '@/tools/api.js';
+import { getAllLabTests } from '@/tools/api';
+import { convertDateTime } from '@/tools/convertDateTime';
+
 
   export default {
-    name: 'CertificationView',
+    name: 'LabTestView',
     watch: {
       '$route.query.productCreated': {
         immediate: true,
@@ -97,24 +98,25 @@ import { getAllCertificate } from '@/tools/api.js';
       }
     },
     methods:{
+      convertDateTime,
       async loadItems({page, itemsPerPage}){
         this.loading = true;
         this.showOverlay = true  
 
-        await getAllCertificate()
+        await getAllLabTests()
         .then((response) => {
           if (response) {
             const start = (page - 1) * itemsPerPage
             const end = start + itemsPerPage
-            const sliced = response.certificates.slice(start,end)
+            const sliced = response.labtests.slice(start,end)
             this.serverItems = sliced;
-            this.totalItems = response.certificates.length;
+            this.totalItems = response.labtests.length;
           } else {
             console.error('Received undefined or null');
           }
         })
         .catch((error) => {
-          console.error('Error fetching products:', error);
+          console.error('Error fetching lab tests:', error);
         })
         .finally(() => {
           this.loading = false;
@@ -128,12 +130,11 @@ import { getAllCertificate } from '@/tools/api.js';
     data: ()=>({
       itemsPerPage: 10,
       headers: [
+        { title: 'Test ID', key: '_id', sortable: false, align: 'center' },
+        { title: 'Serial Number', key: 'meter_id.serial_number', sortable: false, align: 'center' },
         { title: 'Tester', key: 'tester', sortable: false, align: 'center' },
         { title: 'Products', key: 'meter_id.product_id.name', sortable: false, align: 'center' },
-        { title: 'Serial Number', key: 'meter_id.serial_number', sortable: false, align: 'center' },
-        { title: 'Region', key: 'meter_id.region', sortable: false, align: 'center' },
-        { title: 'Certification ID', key: '_id', sortable: false, align: 'center' },
-        { title: 'Tested Date', key: 'meter_id.certificate_id.test_date', sortable: false, align: 'center' },
+        { title: 'Tested Date', key: 'test_date', sortable: false, align: 'center' },
         { title: 'Status', key: 'test_status', sortable: false, align: 'center' },
         { title: 'Actions', value: 'actions', sortable: false, align: 'center' },
       ],
@@ -142,7 +143,7 @@ import { getAllCertificate } from '@/tools/api.js';
       loading: true,
       totalItems: 0,
       snackbar: false, //snackbar
-      text: `New Product Added`, //snackbar
+      text: `New Lab Test Added`, //snackbar
       dataTable: 0, //to remount data table,
       showOverlay: false
     })

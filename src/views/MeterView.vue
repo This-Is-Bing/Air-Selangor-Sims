@@ -3,7 +3,7 @@
   <!-- Header -->
   <v-container fluid class="bg-secondary elevation-2">
     <v-row class="py-7 pl-5">
-      <div class="font-weight-bold text-h5">Meter Inventory</div>
+      <div class="font-weight-bold text-h5">Water Meter</div>
     </v-row>
   </v-container>
       
@@ -36,7 +36,18 @@
         @update:options="loadItems"
       >
 
-      <template v-slot:[`item.installation_date`]="{item}">
+      <template v-slot:[`item.status`]="{item}">
+        <v-chip v-if="item.status == 'new'" close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
+          New
+        </v-chip>
+
+
+        <v-chip v-if="item.status == 'client'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+          Client
+        </v-chip>
+      </template>
+
+      <!-- <template v-slot:[`item.installation_date`]="{item}">
         <p v-if="item.installation_date">{{ convertDate(item.installation_date) }}</p>
         <p v-else>N/A</p>
       </template>
@@ -44,7 +55,7 @@
       <template v-slot:[`item.warranty`]="{item}">
         <p v-if="item.warranty">{{ convertDate(item.warranty) }}</p>
         <p v-else>N/A</p>
-      </template>
+      </template> -->
 
       <template v-slot:[`item.updated_at`]="{item}">
         <p v-if="item.updated_at">{{ convertDateTime(item.updated_at) }}</p>
@@ -52,9 +63,11 @@
       </template>
 
 
-      <template v-slot:[`item.actions`]="{}">
-
+      <template v-slot:[`item.actions`]="{item}">
+        <v-icon icon="fa-solid fa-search" color="secondary mr-2 cursor-pointer" @click="this.$router.push({ name: 'meterDetails', query: { id: item._id } })"></v-icon>
+        <v-icon icon="fa-solid fa-trash" color="quinary cursor-pointer"></v-icon>
       </template>
+
       </v-data-table-server>
 
       <v-overlay
@@ -133,12 +146,16 @@ import { convertDate, convertDateTime } from '@/tools/convertDateTime';
       itemsPerPage: 10,
       headers: [
         { title: 'Serial Number', key: 'serial_number', sortable: false, align: 'center' },
-        { title: 'Product', key: 'product_id.name', sortable: false, align: 'center' },
-        { title: 'Region', key: 'region', sortable: false, align: 'center' },
-        { title: 'Installation Date', key: 'installation_date', sortable: false, align: 'center' },
-        { title: 'Age', key: 'age', sortable: false, align: 'center' },
-        { title: 'Mileage', key: 'mileage', sortable: false, align: 'center' },
-        { title: 'Warranty', key: 'warranty', sortable: false, align: 'center' },
+        { title: 'Model', key: 'product_id.name', sortable: false, align: 'center' },
+        { title: 'Type', key: 'product_id.type', sortable: false, align: 'center' },
+        { title: 'Size', key: 'product_id.size', sortable: false, align: 'center' },
+        { title: 'Supplier', key: 'product_id.supplier_id.name', sortable: false, align: 'center' },
+        { title: 'Status', key: 'status', sortable: false, align: 'center' },
+        // { title: 'Region', key: 'region', sortable: false, align: 'center' },
+        // { title: 'Installation Date', key: 'installation_date', sortable: false, align: 'center' },
+        // { title: 'Age', key: 'age', sortable: false, align: 'center' },
+        // { title: 'Mileage', key: 'mileage', sortable: false, align: 'center' },
+        // { title: 'Warranty', key: 'warranty', sortable: false, align: 'center' },
         { title: 'Last Update', key: 'updated_at', sortable: false, align: 'center' },
         { title: 'Actions', value: 'actions', sortable: false, align: 'center' },
       ],
@@ -147,7 +164,7 @@ import { convertDate, convertDateTime } from '@/tools/convertDateTime';
       loading: true,
       totalItems: 0,
       snackbar: false, //snackbar
-      text: `New Product Added`, //snackbar
+      text: `New Meter Added`, //snackbar
       dataTable: 0, //to remount data table,
       showOverlay: false
     })

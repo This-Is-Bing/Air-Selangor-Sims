@@ -56,8 +56,7 @@
 										></v-img>
 									</v-card>
 									<text style="font-weight: bold; font-size: 20px"
-										>@sarahlee</text
-									>
+										>@{{username}}</text>
 									<text>Admin</text>
 								</v-row>
 							</v-card>
@@ -145,21 +144,38 @@
 </template>
   
 <script>
-	import profile_picture from "@/assets/profile_picture.png"
-	export default {
-		name: "ProfileView",
-		
-		data: () => ({
-			tab: null,
-			items: ["account-summary", "manage-users"],
-			// Determines whether the form is in edit mode
-			editMode: false,
-			// Represents the form fields and their values
-			formFields: {
-				Name: "Sarah Lee",
-				Email: "sarahlee@gmail.com",
-				Department: "Meter Water Unit",
-				Password: "********",
+
+import userInfo from '@/userInfo';
+import profile_picture from "@/assets/profile_picture.png"
+
+export default {
+	name: "ProfileView",
+	data: () => ({
+		username : userInfo.name,
+		tab: null,
+		items: ["account-summary", "manage-users"],
+		// Determines whether the form is in edit mode
+		editMode: false,
+		// Represents the form fields and their values
+		formFields: {
+			Name: userInfo.name,
+			Email: userInfo.email,
+			Department: "Water Meter Unit",
+			Password: "********",
+		},
+		editformFields: {
+			Name: "Sarah Lee",
+			Email: "sarahlee@gmail.com",
+			Department: "Meter Water Unit",
+			Password: "********",
+			"Confirm Password": "********",
+		},
+		user_info: [
+			{
+				username: "sarahlee",
+				name: "Sarah Lee",
+				email: "sarahlee@gmail.com",
+				role: "Admin",
 			},
 			editformFields: {
 				Name: "Sarah Lee",
