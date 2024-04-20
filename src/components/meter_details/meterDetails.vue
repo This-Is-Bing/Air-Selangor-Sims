@@ -117,7 +117,7 @@
                                 <v-col cols="4">Test Result:</v-col>
                                 <v-col cols="8" class="text-capitalize">
 
-                                    <v-chip v-if="labtestStatus== 'new'" close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
+                                    <v-chip v-if="labtestStatus== 'New'" close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
                                         Pending
                                     </v-chip>
 
@@ -213,15 +213,18 @@
                 <v-col cols="5"   >
                     <p class="text-subtitle-1 font-weight-bold pt-2 pb-5">Meter History</p>
                     <p v-if="history==null">No History Available</p>
-                    <v-timeline side="end" align="start" density="compact" style="min-width: 400px;max-width: 450px; max-height: 50px;">
+                    <v-timeline side="end" align="start" density="compact" style="min-width: 400px;max-width: 450px; max-height: 60px;">
                         <v-timeline-item
                             v-for="item in history"
                             :key="item.meter_id"
-                            dot-color="history_yellow_border"
+                            dot-color=""
+                            hide-dot=""
                             size="x-small"
                             density="compact"
                         >
-                            <v-row>
+
+                            <!-- Item Added: Type:Item Yellow -->
+                            <v-row v-if="item.type =='item'">
                                 <v-col cols="2" class="d-flex flex-column align-center">
                                     <p class="font-weight-bold text-caption">{{convertDate(item.updated_at)}}</p>
                                 </v-col>
@@ -235,12 +238,31 @@
                                                 <p class="text-subtitle-2 text-history_yellow_border" >{{item.header}}</p> 
                                             </v-col>  
                                         </v-row>
-                                        <span class="font-weight-bold">{{convertTime(item.updated_at)}} Hours:</span> 
+                                        <span class="font-weight-bold">{{convertTime(item.updated_at)}} Hours:</span>       
                                         {{item.content}}
-
                                     </v-alert>
                                 </v-col>
+                            </v-row>
 
+                            <!-- Lab Test: Type:labtest purple -->
+                            <v-row v-if="item.type =='labtest'">
+                                <v-col cols="2" class="d-flex flex-column align-center">
+                                    <p class="font-weight-bold text-caption">{{convertDate(item.updated_at)}}</p>
+                                </v-col>
+                                <v-col cols="10" class="d-flex">
+                                    <v-alert color="history_purple" :value="true" small class=" elevation-1 py-8 text-caption border-s-lg border-history_purple_border border-opacity-100 " >
+                                        <v-row class="mb-1">
+                                            <v-col cols="1">
+                                                <v-icon icon="fa-regular fa-circle-info" color="history_purple_border"></v-icon>
+                                            </v-col>
+                                            <v-col>
+                                                <p class="text-subtitle-2 text-history_purple_border" >{{item.header}}</p> 
+                                            </v-col>  
+                                        </v-row>
+                                        <span class="font-weight-bold">{{convertTime(item.updated_at)}} Hours:</span>       
+                                        {{item.content}}
+                                    </v-alert>
+                                </v-col>
                             </v-row>
                         </v-timeline-item>
                     </v-timeline>

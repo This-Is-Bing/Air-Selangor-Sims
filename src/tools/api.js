@@ -50,6 +50,55 @@ const createLabTest = async(labtest)=>{
     }
 }
 
+// Installation
+const getAllInstallations = async()=>{
+    try {
+        const response = await axios.get(apiList.getAllInstallations);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+}
+
+const getAInstallation = async( id )=>{
+    const url = apiList.getAInstallation + id
+    try {
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+}
+
+const updateAInstallation = async( id, labtest )=>{
+    const url = apiList.updateAInstallation + id
+    try {
+        const response = await axios.put(url, labtest);
+        return response.data;
+    } catch (error) {
+        console.error("Error udpating data:", error.message);
+    }
+}
+
+const getAInstallationByMeterID = async( id )=>{
+    const url = apiList.getAInstallationByMeterID + id
+    try {
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+}
+
+const createInstallation = async(labtest)=>{
+    try{
+        const response = await axios.post(apiList.createInstallation,labtest)
+        return response
+    }catch (error){
+        console.error("Error Creating data:", error.message);
+    }
+}
+
 // History
 const getAllHistory = async()=>{
     try {
@@ -233,6 +282,7 @@ const createStore= async(store)=>{
 
 export { 
         getAllLabTests, getALabTest, createLabTest, getALabTestByMeterID,updateALabTest,
+        getAllInstallations, getAInstallation, createInstallation, getAInstallationByMeterID,updateAInstallation,
         getAHistory, getAllHistory,createHistory, getAHistoryByMeterID,
         getAllMeters,getAMeter,createMeter,
         getAllProducts, getAProduct, createProduct, 

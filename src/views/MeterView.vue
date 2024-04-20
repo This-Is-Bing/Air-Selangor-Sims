@@ -41,6 +41,7 @@
           New
         </v-chip>
 
+
         <v-chip v-if="item.status == 'client'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
           Client
         </v-chip>

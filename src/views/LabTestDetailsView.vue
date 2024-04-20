@@ -90,7 +90,7 @@
             <v-col cols="2">
                 <p>Comments:</p>
             </v-col>
-            <v-col cols="2">
+            <v-col cols="5">
                 <p v-if="labtest.comments">{{ labtest.comments }}</p>
             </v-col>
         </v-row>

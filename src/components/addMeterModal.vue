@@ -132,7 +132,7 @@ export default {
             productId: null,
             serialNumber: null,
             showOverlay: false,
-            menu:false
+            menu:false,
         }
     },
     watch:{
@@ -184,11 +184,15 @@ export default {
   
             }
 
+
+
             try {
                 await createMeter(newMeter)
                 .then(() => {
-                    this.serialNumber= null,
-                    this.productId= 0,
+
+                    // Clear form
+                    this.serialNumber= null
+                    this.productId= 0
                     
                     this.$router.push({ name: 'meter', query: { meterCreated: 'true' } })
                     .then(() => {

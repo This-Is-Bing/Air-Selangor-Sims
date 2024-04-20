@@ -35,7 +35,13 @@ export default createVuetify({
           main: "#EFF8FC",
           title: "#383E49",
           history_yellow: "#FFFDE9",
-          history_yellow_border:"#DDA617"
+          history_yellow_border:"#DDA617",
+          history_blue: "#CBEFFF",
+          history_blue_border:"#0978AB",
+          history_purple: "#EAE9FF",
+          history_purple_border:"#751DE4",
+          history_red: "#FFE9E9",
+          history_red_border:"#E7544B",
         }
       },
       dark: {
@@ -50,8 +56,15 @@ export default createVuetify({
           block:"#00538C",
           nav: "#D0E2E9",
           main: "#98D0E6",
-          title: "#383E49"
-
+          title: "#383E49",
+          history_yellow: "#FFFDE9",
+          history_yellow_border:"#DDA617",
+          history_blue: "#CBEFFF",
+          history_blue_border:"#0978AB",
+          history_purple: "#817AF3",
+          history_purple_border:"#751DE4",
+          history_red: "#FFE9E9",
+          history_red_border:"#E7544B",
         }
       },
     },
