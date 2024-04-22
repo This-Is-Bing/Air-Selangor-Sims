@@ -47,36 +47,10 @@
         </v-chip>
       </template>
 
-      <template v-slot:[`item.transaction_date`]="{item}">
+      <!-- <template v-slot:[`item.transaction_date`]="{item}">
         <p v-if="item.transaction_date">{{ convertDate(item.transaction_date) }}</p>
         <p v-else>N/A</p>
-      </template>
-
-      <template v-slot:[`item.client`]="{item}">
-        <p v-if="item.client">{{ item.client }}</p>
-        <p v-else>N/A</p>
-      </template>
-
-      <template v-slot:[`item.meter_id.serial_number`]="{item}">
-        <p v-if="item.meter_id.serial_number">{{ item.meter_id.serial_number }}</p>
-        <p v-else>N/A</p>
-      </template>
-
-      <template v-slot:[`item.meter_id.product_id.name`]="{item}">
-        <p v-if="item.meter_id.product_id.name">{{ item.meter_id.product_id.name }}</p>
-        <p v-else>N/A</p>
-      </template>
-
-      <template v-slot:[`item.region`]="{item}">
-        <p v-if="item.region">{{ item.region }}</p>
-        <p v-else>N/A</p>
-      </template>
-
-      <template v-slot:[`item.installation_status`]="{item}">
-        <p v-if="item.installation_status">{{ item.installation_status }}</p>
-        <p v-else>N/A</p>
-      </template>
-
+      </template> -->
 
 
       <template v-slot:[`item.updated_at`]="{item}">
@@ -173,15 +147,15 @@ import { convertDate, convertDateTime } from '@/tools/convertDateTime';
         { title: 'Model', key: 'meter_id.product_id.name', sortable: false, align: 'center' },
         { title: 'Region', key: 'region', sortable: false, align: 'center' },
         { title: 'Installation Status', key: 'installation_status', sortable: false, align: 'center' },
-        { title: 'Transaction Date', key: 'transaction_date', sortable: false, align: 'center' },
+        { title: 'Installation Date', key: 'installlation_date', sortable: false, align: 'center' },
         { title: 'Actions', value: 'actions', sortable: false, align: 'center' },
-      ],
+      ], 
       search: '',
       serverItems: [],
       loading: true,
       totalItems: 0,
       snackbar: false, //snackbar
-      text: `New Meter Added`, //snackbar
+      text: `New Installation Added`, //snackbar
       dataTable: 0, //to remount data table,
       showOverlay: false
     })

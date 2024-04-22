@@ -59,11 +59,11 @@
           </router-link>
 
           <router-link class="text-decoration-none text-inactive" to="/inventory/overview">
-            <v-list-item class=" text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer" :class="{'text-secondary':navigationItems['overview'].active}">Overview</v-list-item>
+            <v-list-item class=" text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer" :class="{'text-secondary':navigationItems['overview'].active}">Models</v-list-item>
           </router-link>
 
           <router-link class="text-decoration-none text-inactive" to="/inventory/customization">
-            <v-list-item class=" text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer" :class="{'text-secondary':navigationItems['customization'].active}">Product Customization</v-list-item>
+            <v-list-item class=" text-subtitle-2 font-weight-regular pl-16 ml-10 my-n1 cursor-pointer" :class="{'text-secondary':navigationItems['customization'].active}">Customize Model</v-list-item>
           </router-link>
 
           <router-link class="text-decoration-none text-inactive" to="/inventory/installation">
@@ -100,7 +100,7 @@
               <v-list-item-icon class="mr-8">
                 <v-icon :color="navigationItems['refund'].active ? 'active' : 'inactive'" >fa-solid fa-hand-holding-dollar</v-icon>
               </v-list-item-icon>
-              <v-list-item-content >Refund & Return</v-list-item-content>
+              <v-list-item-content >Refunds</v-list-item-content>
             </v-list-item>
           </router-link>
         </v-list>

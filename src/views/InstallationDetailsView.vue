@@ -26,7 +26,7 @@
     <v-container grid-list-xs class="d-flex justify-space-between" fluid>
       <p class="text-h6 font-weight-bold">Installation - {{installation._id}}</p>
       <div>
-        <editTestResultModal></editTestResultModal>
+        <edit-installation-status-modal></edit-installation-status-modal>
         <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-regular fa-download">Download</v-btn>
       </div>
     </v-container>
@@ -68,52 +68,38 @@
             <v-col cols="2">
                 <p>Installation Status:</p>
             </v-col>
-            <v-col cols="3" v-if="installation">{{installation.installation_status}}</v-col>
+            <v-col cols="3" v-if="installation">
+              <v-col cols="8" class="text-capitalize">
+                <v-chip v-if="installation.installation_status== 'New' || installation.installation_status== 'Uninstalled'" close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
+                    Not Installed
+                </v-chip>
+                
+                <v-chip v-if="installation.installation_status == 'Installed'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+                    Installed
+                </v-chip>
+
+               </v-col>
+            </v-col>
         </v-row>
 
         <v-row >
-            <v-col cols="2">Client Name:</v-col>
-            <v-col cols="3" v-if="installation">{{installation.client}}</v-col>
+            <v-col cols="2" v-if="installation.client">Client:</v-col>
+            <v-col cols="3" v-if="installation.client">{{installation.client}}</v-col>
         </v-row>
 
         <v-row >
-            <v-col cols="2">Region:</v-col>
-            <v-col cols="3" v-if="installation">{{installation.region}}</v-col>
+            <v-col cols="2" v-if="installation.region">Region:</v-col>
+            <v-col cols="3" v-if="installation.region">{{installation.region}}</v-col>
         </v-row>
 
         <v-row >
-            <v-col cols="2">Transaction Date:</v-col>
-            <v-col cols="3" v-if="installation">{{convertDate(installation.transaction_date)}}</v-col>
+            <v-col cols="2" v-if="installation.contractor">Contractor:</v-col>
+            <v-col cols="3" v-if="installation.contractor">{{installation.contractor}}</v-col>
         </v-row>
 
-        <!-- Lab Test Date -->
-        <v-row v-if="installation.test_date">
-            <v-col cols="2">
-                <p >Test Date:</p>
-            </v-col>
-            <v-col cols="">
-                <p v-if="installation.test_date">{{ convertDate(installation.test_date) }}</p>
-            </v-col>
-        </v-row>
-
-        <!-- installation Date -->
-        <v-row v-if="installation.test_date" >
-            <v-col cols="2" >
-                <p>Tester:</p>
-            </v-col>
-            <v-col cols="2">
-                <p v-if="installation.tester">{{ installation.tester }}</p>
-            </v-col>
-        </v-row>
-
-        <!-- installation Comments -->
-        <v-row v-if="installation.comments" >
-            <v-col cols="2">
-                <p>Comments:</p>
-            </v-col>
-            <v-col cols="5">
-                <p v-if="installation.comments">{{ installation.comments }}</p>
-            </v-col>
+        <v-row >
+            <v-col cols="2" v-if="installation.installation_date">Installation Date:</v-col>
+            <v-col cols="3" v-if="installation.installation_date">{{convertDate(installation.transaction_date)}}</v-col>
         </v-row>
 
     </v-container>
@@ -131,15 +117,15 @@
   </template>
   
   <script>
+    import EditInstallationStatusModal from '@/components/editInstallationStatusModal.vue';
     import { getAInstallation } from '@/tools/api.js';
     import { convertDate, convertDateTime } from '@/tools/convertDateTime';
-    import editTestResultModal from '@/components/editTestResultModal.vue';
 
 
 
   export default {
     name: 'InstallationDetailsView',
-    components:{editTestResultModal},
+    components:{EditInstallationStatusModal},
     props: {
         id: {
             type: String,
@@ -151,9 +137,6 @@
             showOverlay:false,
             installation:[],
             history:[],
-            labResult: null,
-            testDate: null,
-            tester: null,
             snackbar: false,
             text: "Lab Test Updated"
         }
@@ -166,7 +149,7 @@
         immediate: true,
         handler(value) {
           if (value === 'true') {
-            this.loadinstallation()
+            this.loadInstallation()
             this.snackbar = true;// Show the snackbar
           }
         }

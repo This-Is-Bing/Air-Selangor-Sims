@@ -112,13 +112,20 @@
                     <p class="text-subtitle-1 font-weight-bold pt-10 pb-5">Lab Test Details</p>
                     <v-row>
                         <v-col cols="8">
-                            <!-- Inventory Type -->
+                            <!-- Date Tested -->
                             <v-row>
-                                <v-col cols="4">Test Result:</v-col>
+                                <v-col cols="4">Lab Test ID:</v-col>
+                                <v-col cols="8" >{{ labtestID }}</v-col>
+                                <!-- <v-col cols="8" v-else >N/A</v-col> -->
+                            </v-row>
+
+                            <!-- Test Status -->
+                            <v-row>
+                                <v-col cols="4">Test Status:</v-col>
                                 <v-col cols="8" class="text-capitalize">
 
                                     <v-chip v-if="labtestStatus== 'New'" close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
-                                        Pending
+                                        Pending Lab Test
                                     </v-chip>
 
                                     <v-chip v-if="labtestStatus == 'Passed'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
@@ -133,23 +140,23 @@
 
                             <!-- Date Tested -->
                             <v-row>
-                                <v-col cols="4">Date Tested:</v-col>
+                                <v-col cols="4" v-if="labtestDate">Date Tested:</v-col>
                                 <v-col cols="8" v-if="labtestDate" >{{ labtestDate }}</v-col>
-                                <v-col cols="8" v-else >N/A</v-col>
+                                <!-- <v-col cols="8" v-else >N/A</v-col> -->
                             </v-row>
 
                             <!-- Testing Personel -->
                             <v-row>
-                                <v-col cols="4">Tester:</v-col>
+                                <v-col cols="4" v-if="labtestTester">Tester:</v-col>
                                 <v-col cols="8"  v-if="labtestTester">{{ labtestTester }}</v-col>
-                                <v-col cols="8" v-else >N/A</v-col>
+                                <!-- <v-col cols="8" v-else >N/A</v-col> -->
                             </v-row>
 
                             <!-- Comments -->
                             <v-row>
-                                <v-col cols="4">Comments:</v-col>
-                                <v-col cols="8"  v-if="labtestComments">{{ labtestComments }}</v-col>
-                                <v-col cols="8" v-else >N/A</v-col>
+                                <v-col cols="4" v-if="labtestComments">Comments:</v-col>
+                                <v-col cols="8" v-if="labtestComments">{{ labtestComments }}</v-col>
+                                <!-- <v-col cols="8" v-else >N/A</v-col> -->
                             </v-row>
 
                         </v-col>
@@ -170,34 +177,50 @@
                     <p class="text-subtitle-1 font-weight-bold pt-10 pb-5">Installation Details</p>
                     <v-row>
                         <v-col cols="8">
+
+                             <!-- Installation ID -->
+                             <v-row>
+                                <v-col cols="4">Installation ID:</v-col>
+                                <v-col cols="8">{{ installationID }}</v-col>
+                            </v-row>
+
                             <!-- Installation ID -->
                             <v-row>
-                                <v-col cols="4">Installation ID:</v-col>
-                                <v-col cols="8">{{"TBD"}}</v-col>
+                                <v-col cols="4">Installation Status:</v-col>
+                                <v-col cols="8" class="text-capitalize">
+                                    <v-chip v-if="installationStatus== 'New' || installationStatus== 'Uninstalled' " close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
+                                        Not Installed
+                                    </v-chip>
+
+                                    <v-chip v-if="installationStatus == 'Installed'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+                                        Installed
+                                    </v-chip>
+
+                                </v-col>
                             </v-row>
 
                             <!-- Region -->
                             <v-row>
-                                <v-col cols="4">Region:</v-col>
-                                <v-col cols="8">{{"TBD"}}</v-col>
+                                <v-col cols="4" v-if="Region">Region:</v-col>
+                                <v-col cols="8" v-if="Region">{{ Region }}</v-col>
                             </v-row>
 
                             <!-- Client Name -->
                             <v-row>
-                                <v-col cols="4">Contact Name:</v-col>
-                                <v-col cols="8"> {{ "TBD" }}</v-col>
+                                <v-col cols="4" v-if="clientName">Client:</v-col>
+                                <v-col cols="8" v-if="clientName"> {{ clientName }}</v-col>
                             </v-row>
 
                             <!-- Installer Name -->
                             <v-row>
-                                <v-col cols="4">Installer Name:</v-col>
-                                <v-col cols="8"> {{ "TBD" }}</v-col>
+                                <v-col cols="4" v-if="contractor">Contractor</v-col>
+                                <v-col cols="8" v-if="contractor"> {{ contractor }}</v-col>
                             </v-row>
 
                             <!-- Installation Date -->
                             <v-row>
-                                <v-col cols="4">Installation Date:</v-col>
-                                <v-col cols="8"> {{ "TBD" }}</v-col>
+                                <v-col cols="4" v-if="installationDate">Installation Date:</v-col>
+                                <v-col cols="8" v-if="installationDate"> {{ convertDate(installationDate) }}</v-col>
                             </v-row>
 
                         </v-col>
@@ -208,18 +231,83 @@
                             size="small" 
                             prepend-icon="fa-regular fa-up-right-from-square" 
                             class="text-none" 
-                            @click="this.$router.push({ name: 'installationDetails', query: { id: 'INS-0001' } })"
+                            @click="this.$router.push({ name: 'installationDetails', query: { id: installationID } })"
                             >Installation</v-btn>
+                        </v-col>
+                    </v-row>
+
+                    <!-- Installation Details -->
+                    <p class="text-subtitle-1 font-weight-bold pt-10 pb-5">Refund Details</p>
+
+
+                    <v-row v-if="refundID">
+                        <v-col cols="8">
+
+                             <!-- Refund ID -->
+                             <v-row>
+                                <v-col cols="4">Refund ID:</v-col>
+                                <v-col cols="8">{{ refundID }}</v-col>
+                            </v-row>
+
+                            <!-- Request status-->
+                            <v-row>
+                                <v-col cols="4">Refund Status:</v-col>
+                                <v-col cols="8" class="text-capitalize">
+                                    <v-chip v-if="refund_status== 'New' " close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
+                                        Pending Lab Test
+                                    </v-chip>
+
+                                    <!-- <v-chip v-if="installationStatus == 'Installed'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+                                        Installed
+                                    </v-chip> -->
+
+                                </v-col>
+                            </v-row>
+
+                            <!-- Requestor -->
+                            <v-row>
+                                <v-col cols="4" v-if="requester">Reqeustor:</v-col>
+                                <v-col cols="8" v-if="requester">{{ requester }}</v-col>
+                            </v-row>
+
+                            <!-- Installation Date -->
+                            <v-row>
+                                <v-col cols="4" v-if="requestDate">Request Date:</v-col>
+                                <v-col cols="8" v-if="requestDate"> {{ convertDate(requestDate) }}</v-col>
+                            </v-row>
+
+
+                        </v-col>
+
+                        <v-col cols="4">
+                            <v-btn 
+                            color="secondary" 
+                            size="small" 
+                            prepend-icon="fa-regular fa-up-right-from-square" 
+                            class="text-none" 
+                            @click="this.$router.push({ name: 'installationDetails', query: { id: installationID } })"
+                            >Refund</v-btn>
+                        </v-col>
+                    </v-row>
+
+                    <v-row v-else>
+                        <v-col cols="8">
+                            <p>No refund found</p>
+                        </v-col>
+                        <v-col cols="4">
+                            <add-refund-modal v-if="serialNumber" :meter_id="meter_id" :serial_number="serialNumber"></add-refund-modal>
                         </v-col>
                     </v-row>
 
                 </v-col>
 
+
+
                 <!-- Meter Vertical Timeline -->
-                <v-col cols="5"   >
+                <v-col cols="5" style="max-height: max-content;">
                     <p class="text-subtitle-1 font-weight-bold pt-2 pb-5">Meter History</p>
                     <p v-if="history==null">No History Available</p>
-                    <v-timeline side="end" align="start" density="compact" style="min-width: 400px;max-width: 450px; max-height: 60px;">
+                    <v-timeline side="end" align="start" density="compact" style="min-width: 400px;max-width: 450px; max-height: max-content;">
                         <v-timeline-item
                             v-for="item in history"
                             :key="item.meter_id"
@@ -250,8 +338,29 @@
                                 </v-col>
                             </v-row>
 
-                            <!-- Lab Test: Type:labtest purple -->
+                            <!-- Lab Test: Type:labtest blue -->
                             <v-row v-if="item.type =='labtest'">
+                                <v-col cols="2" class="d-flex flex-column align-center">
+                                    <p class="font-weight-bold text-caption">{{convertDate(item.updated_at)}}</p>
+                                </v-col>
+                                <v-col cols="10" class="d-flex">
+                                    <v-alert color="history_blue" :value="true" small class=" elevation-1 py-8 text-caption border-s-lg border-history_blue_border border-opacity-100 " >
+                                        <v-row class="mb-1">
+                                            <v-col cols="1">
+                                                <v-icon icon="fa-regular fa-circle-info" color="history_blue_border"></v-icon>
+                                            </v-col>
+                                            <v-col>
+                                                <p class="text-subtitle-2 text-history_blue_border" >{{item.header}}</p> 
+                                            </v-col>  
+                                        </v-row>
+                                        <span class="font-weight-bold">{{convertTime(item.updated_at)}} Hours:</span>       
+                                        {{item.content}}
+                                    </v-alert>
+                                </v-col>
+                            </v-row>
+
+                            <!-- Installation: Type:installation purple -->
+                            <v-row v-if="item.type =='installation'">
                                 <v-col cols="2" class="d-flex flex-column align-center">
                                     <p class="font-weight-bold text-caption">{{convertDate(item.updated_at)}}</p>
                                 </v-col>
@@ -270,6 +379,27 @@
                                     </v-alert>
                                 </v-col>
                             </v-row>
+
+                            <!-- Refund: Type:refund red -->
+                            <v-row v-if="item.type =='refund'">
+                                <v-col cols="2" class="d-flex flex-column align-center">
+                                    <p class="font-weight-bold text-caption">{{convertDate(item.updated_at)}}</p>
+                                </v-col>
+                                <v-col cols="10" class="d-flex">
+                                    <v-alert color="history_red" :value="true" small class=" elevation-1 py-8 text-caption border-s-lg border-history_red_border border-opacity-100 " >
+                                        <v-row class="mb-1">
+                                            <v-col cols="1">
+                                                <v-icon icon="fa-regular fa-circle-info" color="history_red_border"></v-icon>
+                                            </v-col>
+                                            <v-col>
+                                                <p class="text-subtitle-2 text-history_red_border" >{{item.header}}</p> 
+                                            </v-col>  
+                                        </v-row>
+                                        <span class="font-weight-bold">{{convertTime(item.updated_at)}} Hours:</span>       
+                                        {{item.content}}
+                                    </v-alert>
+                                </v-col>
+                            </v-row>
                         </v-timeline-item>
                     </v-timeline>
 
@@ -280,15 +410,23 @@
             </v-row>
         </v-container>
     </v-container>
+    <v-snackbar v-model="snackbar" color="primary" >
+      <v-icon icon="fa-solid fa-circle-check" color="success" class="mr-3" ></v-icon> {{ text }} 
+      <template v-slot:actions>
+        <v-btn color="secondary" variant="text" @click="snackbar = false" append-icon="fa-regular fa-xmark"></v-btn>
+      </template>
+    </v-snackbar>
 </template>
   
 <script>
-import { getAHistoryByMeterID, getALabTestByMeterID } from "@/tools/api";
+import { getAHistoryByMeterID, getAInstallationByMeterID, getALabTestByMeterID, getARefundByMeterID } from "@/tools/api";
 import { convertDate, convertDateTime, convertTime } from "@/tools/convertDateTime";
 import userInfo from "@/userInfo";
+import AddRefundModal from "../addRefundModal.vue";
 
   export default {
     name: "meterDetails",
+    components: {  AddRefundModal },
     props: {
       meter: Array,
     },
@@ -296,21 +434,64 @@ import userInfo from "@/userInfo";
         // Watch the 'meter._id' for changes
         'meter._id'(newVal) {
             if (newVal) {
+                this.showOverlay = true
                 this.loadLabtest();
-                this.loadHistory()
+                this.loadHistory();
+                this.loadInstallation();
+                this.loadRefund()
             }
         },
+        '$route.query.refundCreated': {
+        immediate: true,
+        handler(value) {
+          if (value === 'true') {
+            this.loadRefund();
+            this.loadHistory();
+            this.loadLabtest();
+            this.snackbar = true;// Show the snackbar
+
+          }
+        }
+      }
     },
     data(){
         return{
             username: userInfo.name,
+
+            // labtest Info
             labtest: null,
             labtestID: null,
             labtestComments: null,
             labtestTester: null,
             labtestDate: null,
             labtestStatus: null,
+
+            // Installation
+            installation: null,
+            installationID: null,
+            installationStatus: null,
+            installationDate: null,
+            clientName: null,
+            region: null,
+            contractor: null,
+
+            // Refund
+            refund:[],
+            refundID: null,
+            serialNumber: null,
+            meter_id: null,
+            productName: null,
+            refundStatus: null,
+            requester: null,
+            requestDate: null,
+            defect: null,
+
+
+            // history
             history:null,
+
+            snackbar:false,
+            text: "Refund created"
         }
     },
     methods:{
@@ -321,21 +502,57 @@ import userInfo from "@/userInfo";
         await getALabTestByMeterID(this.meter._id)
         .then((response) => {
             this.labtest = response.labtest[0]
+            console.log(this.labtest);
             this.labtestID = this.labtest._id
+            this.serialNumber = this.labtest.meter_id.serial_number
+            this.meter_id = this.labtest.meter_id._id
             this.labtestComments = this.labtest.comments
             this.labtestTester = this.labtest.tester
             this.labtestDate = this.labtest.test_date
             this.labtestStatus = this.labtest.test_status
         }).catch((error) => {
             console.error('Error fetching labtest:', error);
+        }).finally(()=>{
+            this.showOverlay = false
         });
         },
         async loadHistory(){
-            this.showOverlay = true
             const result = await getAHistoryByMeterID( this.meter._id )
             this.history = result.history
-            console.log(this.history);
             this.showOverlay = false
+        },
+        async loadInstallation(){
+        await getAInstallationByMeterID(this.meter._id)
+        .then((response) => {
+            this.installation = response.installation[0]
+            this.installationID = this.installation._id
+            this.installationStatus = this.installation.installation_status
+            this.installationDate = this.installation.installation_date  
+            this.clientName = this.installation.client  
+            this.region = this.installation.region  
+            this.contractor = this.installation.contractor  
+        }).catch((error) => {
+            console.error('Error fetching installation:', error);
+        }).finally(()=>{
+            this.showOverlay = false
+        });
+        },
+        async loadRefund(){
+        await getARefundByMeterID(this.meter._id)
+        .then((response) => {
+            this.refund = response.refund[0]
+            this.refundID = this.refund._id
+            this.serialNumber = this.refund.serial_number
+            this.productName = this.refund.meter_id.product_id.name  
+            this.requester = this.refund.requester.name  
+            this.requestDate = this.refund.request_date  
+            this.refund_status = this.refund.refund_status  
+            this.defect = this.refund.defect  
+        }).catch((error) => {
+            console.error('Error fetching refund:', error);
+        }).finally(()=>{
+            this.showOverlay = false
+        });
         },
 }
 }

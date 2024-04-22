@@ -9,7 +9,7 @@
             size="64"
             indeterminate
         ></v-progress-circular>
-      </v-overlay>
+    </v-overlay>
 
     <v-container fluid class="bg-secondary elevation-2 ">
       <v-row class="py-7 pl-5">
@@ -36,7 +36,7 @@
       slider-color="secondary"
       >
       <v-tab key="overview" class="text-none px-10 text-subtitle-1"> Overview </v-tab>
-      <v-tab key="adjustments" class="text-none px-10 text-subtitle-1"> Adjustments </v-tab>
+      <!-- <v-tab key="adjustments" class="text-none px-10 text-subtitle-1"> Adjustments </v-tab> -->
     </v-tabs>
 
     <v-divider color="black"></v-divider>
@@ -50,13 +50,13 @@
           </v-card>
         </v-window-item>
           
-        <v-window-item key="adjustments">
+        <!-- <v-window-item key="adjustments">
           <v-card flat>
             <v-card-text>
               Content for adjustments goes here.
             </v-card-text>
           </v-card>
-        </v-window-item>
+        </v-window-item> -->
         
     </v-window>
 

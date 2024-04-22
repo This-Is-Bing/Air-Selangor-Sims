@@ -22,6 +22,13 @@ const apiList = {
     getAInstallationByMeterID: "https://sims-server-api.vercel.app/installation/meter_id/",
     createInstallation: "https://sims-server-api.vercel.app/installation/create",
 
+    // Refunds
+    getAllRefunds : "https://sims-server-api.vercel.app/refund/all",
+    getARefund: "https://sims-server-api.vercel.app/refund/",
+    updateARefund: "https://sims-server-api.vercel.app/refund/update/",
+    getARefundByMeterID: "https://sims-server-api.vercel.app/refund/meter_id/",
+    createRefund: "https://sims-server-api.vercel.app/refund/create",    
+
     // History
     getAllHistory : "https://sims-server-api.vercel.app/history/all",
     getAHistory: "https://sims-server-api.vercel.app/history/",

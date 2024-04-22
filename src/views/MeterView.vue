@@ -38,7 +38,7 @@
 
       <template v-slot:[`item.status`]="{item}">
         <v-chip v-if="item.status == 'new'" close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
-          New
+          Pending Lab Test
         </v-chip>
 
 
