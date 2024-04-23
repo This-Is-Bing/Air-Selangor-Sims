@@ -36,9 +36,8 @@
       slider-color="secondary"
       >
       <v-tab key="overview" class="text-none px-10 text-subtitle-1"> Overview </v-tab>
-      <v-tab key="purchases" class="text-none px-10 text-subtitle-1"> Purchases </v-tab>
-      <v-tab key="adjustments" class="text-none px-10 text-subtitle-1"> Adjustments </v-tab>
-      <v-tab key="history" class="text-none px-10 text-subtitle-1"> History </v-tab>
+      <v-tab key="inventory" class="text-none px-10 text-subtitle-1"> Inventory </v-tab>
+
     </v-tabs>
 
     <v-divider color="black"></v-divider>
@@ -52,30 +51,13 @@
           </v-card>
         </v-window-item>
         
-        <v-window-item key="purchases">
+        <v-window-item key="inventory">
           <v-card flat>
             <v-card-text>
-              Content for purchases goes here.
+              <product-inventory :product_id="product._id"></product-inventory>
             </v-card-text>
           </v-card>
         </v-window-item>
-        
-        <v-window-item key="adjustments">
-          <v-card flat>
-            <v-card-text>
-              Content for adjustments goes here.
-            </v-card-text>
-          </v-card>
-        </v-window-item>
-        
-        <v-window-item key="history">
-          <v-card flat>
-            <v-card-text>
-              Content for history goes here.
-            </v-card-text>
-          </v-card>
-        </v-window-item>
-
         
 
     </v-window>
@@ -87,10 +69,11 @@
   <script>
 import { getAProduct } from '@/tools/api';
 import DetailOverview from '@/components/product_details/overview.vue';
+import ProductInventory from '@/components/product_details/productInventory.vue';
 
 
   export default {
-  components: { DetailOverview },
+  components: { DetailOverview, ProductInventory },
     name: 'ProductDetailsView',
     props: {
         id: {
@@ -102,7 +85,7 @@ import DetailOverview from '@/components/product_details/overview.vue';
         return{
             showOverlay:false,
             product:[],
-            activeTab: 'overview' 
+            activeTab: 'overview',
         }
     },
     created(){
@@ -115,7 +98,15 @@ import DetailOverview from '@/components/product_details/overview.vue';
           const result = await getAProduct( this.id )
           this.product = result.product
           this.showOverlay = false
-      }
+      },
+      async loadMeter(){
+        console.log(this.id);
+          this.showOverlay = true
+          const result = await getAProduct( this.id )
+          this.product = result.product
+          this.showOverlay = false
+      },
+      
     }
 
   }

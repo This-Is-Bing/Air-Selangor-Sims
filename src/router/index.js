@@ -13,6 +13,7 @@ import RefundView from '../views/RefundView.vue';
 import NotFoundView from '../views/NotFoundView.vue'
 import MeterDetailsView from '../views/MeterDetailsView.vue'
 import LabTestDetailsView from '../views/LabTestDetailsView.vue'
+import RefundDetailsView from '../views/RefundDetailsView.vue'
 import LabTestView from '../views/LabTestView.vue';
 
 const routes = [
@@ -88,6 +89,12 @@ const routes = [
     path: '/refund',
     name: 'refund',
     component: RefundView  
+  },
+  {
+    path: '/refund/refund_details',
+    name: 'refundDetails',
+    component: RefundDetailsView,
+    props: (route) => ({ id: route.query.id })
   },
   {
     path: '/inventory/product_details',

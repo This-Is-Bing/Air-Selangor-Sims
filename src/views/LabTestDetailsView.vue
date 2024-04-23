@@ -59,7 +59,7 @@
                 <p>Test Status:</p>
             </v-col>
             <v-col cols="3">
-                <v-chip close color="warning" v-if="labtest.test_status == 'New'">New</v-chip>
+                <v-chip close color="warning" v-if="labtest.test_status == 'New'">Pending Lab Test</v-chip>
                 <v-chip close color="success" v-if="labtest.test_status == 'Passed'">Passed</v-chip>
                 <v-chip close color="error" v-if="labtest.test_status == 'Failed'">Failed</v-chip>
             </v-col>

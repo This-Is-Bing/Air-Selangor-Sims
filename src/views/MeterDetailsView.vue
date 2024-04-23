@@ -46,7 +46,7 @@
         <!-- Account Summary Tab -->
         <v-window-item key="overview">
           <v-card flat>
-            <meter-details :meter="meter"/>
+            <meter-details :meter="meter" @updateData="loadMeter"/>
           </v-card>
         </v-window-item>
           

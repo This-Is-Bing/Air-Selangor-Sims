@@ -69,7 +69,6 @@
                 <p>Installation Status:</p>
             </v-col>
             <v-col cols="3" v-if="installation">
-              <v-col cols="8" class="text-capitalize">
                 <v-chip v-if="installation.installation_status== 'New' || installation.installation_status== 'Uninstalled'" close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
                     Not Installed
                 </v-chip>
@@ -78,7 +77,6 @@
                     Installed
                 </v-chip>
 
-               </v-col>
             </v-col>
         </v-row>
 
@@ -99,7 +97,7 @@
 
         <v-row >
             <v-col cols="2" v-if="installation.installation_date">Installation Date:</v-col>
-            <v-col cols="3" v-if="installation.installation_date">{{convertDate(installation.transaction_date)}}</v-col>
+            <v-col cols="3" v-if="installation.installation_date">{{convertDate(installation.installation_date)}}</v-col>
         </v-row>
 
     </v-container>
@@ -138,7 +136,7 @@
             installation:[],
             history:[],
             snackbar: false,
-            text: "Lab Test Updated"
+            text: "Installation Updated"
         }
     },
     created(){

@@ -5,8 +5,10 @@ const apiList = {
 
     // Meters
     getAllMeters : "https://sims-server-api.vercel.app/meter/all",
+    getMeterByProductID : "https://sims-server-api.vercel.app/meter/product_id/",
     getAMeter : "https://sims-server-api.vercel.app/meter/",
     createMeter: "https://sims-server-api.vercel.app/meter/create",
+    updateMeterStatus: "https://sims-server-api.vercel.app/meter/update/",
 
     // Lab Test
     getAllLabTests : "https://sims-server-api.vercel.app/labtest/all",

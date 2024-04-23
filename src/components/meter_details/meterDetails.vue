@@ -77,14 +77,22 @@
                         <v-col cols="8">
                             <!-- Inventory Type -->
                             <v-row>
-                                <v-col cols="4">Inventory Type:</v-col>
+                                <v-col cols="4">Meter Status:</v-col>
                                 <v-col cols="8" class="text-capitalize">
-                                    <v-chip v-if="meter.status == 'new'" close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
-                                        In-Store
+                                    <v-chip v-if="meter.status == 'new'" close class="text-subtitle-2 " color="history_blue_border" prepend-icon="fa-regular fa-clock">
+                                    Pending Lab Test
                                     </v-chip>
-
-                                    <v-chip v-if="meter.status == 'client'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
-                                        Installed
+                                    <v-chip v-if="meter.status == 'LT_Done'" close class="text-subtitle-2 " color="history_purple_border" prepend-icon="fa-regular fa-clock">
+                                    Lab Test Done
+                                    </v-chip>
+                                    <v-chip v-if="meter.status == 'installed'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+                                    Installed
+                                    </v-chip>
+                                    <v-chip v-if="meter.status == 'refund_lab_test_pending'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-regular fa-circle-check">
+                                    Pending Refund Test
+                                    </v-chip>
+                                    <v-chip v-if="meter.status == 'refund_LT_Done'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-regular fa-circle-check">
+                                    Refund Test Done
                                     </v-chip>
                                 </v-col>
                             </v-row>
@@ -141,7 +149,7 @@
                             <!-- Date Tested -->
                             <v-row>
                                 <v-col cols="4" v-if="labtestDate">Date Tested:</v-col>
-                                <v-col cols="8" v-if="labtestDate" >{{ labtestDate }}</v-col>
+                                <v-col cols="8" v-if="labtestDate" >{{ convertDate(labtestDate) }}</v-col>
                                 <!-- <v-col cols="8" v-else >N/A</v-col> -->
                             </v-row>
 
@@ -175,7 +183,7 @@
 
                      <!-- Installation Details -->
                     <p class="text-subtitle-1 font-weight-bold pt-10 pb-5">Installation Details</p>
-                    <v-row>
+                    <v-row v-if="installationID">
                         <v-col cols="8">
 
                              <!-- Installation ID -->
@@ -235,8 +243,16 @@
                             >Installation</v-btn>
                         </v-col>
                     </v-row>
+                    <v-row v-else>
+                        <v-col cols="8">
+                            <p class="text-subtitle-2 text-grey">No Installation found (Complete lab test to create installation)</p>
+                        </v-col>
+                        <v-col cols="4" v-if="labtestStatus !== 'New'">
+                            <v-btn color="history_purple_border" size="small" class="text-none" @click="createInstallation">Create Installation</v-btn>
+                        </v-col>
+                    </v-row>
 
-                    <!-- Installation Details -->
+                    <!-- Refund Details -->
                     <p class="text-subtitle-1 font-weight-bold pt-10 pb-5">Refund Details</p>
 
 
@@ -253,21 +269,27 @@
                             <v-row>
                                 <v-col cols="4">Refund Status:</v-col>
                                 <v-col cols="8" class="text-capitalize">
-                                    <v-chip v-if="refund_status== 'New' " close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
-                                        Pending Lab Test
+                                    <v-chip v-if="refund_status== 'New' " close class="text-subtitle-2 " color="history_red_border" prepend-icon="fa-regular fa-clock">
+                                        Pending Refund Test
                                     </v-chip>
 
-                                    <!-- <v-chip v-if="installationStatus == 'Installed'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
-                                        Installed
-                                    </v-chip> -->
+                                    <v-chip v-if="refund_status == 'refund_LT_Done'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-regular fa-circle-check">
+                                        Refund Test Done
+                                    </v-chip>
 
                                 </v-col>
                             </v-row>
 
                             <!-- Requestor -->
                             <v-row>
-                                <v-col cols="4" v-if="requester">Reqeustor:</v-col>
+                                <v-col cols="4" v-if="requester">Requestor:</v-col>
                                 <v-col cols="8" v-if="requester">{{ requester }}</v-col>
+                            </v-row>
+
+                            <!-- Defects -->
+                            <v-row>
+                                <v-col cols="4" v-if="requestDate">Defect:</v-col>
+                                <v-col cols="8" v-if="requestDate"> {{ defect }}</v-col>
                             </v-row>
 
                             <!-- Installation Date -->
@@ -275,7 +297,6 @@
                                 <v-col cols="4" v-if="requestDate">Request Date:</v-col>
                                 <v-col cols="8" v-if="requestDate"> {{ convertDate(requestDate) }}</v-col>
                             </v-row>
-
 
                         </v-col>
 
@@ -285,16 +306,16 @@
                             size="small" 
                             prepend-icon="fa-regular fa-up-right-from-square" 
                             class="text-none" 
-                            @click="this.$router.push({ name: 'installationDetails', query: { id: installationID } })"
+                            @click="this.$router.push({ name: 'refundDetails', query: { id: refundID } })"
                             >Refund</v-btn>
                         </v-col>
                     </v-row>
 
                     <v-row v-else>
                         <v-col cols="8">
-                            <p>No refund found</p>
+                            <p class="text-subtitle-2 text-grey">No refund found (Complete lab test to create refund)</p>
                         </v-col>
-                        <v-col cols="4">
+                        <v-col cols="4" v-if="labtestStatus !== 'New'">
                             <add-refund-modal v-if="serialNumber" :meter_id="meter_id" :serial_number="serialNumber"></add-refund-modal>
                         </v-col>
                     </v-row>
@@ -410,6 +431,18 @@
             </v-row>
         </v-container>
     </v-container>
+
+    <v-overlay
+      :model-value="showOverlay"
+      class="align-center justify-center"
+      >
+        <v-progress-circular
+            color="primary"
+            size="64"
+            indeterminate
+        ></v-progress-circular>
+      </v-overlay>
+
     <v-snackbar v-model="snackbar" color="primary" >
       <v-icon icon="fa-solid fa-circle-check" color="success" class="mr-3" ></v-icon> {{ text }} 
       <template v-slot:actions>
@@ -419,7 +452,7 @@
 </template>
   
 <script>
-import { getAHistoryByMeterID, getAInstallationByMeterID, getALabTestByMeterID, getARefundByMeterID } from "@/tools/api";
+import { createInstallation, getAHistoryByMeterID, getAInstallationByMeterID, getALabTestByMeterID, getARefundByMeterID } from "@/tools/api";
 import { convertDate, convertDateTime, convertTime } from "@/tools/convertDateTime";
 import userInfo from "@/userInfo";
 import AddRefundModal from "../addRefundModal.vue";
@@ -445,6 +478,7 @@ import AddRefundModal from "../addRefundModal.vue";
         immediate: true,
         handler(value) {
           if (value === 'true') {
+            this.$emit('updateData')
             this.loadRefund();
             this.loadHistory();
             this.loadLabtest();
@@ -456,8 +490,8 @@ import AddRefundModal from "../addRefundModal.vue";
     },
     data(){
         return{
+            showOverlay: false,
             username: userInfo.name,
-
             // labtest Info
             labtest: null,
             labtestID: null,
@@ -502,7 +536,6 @@ import AddRefundModal from "../addRefundModal.vue";
         await getALabTestByMeterID(this.meter._id)
         .then((response) => {
             this.labtest = response.labtest[0]
-            console.log(this.labtest);
             this.labtestID = this.labtest._id
             this.serialNumber = this.labtest.meter_id.serial_number
             this.meter_id = this.labtest.meter_id._id
@@ -516,6 +549,7 @@ import AddRefundModal from "../addRefundModal.vue";
             this.showOverlay = false
         });
         },
+
         async loadHistory(){
             const result = await getAHistoryByMeterID( this.meter._id )
             this.history = result.history
@@ -554,6 +588,30 @@ import AddRefundModal from "../addRefundModal.vue";
             this.showOverlay = false
         });
         },
+        async createInstallation() {
+            this.showOverlay = true; // Show the overlay
+
+            const new_installation = {
+                meter_id: this.meter._id
+            };
+
+            try {
+                const response = await createInstallation(new_installation);
+
+                // Set a timer to hide the overlay after 2 seconds
+                setTimeout(() => {
+                    this.showOverlay = false; // Hide the overlay after 2 seconds
+                }, 2000);
+
+                this.installation = response.data.installation;
+                this.installationID = this.installation._id;
+                this.installationStatus = this.installation.installation_status;
+                this.loadHistory();
+            } catch (error) {
+                console.error('Failed to create installation:', error);
+                this.showOverlay = false; // Ensure overlay is hidden in case of error
+            }
+        }
 }
 }
   </script>

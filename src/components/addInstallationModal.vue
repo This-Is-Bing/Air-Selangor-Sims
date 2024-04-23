@@ -3,10 +3,10 @@
         <template v-slot:activator="{ props: activatorProps }">
             <v-btn
             v-bind="activatorProps"
-            text="Create Refund"
+            text="Create Installation"
             variant="flat"
             size="small"
-            color="warning" 
+            color="history_purple_border" 
             class="text-none elevation-1"
             ></v-btn>
         </template>
@@ -15,9 +15,9 @@
             <v-card  title="Create Refund">
 
                 <v-text-field
-                    v-model='sn'
+                    v-model='a'
                     class="px-6 pt-3"
-                    label="Serial Number"
+                    label="Region"
                     density="comfortable"
                     variant="outlined"
                     readonly
@@ -134,7 +134,7 @@ import { createRefund } from '@/tools/api.js'
 import { convertToISO } from '@/tools/convertDateTime'
 import userInfo from '@/userInfo'
 export default {
-    name: "addRefundModal",
+    name: "addInstallationModal",
     props:{
         meter_id: String,
         serial_number: String
@@ -191,11 +191,11 @@ export default {
                 "request_date": convertToISO(Date.now()),
                 "defect": this.defect,
             }
-            console.log(newRefund);
 
             try {
                 await createRefund(newRefund)
                 .then(() => {
+                    
                     this.$router.push({ name: 'meterDetails', query: {id:this.meter_id ,refundCreated: 'true' } })
                     .then(() => {
                         this.$router.replace({ name: 'meterDetails', query: {id:this.meter_id} });

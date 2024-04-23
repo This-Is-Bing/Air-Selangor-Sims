@@ -217,8 +217,25 @@ const createMeter = async(meter)=>{
     }
 }
 
+const getMeterByProductID = async( id )=>{
+    const url = apiList.getMeterByProductID + id
+    try {
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+}
 
-
+const updateMeterStatus = async( id, status )=>{
+    const url = apiList.updateMeterStatus + id
+    try {
+        const response = await axios.put(url, status);
+        return response.data;
+    } catch (error) {
+        console.error("Error udpating data:", error.message);
+    }
+}
 
 // Products
 const getAllProducts = async()=>{
@@ -334,7 +351,7 @@ export {
         getAllInstallations, getAInstallation, createInstallation, getAInstallationByMeterID,updateAInstallation,
         getAllRefunds, getARefund, createRefund, getARefundByMeterID, updateARefund,
         getAHistory, getAllHistory,createHistory, getAHistoryByMeterID,
-        getAllMeters,getAMeter,createMeter,
+        getAllMeters,getAMeter,createMeter,getMeterByProductID, updateMeterStatus,
         getAllProducts, getAProduct, createProduct, 
         getAllSuppliers, createSupplier,
         getAllTypes, createType,

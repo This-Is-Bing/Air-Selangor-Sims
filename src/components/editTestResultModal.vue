@@ -35,7 +35,7 @@
                 <v-container>
                     <p class="text-grey text-subtitle-1 pl-5 pb-4">Test Date</p>
                     <v-row justify="center">
-                        <v-date-picker color="secondary" hide-header v-model:model-value="testDate"></v-date-picker>
+                        <v-date-picker color="secondary" hide-header v-model:model-value="testDate" :max="dateToday"></v-date-picker>
                     </v-row>
                 </v-container>
 
@@ -94,13 +94,15 @@ export default {
     name: "editTestResult",
     data(){
         return{
-            testResultOptions:["Passed", "Failed", "New"],
+            testResultOptions:["Passed", "Failed"],
             testResult: "Passed",
             tester: null,
             testDate: new Date(),
             comments: null,
             labtestId: null,
             showOverlay: false,
+            dateToday: new Date().toISOString().substr(0, 10)
+
         }
     },
     watch:{

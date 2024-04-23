@@ -47,6 +47,10 @@
         <p v-else>N/A</p>
       </template>
 
+      <template v-slot:[`item.defect`]="{item}">
+        <p v-if="item.defect" style="max-width: 200px;">{{ item.defect }}</p>
+        <p v-else>N/A</p>
+      </template>
 
       <template v-slot:[`item.updated_at`]="{item}">
         <p v-if="item.updated_at">{{ convertDateTime(item.updated_at) }}</p>
@@ -55,7 +59,7 @@
 
 
       <template v-slot:[`item.actions`]="{item}">
-        <v-icon icon="fa-solid fa-search" color="secondary mr-2 cursor-pointer" @click="this.$router.push({ name: 'installationDetails', query: { id: item._id } })"></v-icon>
+        <v-icon icon="fa-solid fa-search" color="secondary mr-2 cursor-pointer" @click="this.$router.push({ name: 'refundDetails', query: { id: item._id } })"></v-icon>
         <v-icon icon="fa-solid fa-trash" color="quinary cursor-pointer"></v-icon>
       </template>
 
@@ -141,6 +145,7 @@ import { convertDate, convertDateTime } from '@/tools/convertDateTime';
         { title: 'Model', key: 'meter_id.product_id.name', sortable: false, align: 'center' },
         { title: 'Requestor', key: 'requester.name', sortable: false, align: 'center' },
         { title: 'Request Date', key: 'request_date', sortable: false, align: 'center' },
+        { title: 'Defect', key: 'defect', sortable: false, align: 'center' },
         { title: 'Status', key: 'refund_status', sortable: false, align: 'center' },
         { title: 'Actions', value: 'actions', sortable: false, align: 'center' },
       ], 
