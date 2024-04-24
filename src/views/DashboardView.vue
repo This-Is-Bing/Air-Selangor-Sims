@@ -5,8 +5,8 @@
       </v-row>
     </v-container>
 
-    <v-card class="ma-2 pa-2 elevation-0 bg-primary">
-      <p class="text-h6 text-secondary">Welcome {{ username }}</p>
+    <v-card class="ma-2 pa-2 mt-4 mb-4 elevation-0 bg-primary">
+      <p class="text-h6 font-weight-bold text-secondary">Welcome {{ username }}</p>
     </v-card>
 
     <v-card class="ma-2 pa-2 elevation-0 bg-primary">
@@ -214,7 +214,7 @@
                         <v-icon class="fa-regular fa-wand-magic-sparkles"></v-icon>
                     </v-col>
                     <v-col cols="7">
-                        <v-tooltip text="A Tip For You <3" location="top">
+                        <v-tooltip text="Total = FP + MC + ML" location="top">
                         <template v-slot:activator="{ props }">
                             <p class="text-subtitle-1 font-weight-bold pt-2" v-bind="props">Stock Demand Prediction ⓘ</p>
                         </template>
@@ -228,12 +228,16 @@
                 <!-- graph -->
                 <v-row class="pb-4 mt-n5">
                     <v-col cols="12" class="align-center justify-center d-flex custom-img-container" >
-                      <v-img
+                      <!-- <v-img
                           :src="graph"
                           :width="450"
                           aspect-ratio="1/1"
                           cover
-                      ></v-img>
+                      ></v-img> -->
+                      <div class="mt-5" style="position: relative; width: 500px; height: 300px;">
+                      <line-chart></line-chart>
+                      </div>
+
                     </v-col>
                 </v-row>
               </v-card>
@@ -256,11 +260,8 @@
                         <v-icon class="fa-regular fa-chart-simple"></v-icon>
                     </v-col>
                     <v-col cols="7">
-                        <v-tooltip text="A Tip For You <3" location="top">
-                        <template v-slot:activator="{ props }">
-                            <p class="text-subtitle-1 font-weight-bold pt-2" v-bind="props">Reasons of Returns & Refund ⓘ</p>
-                        </template>
-                        </v-tooltip>
+                        
+                        <p class="text-subtitle-1 font-weight-bold pt-2" >Reasons of Returns & Refund </p>
                         <p class="text-caption pa-0 ma-0" >As of {{ convertDateTime(Date.now()) }}</p>
                     </v-col>
 
@@ -268,7 +269,7 @@
                 <v-row class="pb-4">
                     <v-col cols="12" class="align-center justify-center d-flex custom-img-container" >
                       
-                      <div style="position: relative; width: 400px; height: 400px;">
+                      <div style="position: relative; width: 400px; height: 285px;">
                         <pie-chart></pie-chart>
                       </div>
                     </v-col>
@@ -280,7 +281,7 @@
                     </v-col>
                     <v-col cols="7">
                         <p class="text-subtitle-1 font-weight-bold pt-2" >Pending Refund Cases</p>
-                        <p class="text-h4 text-warning font-weight-bold" >500</p>
+                        <p class="text-h4 text-warning font-weight-bold" >{{ total_pending_refund }}</p>
                         <p class="text-caption text-inactive font-weight-bold"> Waiting for lab test & actions</p>
                     </v-col>
                 </v-row>
@@ -312,12 +313,13 @@ import chart from "@/assets/demo_chart.png"
 import { convertDateTime } from '@/tools/convertDateTime';
 import { getDashboardData } from '@/tools/api';
 import PieChart from '@/components/pieChart.vue';
+import LineChart from '@/components/lineChart.vue';
 
 
 export default {
     name: 'DashboardView',
     components:{
-      PieChart
+      PieChart, LineChart
     },
     data(){
       return{
@@ -334,7 +336,7 @@ export default {
         total_refund_labtest_pending: 0,
         total_labtest_passed: 0,
         total_labtest_failed: 0,
-
+        total_pending_refund: 0
       }
     },
     created(){
@@ -355,6 +357,7 @@ export default {
           this.total_refund_labtest_pending= response.total_refund_labtest_pending,
           this.total_labtest_passed= response.total_labtest_passed,
           this.total_labtest_failed= response.total_labtest_failed,
+          this.total_pending_refund= response.total_pending_refund
           this.showOverlay = false
         }
       )
