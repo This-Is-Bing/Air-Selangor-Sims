@@ -345,6 +345,47 @@ const createStore= async(store)=>{
     }
 }
 
+const getDashboardData = async()=>{
+    try {
+        const response = await axios.get(apiList.getDashboardData);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+}
+
+// Demand
+const getFaultyProgram = async(date)=>{
+    try {
+        const url = `${apiList.getFaultyProgram}?date=${date}`
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+}
+ 
+const getComplaintProgram = async(date)=>{
+    try {
+        const url = `${apiList.getComplaintProgram}?date=${date}`
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+}
+ 
+const getLeakProgram = async(date)=>{
+    try {
+        const url = `${apiList.getLeakProgram}?date=${date}`
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+}
+ 
+
 
 export { 
         getAllLabTests, getALabTest, createLabTest, getALabTestByMeterID,updateALabTest,
@@ -356,5 +397,7 @@ export {
         getAllSuppliers, createSupplier,
         getAllTypes, createType,
         getAllCategories,createCategory ,
-        getAllStores, createStore
+        getAllStores, createStore,
+        getDashboardData,
+        getComplaintProgram, getFaultyProgram, getLeakProgram
         }

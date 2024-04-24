@@ -119,7 +119,7 @@
                             <!-- Date Tested -->
                             <v-row>
                                 <v-col cols="4" v-if="labtestDate">Date Tested:</v-col>
-                                <v-col cols="8" v-if="labtestDate" >{{ labtestDate }}</v-col>
+                                <v-col cols="8" v-if="labtestDate" >{{ convertDate(labtestDate) }}</v-col>
                                 <!-- <v-col cols="8" v-else >N/A</v-col> -->
                             </v-row>
 

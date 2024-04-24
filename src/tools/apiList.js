@@ -57,6 +57,14 @@ const apiList = {
     // Stores
     getAllStores : "https://sims-server-api.vercel.app/store/all",
     createStore: "https://sims-server-api.vercel.app/store/create",
+
+    // Dashboard
+    getDashboardData: "https://sims-server-api.vercel.app/dashboard",
+
+    // Demand Prediction
+    getFaultyProgram: "https://sims-prediction-api.onrender.com/prediction/fp",
+    getComplaintProgram: "https://sims-prediction-api.onrender.com/prediction/mc",
+    getLeakProgram: "https://sims-prediction-api.onrender.com/prediction/ml"
 }
 
 export default apiList

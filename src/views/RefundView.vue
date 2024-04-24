@@ -12,7 +12,7 @@
 
     <!-- Title & Action Buttons -->
     <v-container grid-list-xs class="d-flex justify-space-between " fluid>
-      <p class="text-h6 font-weight-bold">All refunds</p>
+      <p class="text-h6 font-weight-bold">All Refunds</p>
       <div>
         <add-meter-modal/>
         <v-btn color="primary text-none text-subtitle-1 mr-5"  prepend-icon="fa-regular fa-download">Template</v-btn>
@@ -163,7 +163,7 @@ import { convertDate, convertDateTime } from '@/tools/convertDateTime';
         { title: 'Model', key: 'meter_id.product_id.name', sortable: false, align: 'center' },
         { title: 'Requestor', key: 'requester.name', sortable: false, align: 'center' },
         { title: 'Request Date', key: 'request_date', sortable: false, align: 'center' },
-        { title: 'Defect', key: 'defect', sortable: false, align: 'center' },
+        // { title: 'Defect', key: 'defect', sortable: false, align: 'center' },
         { title: 'Status', key: 'refund_status', sortable: false, align: 'center' },
         { title: 'Actions', value: 'actions', sortable: false, align: 'center' },
       ], 
