@@ -43,7 +43,7 @@
                             <!-- updated -->
                             <v-row>
                             <v-col cols="4">Last Update:</v-col>
-                            <v-col cols="8">{{product.updated_at}}</v-col>
+                            <v-col cols="8">{{convertDateTime(product.updated_at)}}</v-col>
                             </v-row>
                         </v-col>
                         
@@ -173,6 +173,7 @@
   <script>
   import graph from "@/assets/demo_graph.png"
   import chart from "@/assets/demo_chart.png"
+    import { convertDateTime } from "@/tools/convertDateTime"
   export default {
     name: "detailOverview",
     props: {
@@ -183,6 +184,9 @@
             graph,
             chart
         }
+    },
+    methods:{
+        convertDateTime
     }
   }
   </script>

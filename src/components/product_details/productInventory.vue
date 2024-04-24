@@ -15,13 +15,27 @@
     >
 
         <template v-slot:[`item.status`]="{item}">
-            <v-chip v-if="item.status == 'new'" close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
-            Pending Lab Test
-            </v-chip>
-
-            <v-chip v-if="item.status == 'client'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
-            Client
-            </v-chip>
+          <v-chip v-if="item.status == 'new'" close class="text-subtitle-2 " color="history_blue_border" prepend-icon="fa-regular fa-clock">
+          Pending Lab Test
+          </v-chip>
+          <v-chip v-if="item.status == 'LT_Done'" close class="text-subtitle-2 " color="history_purple_border" prepend-icon="fa-regular fa-clock">
+            Lab Test Done
+          </v-chip>
+          <v-chip v-if="item.status == 'installed'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+            Installed
+          </v-chip>
+          <v-chip v-if="item.status == 'refund_lab_test_pending'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-regular fa-circle-check">
+            Pending Refund Test
+          </v-chip>
+          <v-chip v-if="item.status == 'refund_LT_Done'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-regular fa-circle-check">
+            Refund Test Done
+          </v-chip>
+          <v-chip v-if="item.status == 'refund_accepted'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+            Refund Accepted
+          </v-chip>
+          <v-chip v-if="item.status == 'refund_rejected'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+            Refund Rejected
+          </v-chip>
         </template>
 
         <template v-slot:[`item.updated_at`]="{item}">

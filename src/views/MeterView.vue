@@ -52,6 +52,12 @@
         <v-chip v-if="item.status == 'refund_LT_Done'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-regular fa-circle-check">
           Refund Test Done
         </v-chip>
+        <v-chip v-if="item.status == 'refund_accepted'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+          Refund Accepted
+        </v-chip>
+        <v-chip v-if="item.status == 'refund_rejected'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+          Refund Rejected
+        </v-chip>
       </template>
 
       <!-- <template v-slot:[`item.installation_date`]="{item}">

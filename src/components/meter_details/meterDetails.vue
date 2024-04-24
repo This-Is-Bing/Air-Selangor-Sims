@@ -94,7 +94,15 @@
                                     <v-chip v-if="meter.status == 'refund_LT_Done'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-regular fa-circle-check">
                                     Refund Test Done
                                     </v-chip>
+                                    <v-chip v-if="meter.status == 'refund_accepted'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+                                    Refund Accepted
+                                    </v-chip>
+                                    <v-chip v-if="meter.status == 'refund_rejected'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+                                    Refund Rejected
+                                    </v-chip>
+
                                 </v-col>
+                                
                             </v-row>
 
                             <!-- Store -->
@@ -276,10 +284,25 @@
                                     <v-chip v-if="refund_status == 'refund_LT_Done'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-regular fa-circle-check">
                                         Refund Test Done
                                     </v-chip>
+                                    <v-chip v-if="refund_status == 'refund_accepted'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+                                        Refund Accepted
+                                    </v-chip>
+                                    <v-chip v-if="refund_status == 'refund_rejected'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-regular fa-circle-check">
+                                        Refund Rejected
+                                    </v-chip>
 
                                 </v-col>
                             </v-row>
 
+                            <v-row>
+                                <v-col cols="4" v-if="requestDate">Request Date:</v-col>
+                                <v-col cols="8" v-if="requestDate"> {{ convertDate(requestDate) }}</v-col>
+                            </v-row>
+
+                            <v-row v-if="refundDate">
+                                <v-col cols="4" v-if="requester">Refund Date:</v-col>
+                                <v-col cols="8" v-if="requester">{{ convertDate(refundDate) }}</v-col>
+                            </v-row>
                             <!-- Requestor -->
                             <v-row>
                                 <v-col cols="4" v-if="requester">Requestor:</v-col>
@@ -292,11 +315,7 @@
                                 <v-col cols="8" v-if="requestDate"> {{ defect }}</v-col>
                             </v-row>
 
-                            <!-- Installation Date -->
-                            <v-row>
-                                <v-col cols="4" v-if="requestDate">Request Date:</v-col>
-                                <v-col cols="8" v-if="requestDate"> {{ convertDate(requestDate) }}</v-col>
-                            </v-row>
+                            
 
                         </v-col>
 
@@ -519,6 +538,7 @@ import AddRefundModal from "../addRefundModal.vue";
             requester: null,
             requestDate: null,
             defect: null,
+            refundDate: null,
 
 
             // history
@@ -582,6 +602,7 @@ import AddRefundModal from "../addRefundModal.vue";
             this.requestDate = this.refund.request_date  
             this.refund_status = this.refund.refund_status  
             this.defect = this.refund.defect  
+            this.refundDate = this.refund.refund_date  
         }).catch((error) => {
             console.error('Error fetching refund:', error);
         }).finally(()=>{

@@ -34,6 +34,8 @@
                             <v-col>
                                 <v-chip close v-if="refund.refund_status == 'New'" color="warning" prepend-icon="fa-regular fa-clock">Pending Lab Test</v-chip>
                                 <v-chip close v-if="refund.refund_status == 'refund_LT_Done'" color="history_red_border" prepend-icon="fa-regular fa-clock">Refund Lab Test Done</v-chip>
+                                <v-chip close v-if="refund.refund_status == 'refund_accepted'" color="success" prepend-icon="fa-regular fa-circle-check">Refund Accepted</v-chip>
+                                <v-chip close v-if="refund.refund_status == 'refund_rejected'" color="history_red_border" prepend-icon="fa-regular fa-circle-check">Refund Rejected</v-chip>
                             </v-col>
                             </v-row>
 
@@ -290,6 +292,15 @@ import userInfo from "@/userInfo";
                 // this.loadRefund()
             }
         },
+        'refund.refund_status'(newVal) {
+            if (newVal) {
+                this.showOverlay = true
+                this.loadLabtest();
+                this.loadHistory();
+                this.loadInstallation();
+                // this.loadRefund()
+            }
+        },
     //     '$route.query.refundCreated': {
     //     immediate: true,
     //     handler(value) {
@@ -343,6 +354,7 @@ import userInfo from "@/userInfo";
             text: "Refund created"
         }
     },
+    
     methods:{
         convertDateTime,
         convertDate,

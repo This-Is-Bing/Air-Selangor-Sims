@@ -67,6 +67,17 @@
                   </v-col>
                 </v-row>
 
+                <v-row v-else-if="this.refund.refund_status == 'refund_accepted' ">
+                  <v-col cols="12">
+                      <p class="">Refund Process Completed: Accepted</p>
+                  </v-col>
+                </v-row>
+
+                <v-row v-else-if="this.refund.refund_status == 'refund_rejected'">
+                  <v-col cols="12">
+                      <p class="">Refund Process Completed: Rejected</p>
+                  </v-col>
+                </v-row>
 
                 <v-row v-else>
                   <v-col cols="12">
@@ -121,8 +132,8 @@
 
                     <v-row>
                       <v-col cols="10" class="d-flex justify-end">
-                        <v-btn color="error" class="mx-3">Reject</v-btn>
-                        <v-btn color="success">Approve</v-btn>
+                        <v-btn color="error" class="mx-3" @click="rejectRefund">Reject</v-btn>
+                        <v-btn color="success" @click="acceptRefund">Approve</v-btn>
                       </v-col>
                     </v-row>
                     
@@ -144,8 +155,9 @@
   </template>
   
   <script>
-import { getARefund } from '@/tools/api';
+import { getARefund, updateARefund } from '@/tools/api';
 import RefundDetailsModal from "../components/refundDetails.vue";
+import { convertToISO } from '@/tools/convertDateTime';
 
 
 
@@ -162,7 +174,8 @@ import RefundDetailsModal from "../components/refundDetails.vue";
         return{
             showOverlay:false,
             refund:[],
-            activeTab: 'overview' 
+            activeTab: 'overview' ,
+            comments: null
         }
     },
     created(){
@@ -174,6 +187,28 @@ import RefundDetailsModal from "../components/refundDetails.vue";
             const result = await getARefund( this.id )
             this.refund = result.refund
             this.showOverlay = false
+        },
+        async rejectRefund(){
+          this.showOverlay = true
+          const new_refund = {
+            "refund_status": 'refund_rejected', 
+            "refund_date": convertToISO(Date.now()), 
+            "refund_comments": this.comments
+          }
+          await updateARefund( this.id , new_refund )
+          .then(()=>{this.loadRefund()})
+        },
+
+        async acceptRefund(){
+          this.showOverlay = true
+          const new_refund = {
+            "refund_status": 'refund_accepted', 
+            "refund_date": convertToISO(Date.now()), 
+            "refund_comments": this.comments
+          }
+          await updateARefund( this.id , new_refund )
+          .then(()=>{this.loadRefund(); this.$emit})
+
         }
     }
 
