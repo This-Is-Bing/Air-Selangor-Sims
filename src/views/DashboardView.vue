@@ -219,7 +219,7 @@
                             <p class="text-subtitle-1 font-weight-bold pt-2" v-bind="props">Stock Demand Prediction ⓘ</p>
                         </template>
                         </v-tooltip>
-                        <p class="text-caption pa-0 ma-0" >As of {{ convertDateTime(Date.now()) }}</p>
+                        <p class="text-caption pa-0 ma-0" >As of {{ convertDate(Date.now()) }}</p>
                     </v-col>
                     <v-col class="d-flex align-center justify-start" cols="3">
                       <v-btn color="secondary text-none" size="small" prepend-icon="fa-regular fa-up-right-from-square">Demand</v-btn>
@@ -262,7 +262,7 @@
                     <v-col cols="7">
                         
                         <p class="text-subtitle-1 font-weight-bold pt-2" >Reasons of Returns & Refund </p>
-                        <p class="text-caption pa-0 ma-0" >As of {{ convertDateTime(Date.now()) }}</p>
+                        <p class="text-caption pa-0 ma-0" >As of {{ convertDate(Date.now()) }}</p>
                     </v-col>
 
                 </v-row>
@@ -310,7 +310,7 @@ import graph from "@/assets/demo_graph.png"
 import chart from "@/assets/demo_chart.png"
 
 
-import { convertDateTime } from '@/tools/convertDateTime';
+import { convertDateTime, convertDate } from '@/tools/convertDateTime';
 import { getDashboardData } from '@/tools/api';
 import PieChart from '@/components/pieChart.vue';
 import LineChart from '@/components/lineChart.vue';
@@ -344,6 +344,7 @@ export default {
     },
     methods:{
       convertDateTime,
+      convertDate,
       async loadData(){
         this.showOverlay = true
         await getDashboardData()
