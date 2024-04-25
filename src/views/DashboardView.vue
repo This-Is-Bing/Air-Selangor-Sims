@@ -175,7 +175,6 @@
                       <v-btn color="secondary text-none" size="small" prepend-icon="fa-regular fa-up-right-from-square" @click="this.$router.push({ name: 'labtest' })" >Lab Test</v-btn>
                     </v-col>
                 </v-row>
-
                 <v-row class="pl-2">
                   <v-col cols="7">
                     <p class="text-subtitle-2 font-weight-bold">Complete Cases</p>

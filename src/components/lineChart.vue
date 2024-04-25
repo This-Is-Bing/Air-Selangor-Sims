@@ -16,12 +16,13 @@
     BarElement,
     CategoryScale,
     LinearScale,
+    BarController,
   } from 'chart.js'
   import {
     Chart,
   } from 'vue-chartjs'
     
-  ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
+  ChartJS.register(CategoryScale, LinearScale, BarElement,BarController, Title, Tooltip, Legend)
   
   export default {
     name: 'App',
