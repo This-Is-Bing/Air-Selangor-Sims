@@ -172,7 +172,7 @@
                         <p class="text-caption pa-0 ma-0" >Last 7 Days</p>
                     </v-col>
                     <v-col class="d-flex align-center justify-start" cols="3">
-                      <v-btn color="secondary text-none" size="small" prepend-icon="fa-regular fa-up-right-from-square" @click="this.$router.push({ name: 'labtest' })" >Lab Test</v-btn>
+                      <v-btn color="secondary text-none" size="small" prepend-icon="fa-solid fa-up-right-from-square" @click="this.$router.push({ name: 'labtest' })" >Lab Test</v-btn>
                     </v-col>
                 </v-row>
                 <v-row class="pl-2">
@@ -221,7 +221,7 @@
                         <p class="text-caption pa-0 ma-0" >As of {{ convertDate(Date.now()) }}</p>
                     </v-col>
                     <v-col class="d-flex align-center justify-start" cols="3">
-                      <v-btn color="secondary text-none" size="small" prepend-icon="fa-regular fa-up-right-from-square">Demand</v-btn>
+                      <v-btn color="secondary text-none" size="small" prepend-icon="fa-solid fa-up-right-from-square">Demand</v-btn>
                     </v-col>
                 </v-row>
                 <!-- graph -->
