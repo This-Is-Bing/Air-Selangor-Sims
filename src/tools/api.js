@@ -1,6 +1,34 @@
 import axios from "axios";
 import apiList from "./apiList.js"
 
+// Stock Transfer
+const getAllStockTransfer = async()=>{
+    try {
+        const response = await axios.get(apiList.getAllStockTransfer);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+}
+const createStockTransfer = async(stock)=>{
+    try{
+        const response = await axios.post(apiList.createStock,stock)
+        return response
+    }catch (error){
+        console.error("Error Creating data:", error.message);
+    }
+}
+
+const getAStock = async( id )=>{
+    const url = apiList.getAStock + id
+    try {
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+}
+
 // Labtest
 const getAllLabTests = async()=>{
     try {
@@ -192,6 +220,14 @@ const createHistory = async(history)=>{
 const getAllMeters = async()=>{
     try {
         const response = await axios.get(apiList.getAllMeters);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+}
+const meterCountByStore = async(id)=>{
+    try {
+        const response = await axios.get(apiList.meterCountByStore + id);
         return response.data;
     } catch (error) {
         console.error("Error fetching data:", error.message);
@@ -392,12 +428,13 @@ export {
         getAllInstallations, getAInstallation, createInstallation, getAInstallationByMeterID,updateAInstallation,
         getAllRefunds, getARefund, createRefund, getARefundByMeterID, updateARefund,
         getAHistory, getAllHistory,createHistory, getAHistoryByMeterID,
-        getAllMeters,getAMeter,createMeter,getMeterByProductID, updateMeterStatus,
+        getAllMeters,getAMeter,createMeter,getMeterByProductID, updateMeterStatus,meterCountByStore,
         getAllProducts, getAProduct, createProduct, 
         getAllSuppliers, createSupplier,
         getAllTypes, createType,
         getAllCategories,createCategory ,
         getAllStores, createStore,
         getDashboardData,
-        getComplaintProgram, getFaultyProgram, getLeakProgram
+        getComplaintProgram, getFaultyProgram, getLeakProgram,
+        getAllStockTransfer,createStockTransfer,getAStock
         }

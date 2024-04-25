@@ -210,7 +210,7 @@
               <v-card class="pa-2 mt-5 mb-8 elevation-0 bg-primary">
                 <v-row class="d-flex justify-space-between">
                     <v-col cols="2" class="d-flex align-center justify-center">
-                        <v-icon class="fa-regular fa-wand-magic-sparkles"></v-icon>
+                        <v-icon class="fa-solid fa-wand-magic-sparkles"></v-icon>
                     </v-col>
                     <v-col cols="7">
                         <v-tooltip text="Total = FP + MC + ML" location="top">
@@ -250,7 +250,7 @@
                         <p class="text-caption pa-0 ma-0" >Last 7 Days</p>
                     </v-col>
                     <v-col class="d-flex align-center justify-start" cols="3">
-                      <v-btn color="secondary text-none"  size="small" prepend-icon="fa-regular fa-up-right-from-square" @click="this.$router.push({ name: 'refund' })">Refunds</v-btn>
+                      <v-btn color="secondary text-none"  size="small" prepend-icon="fa-solid fa-up-right-from-square" @click="this.$router.push({ name: 'refund' })">Refunds</v-btn>
                     </v-col>
               </v-row>
 
@@ -276,7 +276,7 @@
 
                 <v-row class="d-flex ">
                     <v-col cols="1" class="d-flex align-center justify-center ml-3">
-                        <v-icon class="fa-regular fa-chart-simple"></v-icon>
+                        <v-icon class="fa-solid fa-chart-simple"></v-icon>
                     </v-col>
                     <v-col cols="7">
                         <p class="text-subtitle-1 font-weight-bold pt-2" >Pending Refund Cases</p>

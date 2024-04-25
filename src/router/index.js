@@ -15,6 +15,7 @@ import MeterDetailsView from '../views/MeterDetailsView.vue'
 import LabTestDetailsView from '../views/LabTestDetailsView.vue'
 import RefundDetailsView from '../views/RefundDetailsView.vue'
 import LabTestView from '../views/LabTestView.vue';
+import StockDetailsView from '../views/StockDetailsView.vue';
 
 const routes = [
   {
@@ -73,6 +74,12 @@ const routes = [
     path: '/inventory/store',
     name: 'store',
     component: StoreView  
+  },
+  {
+    path: '/inventory/stock/stock_details',
+    name: 'stockDetails',
+    component: StockDetailsView,
+    props: (route) => ({ id: route.query.id }) 
   },
   {
     path: '/meter',

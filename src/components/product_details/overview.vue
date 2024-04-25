@@ -87,18 +87,20 @@
                             </v-row>
 
                             <!-- stores -->
-                            <v-row>
-                                <v-col cols="8">Kuala Selangor Store</v-col>
-                                <v-col cols="4" ><v-chip close color="success" class="ml-2">20 UNITS</v-chip></v-col>
-                            </v-row>    
-                            <v-row>
-                                <v-col cols="8">Gombak Store</v-col>
-                                <v-col cols="4" ><v-chip close color="error" class="ml-2"> 10 UNITS</v-chip></v-col>
-                            </v-row>    
-                            <v-row>
-                                <v-col cols="8">Kuala Langat Store</v-col>
-                                <v-col cols="4" ><v-chip close color="warning" class="ml-2">15 UNITS</v-chip></v-col>
-                            </v-row>    
+                            <v-row v-for="item in data" :key="item._id">
+                                <v-col cols="8">{{ item.storeName }}</v-col>
+                                <v-col cols="4">
+                                    <v-chip v-if="item.count < product.threshold" close class="ml-2" color="error">
+                                    {{ item.count }} UNITS
+                                    </v-chip>
+                                    <v-chip v-else-if="item.count >= (product.threshold*2)" close class="ml-2" color="success">
+                                    {{ item.count }} UNITS
+                                    </v-chip>
+                                    <v-chip v-else-if="item.count >= product.threshold" close class="ml-2" color="warning">
+                                    {{ item.count }} UNITS
+                                    </v-chip>
+                                </v-col>
+                            </v-row> 
 
                         </v-col>
 
@@ -107,10 +109,10 @@
                 </v-col>
 
                 <!-- Demand -->
-                <v-col cols="5" class="pl-10">
+                <!-- <v-col cols="5" class="pl-10"> -->
 
                     <!-- Stock Demand Prediction -->
-                        <v-row>
+                        <!-- <v-row>
                             <v-col cols="1" class="align-self-center">
                                 <v-icon class="fa-regular fa-wand-magic-sparkles"></v-icon>
                             </v-col>
@@ -132,10 +134,10 @@
                                 cover
                             ></v-img>
                             </v-col>
-                        </v-row>
+                        </v-row> -->
 
                     <!-- complaint -->
-                        <v-row class="pt-10"> 
+                        <!-- <v-row class="pt-10"> 
                             <v-col cols="1" class="align-self-center">
                                 <v-icon class="fa-regular fa-chart-simple"></v-icon>
                             </v-col>
@@ -160,9 +162,9 @@
                                 cover
                             ></v-img>
                             </v-col>
-                        </v-row>
+                        </v-row> -->
                     
-                </v-col>
+                <!-- </v-col> -->
                 
             </v-row>
         </v-container>
@@ -174,6 +176,7 @@
   import graph from "@/assets/demo_graph.png"
   import chart from "@/assets/demo_chart.png"
     import { convertDateTime } from "@/tools/convertDateTime"
+import { meterCountByStore } from "@/tools/api"
   export default {
     name: "detailOverview",
     props: {
@@ -182,12 +185,23 @@
     data(){
         return{
             graph,
-            chart
+            chart,
+            data: null
         }
     },
+    watch:{
+        product(newVal){
+        this.loadStock(newVal._id)
+    }
+    },
     methods:{
-        convertDateTime
+        convertDateTime,
+        async loadStock(id){
+            console.log(id);
+            await meterCountByStore(id)
+            .then((response)=>{this.data = response})
+        }
     }
   }
   </script>
-  
+<!-- [{_id: "661cc37794ca5d23f622b722", storeName: "Gombak Store", count: 19}, {_id: "662207ff41bc144aa4140b82", storeName: "Pengurusan Air Selangor Wilayah Kuala Lumpur (HQ)", count: 1}] -->

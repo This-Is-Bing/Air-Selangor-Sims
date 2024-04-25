@@ -98,7 +98,7 @@
           <router-link class="text-decoration-none font-weight-bold text-inactive text-subtitle-1" to="/refund">
             <v-list-item class="ml-6"  :class="{'active':navigationItems['refund'].active, 'text-secondary':navigationItems['refund'].active}">
               <v-list-item-icon class="mr-8">
-                <v-icon :color="navigationItems['refund'].active ? 'active' : 'inactive'" >fa-solid fa-hand-holding-dollar</v-icon>
+                <v-icon :color="navigationItems['refund'].active ? 'active' : 'inactive'" >fa-solid fa-right-left</v-icon>
               </v-list-item-icon>
               <v-list-item-content >Refunds</v-list-item-content>
             </v-list-item>

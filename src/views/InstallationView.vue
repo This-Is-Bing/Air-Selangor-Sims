@@ -14,9 +14,9 @@
     <v-container grid-list-xs class="d-flex justify-space-between " fluid>
       <p class="text-h6 font-weight-bold">All Installations</p>
       <div>
-        <add-meter-modal/>
+        <!-- <add-meter-modal/>
         <v-btn color="primary text-none text-subtitle-1 mr-5"  prepend-icon="fa-regular fa-download">Template</v-btn>
-        <v-btn color="primary text-none text-subtitle-1 mr-5"  prepend-icon="fa-regular fa-upload">Import</v-btn>
+        <v-btn color="primary text-none text-subtitle-1 mr-5"  prepend-icon="fa-regular fa-upload">Import</v-btn> -->
         <v-btn color="primary text-none text-subtitle-1 "  prepend-icon="fa-regular fa-arrow-down-wide-short">Filters</v-btn>
       </div>
     </v-container>
@@ -88,13 +88,13 @@
 </template>
   
 <script>
-import AddMeterModal from '@/components/addMeterModal.vue';
+// import AddMeterModal from '@/components/addMeterModal.vue';
 import { getAllInstallations } from '@/tools/api.js';
 import { convertDate, convertDateTime } from '@/tools/convertDateTime';
 
   export default {
     name: 'InstallationView',
-    components:{ AddMeterModal },
+    // components:{ AddMeterModal },
     watch: {
       '$route.query.meterCreated': {
         immediate: true,

@@ -5,6 +5,7 @@ const apiList = {
 
     // Meters
     getAllMeters : "https://sims-server-api.vercel.app/meter/all",
+    meterCountByStore : "https://sims-server-api.vercel.app/meter/storeCount/",
     getMeterByProductID : "https://sims-server-api.vercel.app/meter/product_id/",
     getAMeter : "https://sims-server-api.vercel.app/meter/",
     createMeter: "https://sims-server-api.vercel.app/meter/create",
@@ -57,6 +58,12 @@ const apiList = {
     // Stores
     getAllStores : "https://sims-server-api.vercel.app/store/all",
     createStore: "https://sims-server-api.vercel.app/store/create",
+
+    // stock
+    getAllStockTransfer : "https://sims-server-api.vercel.app/stock/all",
+    createStock: "https://sims-server-api.vercel.app/stock/create",
+    getAStock: "https://sims-server-api.vercel.app/stock/",
+
 
     // Dashboard
     getDashboardData: "https://sims-server-api.vercel.app/dashboard",
