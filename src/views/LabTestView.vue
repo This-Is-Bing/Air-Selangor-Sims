@@ -14,7 +14,7 @@
     <v-container grid-list-xs class="d-flex justify-space-between " fluid>
       <p class="text-h6 font-weight-bold">All Lab Tests</p>
       <div>
-        <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-regular fa-arrow-down-wide-short">Filters</v-btn>
+        <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-solid  fa-arrow-down-wide-short">Filters</v-btn>
       </div>
     </v-container>
 
@@ -34,9 +34,9 @@
       >
 
         <template v-slot:[`item.test_status`]="{item}">
-          <v-chip close color="warning" v-if="item.test_status == 'New'" prepend-icon="fa-regular fa-clock">Pending</v-chip>
-          <v-chip close color="success" v-if="item.test_status == 'Passed'" prepend-icon="fa-regular fa-circle-check">Passed</v-chip>
-          <v-chip close color="error" v-if="item.test_status == 'Failed'" prepend-icon="fa-regular fa-circle-exclamation" class="px-4">Failed</v-chip>
+          <v-chip close color="warning" v-if="item.test_status == 'New'" prepend-icon="fa-solid  fa-clock">Pending</v-chip>
+          <v-chip close color="success" v-if="item.test_status == 'Passed'" prepend-icon="fa-solid  fa-circle-check">Passed</v-chip>
+          <v-chip close color="error" v-if="item.test_status == 'Failed'" prepend-icon="fa-solid  fa-circle-exclamation" class="px-4">Failed</v-chip>
         </template>
 
         <template v-slot:[`item.test_date`]="{item}">
@@ -72,7 +72,7 @@
     <v-snackbar v-model="snackbar" color="primary" >
       <v-icon icon="fa-solid fa-circle-check" color="success" class="mr-3" ></v-icon> {{ text }} 
       <template v-slot:actions>
-        <v-btn color="secondary" variant="text" @click="snackbar = false" append-icon="fa-regular fa-xmark"></v-btn>
+        <v-btn color="secondary" variant="text" @click="snackbar = false" append-icon="fa-solid  fa-xmark"></v-btn>
       </template>
     </v-snackbar>
   </v-card>

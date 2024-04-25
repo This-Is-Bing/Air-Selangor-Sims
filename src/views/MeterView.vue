@@ -15,9 +15,9 @@
       <p class="text-h6 font-weight-bold">All Meters</p>
       <div>
         <add-meter-modal/>
-        <v-btn color="primary text-none text-subtitle-1 mr-5"  prepend-icon="fa-regular fa-download">Template</v-btn>
-        <v-btn color="primary text-none text-subtitle-1 mr-5"  prepend-icon="fa-regular fa-upload">Import</v-btn>
-        <v-btn color="primary text-none text-subtitle-1 "  prepend-icon="fa-regular fa-arrow-down-wide-short">Filters</v-btn>
+        <v-btn color="primary text-none text-subtitle-1 mr-5"  prepend-icon="fa-solid  fa-download">Template</v-btn>
+        <v-btn color="primary text-none text-subtitle-1 mr-5"  prepend-icon="fa-solid  fa-upload">Import</v-btn>
+        <v-btn color="primary text-none text-subtitle-1 "  prepend-icon="fa-solid  fa-arrow-down-wide-short">Filters</v-btn>
       </div>
     </v-container>
 
@@ -37,25 +37,25 @@
       >
 
       <template v-slot:[`item.status`]="{item}">
-        <v-chip v-if="item.status == 'new'" close class="text-subtitle-2 " color="history_blue_border" prepend-icon="fa-regular fa-clock">
+        <v-chip v-if="item.status == 'new'" close class="text-subtitle-2 " color="history_blue_border" prepend-icon="fa-solid fa-clock">
           Pending Lab Test
         </v-chip>
-        <v-chip v-if="item.status == 'LT_Done'" close class="text-subtitle-2 " color="history_purple_border" prepend-icon="fa-regular fa-clock">
+        <v-chip v-if="item.status == 'LT_Done'" close class="text-subtitle-2 " color="history_purple_border" prepend-icon="fa-solid fa-clock">
           Lab Test Done
         </v-chip>
-        <v-chip v-if="item.status == 'installed'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+        <v-chip v-if="item.status == 'installed'" close class="text-subtitle-2" color="success" prepend-icon="fa-solid fa-circle-check">
           Installed
         </v-chip>
-        <v-chip v-if="item.status == 'refund_lab_test_pending'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-regular fa-circle-check">
+        <v-chip v-if="item.status == 'refund_lab_test_pending'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-solid fa-circle-check">
           Pending Refund Test
         </v-chip>
-        <v-chip v-if="item.status == 'refund_LT_Done'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-regular fa-circle-check">
+        <v-chip v-if="item.status == 'refund_LT_Done'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-solid fa-circle-check">
           Refund Test Done
         </v-chip>
-        <v-chip v-if="item.status == 'refund_accepted'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+        <v-chip v-if="item.status == 'refund_accepted'" close class="text-subtitle-2" color="success" prepend-icon="fa-solid fa-circle-check">
           Refund Accepted
         </v-chip>
-        <v-chip v-if="item.status == 'refund_rejected'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+        <v-chip v-if="item.status == 'refund_rejected'" close class="text-subtitle-2" color="success" prepend-icon="fa-solid fa-circle-check">
           Refund Rejected
         </v-chip>
       </template>
@@ -77,8 +77,8 @@
 
 
       <template v-slot:[`item.actions`]="{item}">
-        <v-icon icon="fa-solid fa-search" color="secondary mr-2 cursor-pointer" @click="this.$router.push({ name: 'meterDetails', query: { id: item._id } })"></v-icon>
-        <v-icon icon="fa-solid fa-trash" color="quinary cursor-pointer"></v-icon>
+        <v-icon icon="fa-solid  fa-search" color="secondary mr-2 cursor-pointer" @click="this.$router.push({ name: 'meterDetails', query: { id: item._id } })"></v-icon>
+        <v-icon icon="fa-solid  fa-trash" color="quinary cursor-pointer"></v-icon>
       </template>
 
       </v-data-table-server>
@@ -96,9 +96,9 @@
     
     <!-- Notification -->
     <v-snackbar v-model="snackbar" color="primary" >
-      <v-icon icon="fa-solid fa-circle-check" color="success" class="mr-3" ></v-icon> {{ text }} 
+      <v-icon icon="fa-solid  fa-circle-check" color="success" class="mr-3" ></v-icon> {{ text }} 
       <template v-slot:actions>
-        <v-btn color="secondary" variant="text" @click="snackbar = false" append-icon="fa-regular fa-xmark"></v-btn>
+        <v-btn color="secondary" variant="text" @click="snackbar = false" append-icon="fa-solid fa-xmark"></v-btn>
       </template>
     </v-snackbar>
   </v-card>

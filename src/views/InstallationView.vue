@@ -15,9 +15,9 @@
       <p class="text-h6 font-weight-bold">All Installations</p>
       <div>
         <!-- <add-meter-modal/>
-        <v-btn color="primary text-none text-subtitle-1 mr-5"  prepend-icon="fa-regular fa-download">Template</v-btn>
-        <v-btn color="primary text-none text-subtitle-1 mr-5"  prepend-icon="fa-regular fa-upload">Import</v-btn> -->
-        <v-btn color="primary text-none text-subtitle-1 "  prepend-icon="fa-regular fa-arrow-down-wide-short">Filters</v-btn>
+        <v-btn color="primary text-none text-subtitle-1 mr-5"  prepend-icon="fa-solid  fa-download">Template</v-btn>
+        <v-btn color="primary text-none text-subtitle-1 mr-5"  prepend-icon="fa-solid  fa-upload">Import</v-btn> -->
+        <v-btn color="primary text-none text-subtitle-1 "  prepend-icon="fa-solid  fa-arrow-down-wide-short">Filters</v-btn>
       </div>
     </v-container>
 
@@ -37,13 +37,13 @@
       >
 
       <template v-slot:[`item.status`]="{item}">
-        <v-chip v-if="item.status == 'new'" close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
+        <v-chip v-if="item.status == 'new'" close class="text-subtitle-2 " color="warning" prepend-icon="fa-solid  fa-clock">
           New
         </v-chip>
 
 
-        <v-chip v-if="item.status == 'client'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
-          Client
+        <v-chip v-if="item.status == 'Installed'" close class="text-subtitle-2" color="success" prepend-icon="fa-solid  fa-circle-check">
+          Installed
         </v-chip>
       </template>
 
@@ -81,7 +81,7 @@
     <v-snackbar v-model="snackbar" color="primary" >
       <v-icon icon="fa-solid fa-circle-check" color="success" class="mr-3" ></v-icon> {{ text }} 
       <template v-slot:actions>
-        <v-btn color="secondary" variant="text" @click="snackbar = false" append-icon="fa-regular fa-xmark"></v-btn>
+        <v-btn color="secondary" variant="text" @click="snackbar = false" append-icon="fa-solid  fa-xmark"></v-btn>
       </template>
     </v-snackbar>
   </v-card>

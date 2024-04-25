@@ -256,7 +256,7 @@
 
               <v-row class="d-flex ">
                     <v-col cols="1" class="d-flex align-center justify-center ml-3">
-                        <v-icon class="fa-regular fa-chart-simple"></v-icon>
+                        <v-icon class="fa-solid fa-chart-simple"></v-icon>
                     </v-col>
                     <v-col cols="7">
                         
