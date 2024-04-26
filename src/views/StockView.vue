@@ -72,7 +72,7 @@
     <v-snackbar v-model="snackbar" color="primary" >
       <v-icon icon="fa-solid fa-circle-check" color="success" class="mr-3" ></v-icon> {{ text }} 
       <template v-slot:actions>
-        <v-btn color="secondary" variant="text" @click="snackbar = false" append-icon="fa-regular fa-xmark"></v-btn>
+        <v-btn color="secondary" variant="text" @click="snackbar = false" append-icon="fa-solid fa-xmark"></v-btn>
       </template>
     </v-snackbar>
   </v-card>

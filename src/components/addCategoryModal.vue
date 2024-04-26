@@ -7,7 +7,7 @@
             text="Add"
             color="secondary text-none text-subtitle-1" 
             class="mx-5 elevation-1 text-h6 text-bold"
-            prepend-icon="fa-regular fa-plus"
+            prepend-icon="fa-solid fa-plus"
 
             ></v-btn>
         </template>

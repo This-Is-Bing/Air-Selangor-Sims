@@ -27,7 +27,7 @@
       <p class="text-h6 font-weight-bold">Installation - {{installation._id}}</p>
       <div>
         <edit-installation-status-modal></edit-installation-status-modal>
-        <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-regular fa-download">Download</v-btn>
+        <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-solid fa-download">Download</v-btn>
       </div>
     </v-container>
 
@@ -69,11 +69,11 @@
                 <p>Installation Status:</p>
             </v-col>
             <v-col cols="3" v-if="installation">
-                <v-chip v-if="installation.installation_status== 'New' || installation.installation_status== 'Uninstalled'" close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
+                <v-chip v-if="installation.installation_status== 'New' || installation.installation_status== 'Uninstalled'" close class="text-subtitle-2 " color="warning" prepend-icon="fa-solid fa-clock">
                     Not Installed
                 </v-chip>
                 
-                <v-chip v-if="installation.installation_status == 'Installed'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+                <v-chip v-if="installation.installation_status == 'Installed'" close class="text-subtitle-2" color="success" prepend-icon="fa-solid fa-circle-check">
                     Installed
                 </v-chip>
 
@@ -106,7 +106,7 @@
     <v-snackbar v-model="snackbar" color="primary" >
       <v-icon icon="fa-solid fa-circle-check" color="success" class="mr-3" ></v-icon> {{ text }} 
       <template v-slot:actions>
-        <v-btn color="secondary" variant="text" @click="snackbar = false" append-icon="fa-regular fa-xmark"></v-btn>
+        <v-btn color="secondary" variant="text" @click="snackbar = false" append-icon="fa-solid fa-xmark"></v-btn>
       </template>
     </v-snackbar>
 

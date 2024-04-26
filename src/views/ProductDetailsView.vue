@@ -24,8 +24,8 @@
     <v-container grid-list-xs class="d-flex justify-space-between" fluid>
       <p class="text-h6 font-weight-bold">{{product.name}}</p>
       <div>
-        <!-- <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-regular fa-pencil" class="mr-2">Edit</v-btn> -->
-        <!-- <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-regular fa-download">Download</v-btn> -->
+        <!-- <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-solid fa-pencil" class="mr-2">Edit</v-btn> -->
+        <!-- <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-solid fa-download">Download</v-btn> -->
       </div>
     </v-container>
 

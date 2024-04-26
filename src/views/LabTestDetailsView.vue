@@ -27,7 +27,7 @@
       <p class="text-h6 font-weight-bold">Lab Test - {{labtest._id}}</p>
       <div>
         <editTestResultModal></editTestResultModal>
-        <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-regular fa-download">Download</v-btn>
+        <v-btn color="primary text-none text-subtitle-1"  prepend-icon="fa-solid fa-download">Download</v-btn>
       </div>
     </v-container>
 
@@ -101,7 +101,7 @@
     <v-snackbar v-model="snackbar" color="primary" >
       <v-icon icon="fa-solid fa-circle-check" color="success" class="mr-3" ></v-icon> {{ text }} 
       <template v-slot:actions>
-        <v-btn color="secondary" variant="text" @click="snackbar = false" append-icon="fa-regular fa-xmark"></v-btn>
+        <v-btn color="secondary" variant="text" @click="snackbar = false" append-icon="fa-solid fa-xmark"></v-btn>
       </template>
     </v-snackbar>
 

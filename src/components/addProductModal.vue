@@ -18,7 +18,7 @@
                         <v-file-input 
                         v-model = "imageFile"
                         accept="image/*" 
-                        prepend-icon="fa-regular fa-images"  
+                        prepend-icon="fa-solid fa-images"  
                         label="Browse or Drag Image Here" 
                         placeholder="Pick an image" 
                         variant="outlined"

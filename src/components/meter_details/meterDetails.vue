@@ -79,25 +79,25 @@
                             <v-row>
                                 <v-col cols="4">Meter Status:</v-col>
                                 <v-col cols="8" class="text-capitalize">
-                                    <v-chip v-if="meter.status == 'new'" close class="text-subtitle-2 " color="history_blue_border" prepend-icon="fa-regular fa-clock">
+                                    <v-chip v-if="meter.status == 'new'" close class="text-subtitle-2 " color="history_blue_border" prepend-icon="fa-solid fa-clock">
                                     Pending Lab Test
                                     </v-chip>
-                                    <v-chip v-if="meter.status == 'LT_Done'" close class="text-subtitle-2 " color="history_purple_border" prepend-icon="fa-regular fa-clock">
+                                    <v-chip v-if="meter.status == 'LT_Done'" close class="text-subtitle-2 " color="history_purple_border" prepend-icon="fa-solid fa-clock">
                                     Lab Test Done
                                     </v-chip>
-                                    <v-chip v-if="meter.status == 'installed'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+                                    <v-chip v-if="meter.status == 'installed'" close class="text-subtitle-2" color="success" prepend-icon="fa-solid fa-circle-check">
                                     Installed
                                     </v-chip>
-                                    <v-chip v-if="meter.status == 'refund_lab_test_pending'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-regular fa-circle-check">
+                                    <v-chip v-if="meter.status == 'refund_lab_test_pending'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-solid fa-circle-check">
                                     Pending Refund Test
                                     </v-chip>
-                                    <v-chip v-if="meter.status == 'refund_LT_Done'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-regular fa-circle-check">
+                                    <v-chip v-if="meter.status == 'refund_LT_Done'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-solid fa-circle-check">
                                     Refund Test Done
                                     </v-chip>
-                                    <v-chip v-if="meter.status == 'refund_accepted'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+                                    <v-chip v-if="meter.status == 'refund_accepted'" close class="text-subtitle-2" color="success" prepend-icon="fa-solid fa-circle-check">
                                     Refund Accepted
                                     </v-chip>
-                                    <v-chip v-if="meter.status == 'refund_rejected'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+                                    <v-chip v-if="meter.status == 'refund_rejected'" close class="text-subtitle-2" color="success" prepend-icon="fa-solid fa-circle-check">
                                     Refund Rejected
                                     </v-chip>
 
@@ -140,15 +140,15 @@
                                 <v-col cols="4">Test Status:</v-col>
                                 <v-col cols="8" class="text-capitalize">
 
-                                    <v-chip v-if="labtestStatus== 'New'" close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
+                                    <v-chip v-if="labtestStatus== 'New'" close class="text-subtitle-2 " color="warning" prepend-icon="fa-solid fa-clock">
                                         Pending Lab Test
                                     </v-chip>
 
-                                    <v-chip v-if="labtestStatus == 'Passed'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+                                    <v-chip v-if="labtestStatus == 'Passed'" close class="text-subtitle-2" color="success" prepend-icon="fa-solid fa-circle-check">
                                         Passed
                                     </v-chip>
 
-                                    <v-chip v-if="labtestStatus == 'Failed'" close class="text-subtitle-2" color="error" prepend-icon="fa-regular fa-circle-check">
+                                    <v-chip v-if="labtestStatus == 'Failed'" close class="text-subtitle-2" color="error" prepend-icon="fa-solid fa-circle-check">
                                         Failed
                                     </v-chip> 
                                 </v-col>
@@ -180,7 +180,7 @@
                             <v-btn 
                                 color="secondary" 
                                 size="small" 
-                                prepend-icon="fa-regular fa-up-right-from-square" 
+                                prepend-icon="fa-solid fa-up-right-from-square" 
                                 class="text-none"
                                 @click="this.$router.push({ name: 'LabTestDetails', query: { id: labtestID } })"
                             >
@@ -204,11 +204,11 @@
                             <v-row>
                                 <v-col cols="4">Installation Status:</v-col>
                                 <v-col cols="8" class="text-capitalize">
-                                    <v-chip v-if="installationStatus== 'New' || installationStatus== 'Uninstalled' " close class="text-subtitle-2 " color="warning" prepend-icon="fa-regular fa-clock">
+                                    <v-chip v-if="installationStatus== 'New' || installationStatus== 'Uninstalled' " close class="text-subtitle-2 " color="warning" prepend-icon="fa-solid fa-clock">
                                         Not Installed
                                     </v-chip>
 
-                                    <v-chip v-if="installationStatus == 'Installed'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+                                    <v-chip v-if="installationStatus == 'Installed'" close class="text-subtitle-2" color="success" prepend-icon="fa-solid fa-circle-check">
                                         Installed
                                     </v-chip>
 
@@ -245,7 +245,7 @@
                             <v-btn 
                             color="secondary" 
                             size="small" 
-                            prepend-icon="fa-regular fa-up-right-from-square" 
+                            prepend-icon="fa-solid fa-up-right-from-square" 
                             class="text-none" 
                             @click="this.$router.push({ name: 'installationDetails', query: { id: installationID } })"
                             >Installation</v-btn>
@@ -277,17 +277,17 @@
                             <v-row>
                                 <v-col cols="4">Refund Status:</v-col>
                                 <v-col cols="8" class="text-capitalize">
-                                    <v-chip v-if="refund_status== 'New' " close class="text-subtitle-2 " color="history_red_border" prepend-icon="fa-regular fa-clock">
+                                    <v-chip v-if="refund_status== 'New' " close class="text-subtitle-2 " color="history_red_border" prepend-icon="fa-solid fa-clock">
                                         Pending Refund Test
                                     </v-chip>
 
-                                    <v-chip v-if="refund_status == 'refund_LT_Done'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-regular fa-circle-check">
+                                    <v-chip v-if="refund_status == 'refund_LT_Done'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-solid fa-circle-check">
                                         Refund Test Done
                                     </v-chip>
-                                    <v-chip v-if="refund_status == 'refund_accepted'" close class="text-subtitle-2" color="success" prepend-icon="fa-regular fa-circle-check">
+                                    <v-chip v-if="refund_status == 'refund_accepted'" close class="text-subtitle-2" color="success" prepend-icon="fa-solid fa-circle-check">
                                         Refund Accepted
                                     </v-chip>
-                                    <v-chip v-if="refund_status == 'refund_rejected'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-regular fa-circle-check">
+                                    <v-chip v-if="refund_status == 'refund_rejected'" close class="text-subtitle-2" color="history_red_border" prepend-icon="fa-solid fa-circle-check">
                                         Refund Rejected
                                     </v-chip>
 
@@ -323,7 +323,7 @@
                             <v-btn 
                             color="secondary" 
                             size="small" 
-                            prepend-icon="fa-regular fa-up-right-from-square" 
+                            prepend-icon="fa-solid fa-up-right-from-square" 
                             class="text-none" 
                             @click="this.$router.push({ name: 'refundDetails', query: { id: refundID } })"
                             >Refund</v-btn>
@@ -366,7 +366,7 @@
                                     <v-alert color="history_yellow" :value="true" small class=" elevation-1 py-8 text-caption border-s-lg border-history_yellow_border border-opacity-100 " >
                                         <v-row class="mb-1">
                                             <v-col cols="1">
-                                                <v-icon icon="fa-regular fa-circle-info" color="history_yellow_border"></v-icon>
+                                                <v-icon icon="fa-solid fa-circle-info" color="history_yellow_border"></v-icon>
                                             </v-col>
                                             <v-col>
                                                 <p class="text-subtitle-2 text-history_yellow_border" >{{item.header}}</p> 
@@ -387,7 +387,7 @@
                                     <v-alert color="history_blue" :value="true" small class=" elevation-1 py-8 text-caption border-s-lg border-history_blue_border border-opacity-100 " >
                                         <v-row class="mb-1">
                                             <v-col cols="1">
-                                                <v-icon icon="fa-regular fa-circle-info" color="history_blue_border"></v-icon>
+                                                <v-icon icon="fa-solid fa-circle-info" color="history_blue_border"></v-icon>
                                             </v-col>
                                             <v-col>
                                                 <p class="text-subtitle-2 text-history_blue_border" >{{item.header}}</p> 
@@ -408,7 +408,7 @@
                                     <v-alert color="history_purple" :value="true" small class=" elevation-1 py-8 text-caption border-s-lg border-history_purple_border border-opacity-100 " >
                                         <v-row class="mb-1">
                                             <v-col cols="1">
-                                                <v-icon icon="fa-regular fa-circle-info" color="history_purple_border"></v-icon>
+                                                <v-icon icon="fa-solid fa-circle-info" color="history_purple_border"></v-icon>
                                             </v-col>
                                             <v-col>
                                                 <p class="text-subtitle-2 text-history_purple_border" >{{item.header}}</p> 
@@ -429,7 +429,7 @@
                                     <v-alert color="history_red" :value="true" small class=" elevation-1 py-8 text-caption border-s-lg border-history_red_border border-opacity-100 " >
                                         <v-row class="mb-1">
                                             <v-col cols="1">
-                                                <v-icon icon="fa-regular fa-circle-info" color="history_red_border"></v-icon>
+                                                <v-icon icon="fa-solid fa-circle-info" color="history_red_border"></v-icon>
                                             </v-col>
                                             <v-col>
                                                 <p class="text-subtitle-2 text-history_red_border" >{{item.header}}</p> 
@@ -465,7 +465,7 @@
     <v-snackbar v-model="snackbar" color="primary" >
       <v-icon icon="fa-solid fa-circle-check" color="success" class="mr-3" ></v-icon> {{ text }} 
       <template v-slot:actions>
-        <v-btn color="secondary" variant="text" @click="snackbar = false" append-icon="fa-regular fa-xmark"></v-btn>
+        <v-btn color="secondary" variant="text" @click="snackbar = false" append-icon="fa-solid fa-xmark"></v-btn>
       </template>
     </v-snackbar>
 </template>
