@@ -159,7 +159,8 @@
                 <v-col cols="5" style="max-height: max-content;">
                     <p class="text-subtitle-1 font-weight-bold pt-2 pb-5">Meter History</p>
                     <p v-if="history==null">No History Available</p>
-                    <v-timeline side="end" align="start" density="compact" style="min-width: 400px;max-width: 450px; max-height: max-content;">
+                    <div>
+                        <v-timeline side="end" align="start" density="compact" style="min-width: 400px;max-width: 450px; max-height: max-content;">
                         <v-timeline-item
                             v-for="item in history"
                             :key="item.meter_id"
@@ -254,6 +255,7 @@
                             </v-row>
                         </v-timeline-item>
                     </v-timeline>
+                    </div>
 
                     
                   
