@@ -147,7 +147,6 @@ import { convertDate, convertDateTime } from '@/tools/convertDateTime';
         { title: 'Model', key: 'meter_id.product_id.name', sortable: false, align: 'center' },
         { title: 'Region', key: 'region', sortable: false, align: 'center' },
         { title: 'Installation Status', key: 'installation_status', sortable: false, align: 'center' },
-        { title: 'Installation Date', key: 'installlation_date', sortable: false, align: 'center' },
         { title: 'Actions', value: 'actions', sortable: false, align: 'center' },
       ], 
       search: '',
